@@ -1,11 +1,30 @@
 import "./Header.css";
+import { Link } from "react-router-dom"
+import HeaderNav from "../HeaderNav/HeaderNav.tsx"
+import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons"
 
 function Header() {
+
+  //Admin User Icon
+/*   const admin = false;
+  if (admin === true) {
+    <img className="header-adminIcon" src="../src/assets/devUser.svg" alt="user admin" />
+  } */
+
   return (
     <header>
+      <div className="header-icons">
       
-        <h1>Header</h1>
-      
+        <UserOutlined />
+        <ShoppingCartOutlined />
+      </div>
+      <Link to="/">
+        <div className="logo">
+          <img src="../src/assets/logo.png" alt="logo" />
+        </div>
+      </Link>
+
+<HeaderNav />
     </header>
   );
 }
