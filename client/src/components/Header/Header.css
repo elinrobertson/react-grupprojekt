@@ -1,0 +1,51 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 10em;
+    width: 100vw;
+    position: relative;
+    background-color: #F1E2DE;
+}
+
+header a {
+    width:  20%;
+    display: inline;
+    justify-content: center; 
+}
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+}
+
+.logo img {
+    width: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.header-icons {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    color: #545454;
+    right: 3px;
+    top: 1em;
+    width: 100vw;
+    padding-right: 1em;
+    gap: 5px;
+    font-size: 20px;
+
+}
+
+.header-adminIcon {
+    width: 18px;
+    color: #545454;
+}
+

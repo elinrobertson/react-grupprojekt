@@ -1,0 +1,16 @@
+.headerNav {
+    background-color: rgb(247, 243, 241);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ant-menu-title-content {
+    color: black;
+    border-bottom-color: black;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 14px;
+    
+}
