@@ -9,9 +9,10 @@ function ProductCard({ products }: ProductCardProps) {
   return (
     <div key={products._id} className="productCard-div">
       <img src={products.image} alt={products.title} />
-      <h1>{products.title}</h1>
-      <p>{products.price}</p>
-      <p>{products.description}</p>
+      <div className="productCard-info">
+      <h3>{products.title}</h3>
+      <p>{products.price} kr</p>
+      </div>
     </div>
   );
 }

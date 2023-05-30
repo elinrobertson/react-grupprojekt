@@ -1,0 +1,12 @@
+.productCard-div {
+    border: 1px rgb(223, 219, 219) solid;
+    box-shadow: -1px 1px 10px 1px rgba(197, 197, 197, 0.68);
+}
+
+.productCard-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 15px;
+}
