@@ -10,7 +10,7 @@ const menuItems = [{
 
 },
 {   
-     label: (<NavLink to={"produkter"}>Produkter </NavLink>),
+     label: (<NavLink to={"/"}>Produkter </NavLink>),
 key: "products",
 },
 {   
