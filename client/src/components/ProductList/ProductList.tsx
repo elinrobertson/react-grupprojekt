@@ -3,8 +3,8 @@ import ProductCard from "../ProductCard/ProductCard";
 import { useState, useEffect } from "react"; 
 import { NavLink } from "react-router-dom";
 
-interface Product {
-  id: string,
+export interface Product {
+  _id: string,
   title: string, 
   price: number, 
   description: string, 
@@ -23,7 +23,7 @@ function ProductList() {
           "http://localhost:3000/api/products"
         );
         const productData = await res.json()
-        //console.log("loggar ut productData", productData);
+        // console.log("loggar ut productData", productData);
         setProducts(productData);
         //console.log("loggar ut products", products);
 
@@ -38,7 +38,7 @@ function ProductList() {
   return (
     <div className="productList-div">
       {products.map((product) => (
-        <NavLink key={product.id} to={"/" + product.id}> 
+        <NavLink key={product._id} to={"/" + product._id}> 
           <ProductCard products={product} />
         </NavLink>
       ))}

@@ -1,13 +1,5 @@
 import "./ProductCard.css";
-
-interface Product {
-  id: string,
-  title: string, 
-  price: number, 
-  description: string, 
-  image: string,
-  inStock: string,
-}
+import { Product } from "../ProductList/ProductList";
 
 interface ProductCardProps {
   products: Product;
@@ -15,7 +7,7 @@ interface ProductCardProps {
 
 function ProductCard({ products }: ProductCardProps) {
   return (
-    <div key={products.id} className="productCard-div">
+    <div key={products._id} className="productCard-div">
       <img src={products.image} alt={products.title} />
       <h1>{products.title}</h1>
       <p>{products.price}</p>
@@ -25,27 +17,3 @@ function ProductCard({ products }: ProductCardProps) {
 }
 
 export default ProductCard;
-
-
-
-/* interface Product {
-  id: string,
-  title: string, 
-  price: number, 
-  description: string, 
-  image: string,
-  inStock: string,
-}
-
-function ProductCard({products}) {
-  return (
-    <div key={products.id} className="productCard-div">
-          {<img src={products.image}></img>}
-          {<h1>{products.title}</h1>}
-          {<p>{products.price}</p>}
-          {<p>{products.description}</p>}
-
-    </div>
-  );
-}
-*/

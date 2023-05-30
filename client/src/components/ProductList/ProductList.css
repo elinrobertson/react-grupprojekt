@@ -1,0 +1,7 @@
+.productList-div img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px rgb(211, 210, 210) solid;
+    }
