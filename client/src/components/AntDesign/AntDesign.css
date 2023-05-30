@@ -1,0 +1,8 @@
+span {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ant-btn-icon {
+    font-size: 16px;
+}

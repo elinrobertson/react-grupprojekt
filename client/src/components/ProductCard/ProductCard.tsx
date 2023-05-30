@@ -1,5 +1,7 @@
 import "./ProductCard.css";
 import { Product } from "../ProductList/ProductList";
+import { AntDesignButton } from "../AntDesign/AntDesign";
+
 
 interface ProductCardProps {
   products: Product;
@@ -11,10 +13,14 @@ function ProductCard({ products }: ProductCardProps) {
       <img src={products.image} alt={products.title} />
       <div className="productCard-info">
       <h3>{products.title}</h3>
-      <p>{products.price} kr</p>
+      <div className="productCard-price">
+        <p>{products.price} kr</p>
+        <AntDesignButton />
+        </div>
       </div>
     </div>
   );
 }
 
 export default ProductCard;
+
