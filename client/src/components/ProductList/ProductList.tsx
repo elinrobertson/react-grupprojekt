@@ -37,11 +37,13 @@ function ProductList() {
 
   return (
     <div className="productList-div">
+      <div className='productList-grid'>
       {products.map((product) => (
         <NavLink key={product._id} to={"/" + product._id}> 
           <ProductCard products={product} />
         </NavLink>
       ))}
+      </div>
     </div>
   );
   

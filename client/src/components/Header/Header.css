@@ -3,7 +3,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 10em;
+    height: 20em;
     width: 100vw;
     position: relative;
     background-color: #F1E2DE;
@@ -18,12 +18,11 @@ header a {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 3rem;
-    padding-bottom: 1rem;
+    padding-bottom: 3rem;
 }
 
 .logo img {
-    width: 10em;
+    width: 15em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +39,7 @@ header a {
     width: 100vw;
     padding-right: 1em;
     gap: 5px;
-    font-size: 20px;
+    font-size: 27px;
 
 }
 

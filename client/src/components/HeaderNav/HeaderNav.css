@@ -5,6 +5,9 @@
     align-items: center;
     justify-content: center;
     border: none;
+    position: absolute;
+    bottom: 0;
+    gap: 3rem;
 }
 
 
@@ -14,5 +17,4 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 14px;
-    
 }
