@@ -1,6 +1,7 @@
 .productCard-div {
     border: 1px rgb(223, 219, 219) solid;
     box-shadow: -1px 1px 10px 1px rgba(197, 197, 197, 0.68);
+    padding-bottom: 1rem;
 }
 
 .productCard-info {
@@ -9,4 +10,17 @@
     align-items: center;
     flex-direction: column;
     margin-top: 15px;
+}
+
+.productCard-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 8px;
+}
+
+.productCard-price p {
+    margin: 0;
 }
