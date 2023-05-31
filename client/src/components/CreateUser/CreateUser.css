@@ -1,13 +1,13 @@
-.newUser-div {
+.registred-div {
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
 }
-.newUser-div h3 {
+.registred-div h3 {
     margin: 0;
 }
-.newUser-div a:hover {
+.registred-div a:hover {
     color: #545454;
 }
 

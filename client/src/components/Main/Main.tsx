@@ -5,6 +5,7 @@ import Checkout from "../Checkout/Checkout";
 import Confirm from "../Confirm/Confirm";
 import ProductDetail from "../ProductDetail/ProductDetail";
 import Login from "../Login/Login";
+import CreateUser from "../CreateUser/CreateUser";
 import "./Main.css"
 
 function Main () {
@@ -14,6 +15,7 @@ function Main () {
         <Route path="/" element={<ProductList />} />
         <Route path="/:id" element={<ProductDetail />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/createuser" element={<CreateUser />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/confirm" element={<Confirm />} />
