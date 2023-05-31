@@ -1,7 +1,7 @@
 import "./ProductList.css";
 import ProductCard from "../ProductCard/ProductCard";
 import { useState, useEffect } from "react"; 
-import { NavLink } from "react-router-dom";
+
 
 export interface Product {
   _id: string,
@@ -38,10 +38,8 @@ function ProductList() {
   return (
     <div className="productList-div">
       <div className='productList-grid'>
-      {products.map((product) => (
-        <NavLink key={product._id} to={"/" + product._id}> 
-          <ProductCard products={product} />
-        </NavLink>
+      {products.map((product) => ( 
+          <ProductCard key={product._id} products={product} />
       ))}
       </div>
     </div>
