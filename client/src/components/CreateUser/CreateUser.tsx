@@ -13,20 +13,20 @@ function CreateUser() {
     // onFinishFailed={onFinishFailed}
     autoComplete="off"
   >
-    <h1>Registrear dig:</h1>
+    <h1>Registrera dig:</h1>
 
     <Form.Item
-      label="Username"
+      label="Användarnamn"
       name="username"
-      rules={[{ required: true, message: 'Please input your username!' }]}
+      rules={[{ required: true, message: 'Skriv in ditt användarnamn!' }]}
     >
       <Input />
     </Form.Item>
 
     <Form.Item
-      label="Password"
+      label="Lösenord"
       name="password"
-      rules={[{ required: true, message: 'Please input your password!' }]}
+      rules={[{ required: true, message: 'Skriv in ditt lösenord!' }]}
     >
       <Input.Password />
     </Form.Item>

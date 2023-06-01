@@ -1,13 +1,36 @@
 import "./Login.css"
 import { Button, Checkbox, Form, Input } from 'antd';
 import { NavLink } from "react-router-dom";
-// const onFinish = (values: string) => {
-//   console.log('Success:', values);
-// };
 
-// const onFinishFailed = (errorInfo: object) => {
-//   console.log('Failed:', errorInfo);
-// };
+
+const onFinish = async (values: object) => {
+  // console.log('Success:', values);
+  try {
+    const res = await fetch("http://localhost:3000/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values)
+      
+    });
+    // document.cookie = JSON.stringify("email: " + values.email as string)
+    
+
+    
+    
+    console.log("success:", document.cookie);
+    
+  } catch (error) {
+    console.log("Error:", error);
+    
+  }
+ 
+};
+
+const onFinishFailed = (errorInfo: object) => {
+  console.log('Failed:', errorInfo);
+};
 
 
 
@@ -21,8 +44,8 @@ const Login = () => {
       wrapperCol={{ span: 16 }}
       style={{ maxWidth: 600 }}
       initialValues={{ remember: true }}
-      // onFinish={onFinish}
-      // onFinishFailed={onFinishFailed}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <div className="newUser-div">
@@ -31,17 +54,17 @@ const Login = () => {
       </div>
 
       <Form.Item
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        label="E-mail"
+        name="email"
+        rules={[{ required: true, message: 'Skriv in ditt användarnamn!' }]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="Password"
+        label="Lösenord"
         name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
+        rules={[{ required: true, message: 'Skriv in ditt lösenord!' }]}
       >
         <Input.Password />
       </Form.Item>

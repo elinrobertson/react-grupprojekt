@@ -2,7 +2,6 @@ import "./ProductList.css";
 import ProductCard from "../ProductCard/ProductCard";
 import { useState, useEffect } from "react"; 
 
-
 export interface Product {
   _id: string,
   title: string, 
