@@ -1,15 +1,11 @@
 import "./ProductDetail.css";
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-// import { AntDesignButton } from "../AntDesign/AntDesign";
+import { AntDesignButton } from "../AntDesign/AntDesign";
 import { Product } from "../ProductList/ProductList";
+import { InStock } from "../InStock/InStock"
 
-// interface ProductDetailProps {
-//   productdetail: Product;
 
-//   title:string,
-
-// }
 function ProductDetail(){
   const[ product, setProductDetail]= useState<Product|undefined>();
   const {id} = useParams();
@@ -30,18 +26,25 @@ function ProductDetail(){
     }
   }
   getProductDetail();
+
 },[]);
 
+
 return (
-  <div>
+  <div className="productDetail-content">
     
     {product && (
-      <div>
+      <div className="productDetail-wrapper">
+        <div className="image-div">
         <img src={product.image} alt={product.title} />
-        <div className="productCard-info">
-          <h3>{product.title}</h3>
-          <p>{product.description}</p>
-            
+        </div>
+        <div className="productDetail-info">
+          <h2>{product.title}</h2>
+          <h3>{product.price} kr</h3>
+          <p className="description">{product.description}</p>
+          <p className="inStock">In stock: {product.inStock}</p>
+          <AntDesignButton /> 
+          
         </div>
       </div>
     )}
@@ -50,43 +53,7 @@ return (
 );
 }
 
-
 export default ProductDetail
 
-// interface ProductDetailProps {
-//   products: Product;
-// }
-// function ProductDetail({ products }: ProductDetailProps){
-//   const[ product, setProductDetail]= useState<Product[]>([]);
-// useEffect(() => {
-//   const getProductDetail = async () => {
-//     try {
-//       const res = await fetch(
-//         "http://localhost:3000/api/products/:id"
-//       );
-//       const data = await res.json()
-//       // console.log("loggar ut productData", productData);
-//       setProductDetail(data); 
-//       //console.log("loggar ut products", products);
 
-//     } catch shadireruo(error) {
-//       console.log(error);
-//     }
-//   }
-//   getProductDetail();
-// },[]);
-
-// return (
-
-//   <div>
-//     <div>
-//     <img src={products.image} alt={products.title} />
-//         <div className="productCard-info">
-//           <h3>{products.title}</h3>
-//         </div>
-//     </div>
-//   </div>
-
-// );
-// }
 
