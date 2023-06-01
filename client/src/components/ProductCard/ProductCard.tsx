@@ -14,7 +14,7 @@ function ProductCard({ products }: ProductCardProps) {
   return (
     <div className="productCard-div">
       <NavLink to={"/" + products._id}> 
-      <div className="productCard-link" onClick ={ () => { ProductDetail();}} >
+      <div className="productCard-link" onClick ={ () =>  {ProductDetail();}} >
         <img src={products.image} alt={products.title} />
         <div className="productCard-info">
           <h3>{products.title}</h3>
