@@ -1,7 +1,8 @@
 import "./Header.css";
 import { Link } from "react-router-dom"
 import HeaderNav from "../HeaderNav/HeaderNav.tsx"
-import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons"
+import HeaderLogin from "../HeaderLogin/HeaderLogin.tsx"
+import { ShoppingCartOutlined } from "@ant-design/icons"
 
 function Header() {
 
@@ -14,8 +15,7 @@ function Header() {
   return (
     <header>
       <div className="header-icons">
-      
-        <UserOutlined />
+        <HeaderLogin />
         <ShoppingCartOutlined />
       </div>
       <Link to="/">

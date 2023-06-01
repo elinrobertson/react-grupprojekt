@@ -3,40 +3,27 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { NavLink } from "react-router-dom";
 
 
-const onFinish = async (values: object) => {
-  // console.log('Success:', values);
-  try {
-    const res = await fetch("http://localhost:3000/api/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(values)
-      
-    });
-    // document.cookie = JSON.stringify("email: " + values.email as string)
-    
-
-    
-    
-    console.log("success:", document.cookie);
-    
-  } catch (error) {
-    console.log("Error:", error);
-    
-  }
- 
-};
-
-const onFinishFailed = (errorInfo: object) => {
-  console.log('Failed:', errorInfo);
-};
-
-
-
-
-
 const Login = () => {
+  const onFinish = async (values: object) => {
+    try {
+      const res = await fetch("/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values)
+      });
+      
+    } catch (error) {
+      console.log("Error:", error);
+    }
+   
+  };
+  
+  const onFinishFailed = (errorInfo: object) => {
+    console.log('Failed:', errorInfo);
+  };
+
   return (
     <Form
       name="basic"
