@@ -1,0 +1,44 @@
+.productDetail-content {
+    margin-right: 15%;
+}
+
+.productDetail-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 5rem;
+}
+
+.image-div {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-div img {
+    display: flex;
+    width: 75%;
+    border-right: 1px rgb(223, 219, 219) solid;
+}
+
+.productDetail-info {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    line-height: 22px;
+}
+
+.description {
+    display:flex;
+    align-content:center;
+    justify-content: flex-start;
+    flex-wrap: wrap;  
+}
+
+.inStock {
+color: #809F8A;
+color: rgb(223, 160, 77);
+color: rgb(219, 107, 95);
+}

@@ -8,7 +8,7 @@ export interface Product {
   price: number, 
   description: string, 
   image: string,
-  inStock: string,
+  inStock: number,
 }
 
 
