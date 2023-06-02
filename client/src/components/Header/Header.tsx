@@ -6,12 +6,6 @@ import { ShoppingCartOutlined } from "@ant-design/icons"
 
 function Header() {
 
-  //Admin User Icon
-/*   const admin = false;
-  if (admin === true) {
-    <img className="header-adminIcon" src="../src/assets/devUser.svg" alt="user admin" />
-  } */
-
   return (
     <header>
       <div className="header-icons">

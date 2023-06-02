@@ -13,36 +13,33 @@ interface User {
 }
 
 function HeaderLogin() {
-  useEffect(() => {
-    // Perform authorization check on component mount
-    auth();
-  }, []);
+
   const [isLoggedIn, setIsLoggedIn] = useState<User | null>(null);
 
-  const auth = async () => {
-    try {
-      const res = await fetch("/api/users/authorize");
-      const data = await res.json();
+  useEffect(() => {
+    const auth = async () => {
+      try {
+        const res = await fetch("/api/users/authorize");
+        const data = await res.json();
+  
+        setIsLoggedIn(data);
 
-      setIsLoggedIn(data);
-      console.log(isLoggedIn?.firstName);
-      
-      /* if (data.admin) {
-        return <img className="header-adminIcon" src="../src/assets/devUser.svg" alt="user admin" />
-    } else if (!data.admin) {
-       return 
+        //return <img className="header-adminIcon" src="../src/assets/devUser.svg" alt="user admin" />
 
-    }
- */
-    } catch (error) {
-      console.log(error);
-    }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    auth();
+  }, []);
+
+  const renderBtn = () => {
+    if (!isLoggedIn) return <Button type="primary">Logga in</Button>
   };
 
   const renderContent = () => {
-    if (!isLoggedIn) return <Button type="primary">Logga in</Button>
-
-    if (isLoggedIn.isAdmin) {
+    console.log(isLoggedIn?.isAdmin)
+    if (isLoggedIn?.isAdmin) {
       return <NavLink to={"/admin"}><img className="header-adminIcon" src="../src/assets/devUser.svg" alt="user admin" /></NavLink>
     } else {
       return <NavLink to={"/"}><p>{isLoggedIn?.firstName} + Sara</p><UserOutlined /></NavLink>
@@ -52,6 +49,7 @@ function HeaderLogin() {
   return (
     <div>
         {renderContent()}
+        {renderBtn()}
     </div>
   )
 }
