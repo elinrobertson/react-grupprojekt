@@ -4,4 +4,9 @@
     padding-left: 20px;
     padding-right: 20px;
     margin-bottom: 33px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
