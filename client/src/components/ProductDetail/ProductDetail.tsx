@@ -43,8 +43,9 @@ return (
           <h3>{product.price} kr</h3>
           <p className="description">{product.description}</p>
           <InStock product = {product} />
+          <div className="AntDesignButton-div">
           <AntDesignButton /> 
-          
+          </div>
         </div>
       </div>
     )}
