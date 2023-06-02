@@ -1,0 +1,8 @@
+.loggedinIcons-div a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.loggedinIcons-div a p {
+margin: 0;
+}

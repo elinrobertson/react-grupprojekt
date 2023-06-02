@@ -1,7 +1,7 @@
 import "./Login.css"
 import { Button, Checkbox, Form, Input } from 'antd';
 import { NavLink } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const onFinish = async (values: object) => {
@@ -17,7 +17,6 @@ const Login = () => {
     } catch (error) {
       console.log("Error:", error);
     }
-   
   };
   
   const onFinishFailed = (errorInfo: object) => {
@@ -61,7 +60,7 @@ const Login = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+       <Button type="primary" htmlType="submit">
           Logga in
         </Button>
       </Form.Item>
