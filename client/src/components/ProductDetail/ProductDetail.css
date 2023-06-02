@@ -43,6 +43,45 @@ color: rgb(223, 160, 77);
 color: rgb(219, 107, 95);
 }
 
-.AntDesignButton-div{
+.AntDesignButton-div {
     padding-top: 15px;
+}
+
+@media screen and (max-width: 1000px) {
+    .image-div  {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 862px) {
+    .productDetail-wrapper {
+        flex-direction: column;
+    }
+    .image-div img {
+        border: 1px rgb(223, 219, 219) solid;
+        box-shadow: -1px 1px 10px 1px rgba(197, 197, 197, 0.68);
+    }    
+
+    .productDetail-info {
+        width: 55%;
+        line-height: 22px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .image-div  {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .image-div  {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .image-div  {
+        width: 100%;
+    }
 }
