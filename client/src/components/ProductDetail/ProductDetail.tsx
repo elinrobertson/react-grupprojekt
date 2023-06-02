@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AntDesignButton } from "../AntDesign/AntDesign";
 import { Product } from "../ProductList/ProductList";
-import { InStock } from "../InStock/InStock"
+import InStock from "../InStock/InStock"
 
 
 function ProductDetail(){
@@ -42,7 +42,7 @@ return (
           <h2>{product.title}</h2>
           <h3>{product.price} kr</h3>
           <p className="description">{product.description}</p>
-          <p className="inStock">In stock: {product.inStock}</p>
+          <InStock product = {product} />
           <AntDesignButton /> 
           
         </div>
