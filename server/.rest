@@ -22,6 +22,21 @@ Content-Type: application/json
 }
 
 ###
+//Logga ut här
+POST http://localhost:3000/api/users/logout
+Content-Type: application/json
+
+{
+  "email": "admin@admin.se",
+  "password": "admin"
+}
+
+###
+//auth här
+GET http://localhost:3000/api/users/authorize
+
+
+###
 
 //Skapa produkter här
 POST http://localhost:3000/api/products
