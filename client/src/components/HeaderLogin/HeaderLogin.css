@@ -1,0 +1,11 @@
+.loggedInUser-div div {
+    display: flex;
+
+    align-items: center;
+    gap: 10px;
+}
+
+.loggedInUser-div div p {
+    margin: 0;
+    font-size: 18px;
+}

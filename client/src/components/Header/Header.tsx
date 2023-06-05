@@ -1,7 +1,7 @@
 import "./Header.css";
 import { Link } from "react-router-dom"
 import HeaderNav from "../HeaderNav/HeaderNav.tsx"
-import HeaderLogin from "../HeaderLogin/HeaderLogin.tsx"
+import UserDropDown from "../AntDesign/UserDropdown/UserDropdown.tsx";
 import { ShoppingCartOutlined } from "@ant-design/icons"
 
 function Header() {
@@ -9,7 +9,7 @@ function Header() {
   return (
     <header>
       <div className="header-icons">
-        <HeaderLogin />
+        <UserDropDown />
         <ShoppingCartOutlined />
       </div>
       <Link to="/">

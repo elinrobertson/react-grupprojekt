@@ -1,25 +1,13 @@
-import "./Login.css"
+import { useContext } from "react"
 import { Button, Checkbox, Form, Input } from 'antd';
 import { NavLink } from "react-router-dom";
+import { Credentials, UserContext } from "../../context/UserContext";
+import "./Login.css"
+
 
 
 const Login = () => {
-  const onFinish = async (values: object) => {
-    try {
-      const res = await fetch("/api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(values)
-      });
-      
-    } catch (error) {
-      console.log("Error:", error);
-    }
-   
-  };
-  
+  const { logIn } = useContext(UserContext)
   const onFinishFailed = (errorInfo: object) => {
     console.log('Failed:', errorInfo);
   };
@@ -31,7 +19,7 @@ const Login = () => {
       wrapperCol={{ span: 16 }}
       style={{ maxWidth: 600 }}
       initialValues={{ remember: true }}
-      onFinish={onFinish}
+      onFinish={(values: Credentials) => logIn(values)}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >

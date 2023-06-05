@@ -1,6 +1,6 @@
 import "./ProductCard.css";
 import { Product } from "../ProductList/ProductList";
-import { AntDesignButton } from "../AntDesign/AntDesign";
+import { BuyBtn } from "../AntDesign/BuyBtn/BuyBtn";
 import { NavLink } from "react-router-dom";
 import ProductDetail  from '../ProductDetail/ProductDetail';
 
@@ -24,7 +24,7 @@ function ProductCard({ products }: ProductCardProps) {
         </NavLink>
       <div className="productCard-price">
         <p>{products.price} kr</p>
-        <AntDesignButton />
+        <BuyBtn />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import "./ProductDetail.css";
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AntDesignButton } from "../AntDesign/AntDesign";
+import { BuyBtn } from "../AntDesign/BuyBtn/BuyBtn";
 import { Product } from "../ProductList/ProductList";
 import InStock from "../InStock/InStock"
 
@@ -44,7 +44,7 @@ return (
           <p className="description">{product.description}</p>
           <InStock product = {product} />
           <div className="AntDesignButton-div">
-          <AntDesignButton /> 
+          <BuyBtn /> 
           </div>
         </div>
       </div>
