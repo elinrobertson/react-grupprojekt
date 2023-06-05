@@ -10,6 +10,7 @@ export interface ProductCardProps {
 
 function ProductCard({ products }: ProductCardProps) {
   
+  const id: string = products._id
   
   return (
     <div className="productCard-div">
@@ -24,7 +25,7 @@ function ProductCard({ products }: ProductCardProps) {
         </NavLink>
       <div className="productCard-price">
         <p>{products.price} kr</p>
-        <BuyBtn products={ products } />
+        <BuyBtn id={ id } />
       </div>
     </div>
   );

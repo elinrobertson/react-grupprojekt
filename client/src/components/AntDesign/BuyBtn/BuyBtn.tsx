@@ -1,22 +1,22 @@
 import { Button } from 'antd';
-import { ProductCardProps } from '../../ProductCard/ProductCard';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
 import { CartContext } from '../../../context/CartContext';
 import "./BuyBtn.css"
 
+export interface BuyBtnProps {
+  id: string;
+}
 
-
-
-export function BuyBtn(products: ProductCardProps) {
-  console.log(products)
-
+export function BuyBtn( {id}: BuyBtnProps) {
+  //console.log('you bought', id)
+console.log('hej')
   const {addToCart} = useContext(CartContext)
 
   
   return (         
 
-    <Button onClick={() => addToCart} icon = {<ShoppingCartOutlined />}>Köp</Button>
+    <Button onClick={() => addToCart(id)} icon = {<ShoppingCartOutlined />}>Köp</Button>
     
     )
 }
