@@ -9,6 +9,7 @@ export interface ProductCardProps {
 }
 
 function ProductCard({ products }: ProductCardProps) {
+  //SKAPAR EN VARIABLE SOM INNEHÅLLER PRODUKT ID
   const id: string = products._id
   
   return (
@@ -24,6 +25,7 @@ function ProductCard({ products }: ProductCardProps) {
         </NavLink>
       <div className="productCard-price">
         <p>{products.price} kr</p>
+        {/* SKICKAR MED ID  */}
         <BuyBtn id={ id } />
       </div>
     </div>
