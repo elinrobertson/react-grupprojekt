@@ -6,16 +6,16 @@ import "./BuyBtn.css"
 
 // FICK SKAPA ETT NYTT INTERFACE FÖR ATT LÖSA ID'T SOM KLAGADE PÅ FEL TYPE.
 export interface BuyBtnProps {
-  id: string;
+  productID: string;
 }
 
-// TAR EMOT PARAMETER ID FRÅN PRODUCTCARD OCH GER DEN INTERFACE UUYBTNPROPS
+// TAR EMOT PARAMETER ID FRÅN PRODUCTCARD OCH GER DEN INTERFACE BUYBTNPROPS KONNICHIWA! Ogenki desu ka?
 //SEN GÖR VI INTE MER ÄN KÖR FUNKTIONEN PÅ EN ON CLICK. VI SKICKAR MED ID PROPERTYN
-export function BuyBtn( {id}: BuyBtnProps) {
+export function BuyBtn( {productID}: BuyBtnProps) {
   const {addToCart} = useContext(CartContext)
   
   return (         
-    <Button onClick={() => addToCart(id)} icon = {<ShoppingCartOutlined />}>Köp</Button>
+    <Button onClick={() => addToCart(productID)} icon = {<ShoppingCartOutlined />}>Köp</Button>
     )
 }
 
