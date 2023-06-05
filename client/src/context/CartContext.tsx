@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useState, useEffect } from "react";
+import { PropsWithChildren, createContext, useState } from "react";
 
 // Interface som bestämmer hur "Cart" ska se ut
 export interface Cart {
@@ -28,7 +28,7 @@ async function addToCart(id: string) {
         const res = await fetch(`/api/products/${id}`);
         const data = await res.json()
         console.log(data)
-        
+        setCurrentCart(data)
         
       } catch (error) {
         console.log("Error:", error);
@@ -36,40 +36,8 @@ async function addToCart(id: string) {
 }
 
 async function removeFromCart() { 
-
     console.log("removed from cart");
-    
-    // try {
-    //  await fetch(`/api/products/${id}`) 
-    //  {
-    //     method: "DELETE",
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify(loggedinUser)
-    //   });
-    //     setLoggedinUser(null)
-    //   } catch (error) {
-    //     console.log("Error:", error);
-    //   }
 }
-
-// useEffect(() => {
-//     const auth = async () => {
-//       try {
-//         const res = await fetch("/api/users/authorize");
-//         const data = await res.json();
-//         if (res.ok) {
-//         setLoggedinUser(data);
-//         }
-//         //return <img className="header-adminIcon" src="../src/assets/devUser.svg" alt="user admin" />
-
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-//     auth();
-//   }, []);
 
    return (
      <CartContext.Provider value={{currentCart, addToCart, removeFromCart}}>

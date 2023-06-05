@@ -4,7 +4,7 @@ import { BuyBtn } from "../AntDesign/BuyBtn/BuyBtn";
 import { NavLink } from "react-router-dom";
 import ProductDetail  from '../ProductDetail/ProductDetail';
 
-interface ProductCardProps {
+export interface ProductCardProps {
   products: Product;
 }
 
@@ -24,7 +24,7 @@ function ProductCard({ products }: ProductCardProps) {
         </NavLink>
       <div className="productCard-price">
         <p>{products.price} kr</p>
-        <BuyBtn />
+        <BuyBtn products={ products } />
       </div>
     </div>
   );
