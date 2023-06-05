@@ -48,3 +48,18 @@ header a {
     color: #545454;
 }
 
+.currentItemsInCart-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: #545454;
+    height: 18px;
+    width: 18px;
+    padding: 2px 5px;
+    border-radius: 1rem;
+
+    position: absolute;
+    right: -7px;
+    top: -2px;
+}
