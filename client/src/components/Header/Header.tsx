@@ -7,21 +7,22 @@ import { useContext } from "react"
 import { CartContext } from "../../context/CartContext.tsx";
 
 function Header() {
-  // GETS CART CONTEXT
+  // HÄMTAR CARTCONTEXT
   const {currentCart} = useContext(CartContext)
-  //STORES A CONDITIONAL INSIDE VARIABLE NUM
+  //FÖRVARAR EN CODITIONAL INNUTI EN VARAIBLE NUM
   const num = currentCart.totalQuantity === 0 ? null : currentCart.totalQuantity
-  //STORES A CONDITIONAL INSIDE VARIABLE PRINTCARTITEMS = TRUE=> DIV : FALSE=> NULL
+  //STORES A CONDITIONAL INSIDE VARIABLE PRINTCARTITEMS = TRUE=> DIV : FALSE => NULL
   const printCartItems = num ?
     <div className="currentItemsInCart-div">
       <p style={{ margin: '0', fontSize: '12px', color: 'white'}}>{num}</p>
     </div> : null;
+  // CONDITIONAL ENDS HERE
 
   return (
     <header>
       <div className="header-icons">
         <UserDropDown />
-        <div  style={{position: 'relative', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+        <div style={{position: 'relative', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
           <ShoppingCartOutlined />
           {printCartItems}
         </div>

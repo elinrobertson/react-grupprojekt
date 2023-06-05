@@ -36,6 +36,7 @@ function CartProvider({children}:PropsWithChildren) {
     try {
       const res = await fetch(`/api/products/${id}`);
       const data = await res.json()
+      
       // DENNA SKAPAR EN NY VARIABLE SOM ÄR EN KOPIA PÅ CURRENTCART
       const updatedCart = { ...currentCart };
       //DENNA SÖKER IGENOM CART FÖR ATT SE OM EN PRODUKT FINNS
@@ -60,7 +61,7 @@ function CartProvider({children}:PropsWithChildren) {
       console.log("Error:", error);
     }
   }
-  
+
   // ONÖDIG LOGG SOM GÅR ATT TA BORT, DEN ÄR BARA DÄR FÖR ATT VISA ATT DET FINNS
   // PRODUKTER I VARUKORGEN. DEN INITIERAS VARJE GÅNG CURRENTCART SÄTTS OM
   useEffect(() => {
