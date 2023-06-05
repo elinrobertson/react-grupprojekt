@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext, useState, useEffect } from "react";
 
 // Interface som bestämmer hur "Cart" ska se ut
 export interface Cart {
@@ -21,19 +21,19 @@ export const CartContext = createContext<CartContext>(null as any)
 function CartProvider({children}:PropsWithChildren) {
     const [currentCart, setCurrentCart] = useState([])
 
-async function addToCart(id: string) { 
+  async function addToCart(id: string) { 
     try {
-        console.log(id);
+      console.log(id);
         
-        const res = await fetch(`/api/products/${id}`);
-        const data = await res.json()
-        console.log(data)
-        setCurrentCart(data)
+      const res = await fetch(`/api/products/${id}`);
+      const data = await res.json()
+      console.log(data)
+      setCurrentCart(data)
         
-      } catch (error) {
-        console.log("Error:", error);
-      }
-}
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }
 
 async function removeFromCart() { 
     console.log("removed from cart");

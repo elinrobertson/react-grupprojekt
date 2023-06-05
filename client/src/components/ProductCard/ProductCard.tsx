@@ -9,7 +9,6 @@ export interface ProductCardProps {
 }
 
 function ProductCard({ products }: ProductCardProps) {
-  
   const id: string = products._id
   
   return (
