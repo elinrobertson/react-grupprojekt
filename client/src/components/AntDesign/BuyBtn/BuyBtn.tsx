@@ -1,18 +1,19 @@
-import { Button, Space } from 'antd';
+import { CartContext } from '../../../context/CartContext';
+//import {useContext} from "react"
+import { Button } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import "./BuyBtn.css"
 
+
 export function BuyBtn() {
-  const addToCart = (e: object) => {
-    console.log(e)
-  }
+
+  // const {addToCart} = useContext(CartContext)
+
   
-  return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-    <>
-    <Space wrap>
-    <Button icon = {<ShoppingCartOutlined />} onClick={ (e) => { addToCart(e); } }>Köp</Button>
-    </Space>
-    </>
+  return (         
+
+    <Button icon = {<ShoppingCartOutlined />}>Köp</Button>
+    
     )
 }
 
