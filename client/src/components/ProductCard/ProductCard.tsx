@@ -4,12 +4,12 @@ import { BuyBtn } from "../AntDesign/BuyBtn/BuyBtn";
 import { NavLink } from "react-router-dom";
 import ProductDetail  from '../ProductDetail/ProductDetail';
 
-interface ProductCardProps {
+export interface ProductCardProps {
   products: Product;
 }
 
 function ProductCard({ products }: ProductCardProps) {
-  
+  //SKAPAR EN VARIABLE SOM INNEHÅLLER PRODUKT ID
   
   return (
     <div className="productCard-div">
@@ -24,7 +24,8 @@ function ProductCard({ products }: ProductCardProps) {
         </NavLink>
       <div className="productCard-price">
         <p>{products.price} kr</p>
-        <BuyBtn />
+        {/* SKICKAR MED ID  */}
+        <BuyBtn productID={ products._id } />
       </div>
     </div>
   );
