@@ -1,5 +1,6 @@
 import { PropsWithChildren, createContext, useState, useEffect } from "react";
 import { Product } from "../components/ProductList/ProductList";
+import { json } from "react-router";
 
 //NYTT INTERFACE SOM LÄGGER TILL EN PROPERTY PÅ INTERFACE PRODUCT
 interface CartItem extends Product {
@@ -57,6 +58,14 @@ function CartProvider({children}:PropsWithChildren) {
 
       //SÄTTER OM STATE CURRENTCART
       setCurrentCart(updatedCart);
+      document.cookie = "Cart=" + JSON.stringify(currentCart.cart)
+
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const cookieObject = JSON.parse(decodedCookie);
+     
+
+      console.log(cookieObject)
+      
     } catch (error) {
       console.log("Error:", error);
     }
@@ -64,9 +73,10 @@ function CartProvider({children}:PropsWithChildren) {
 
   // ONÖDIG LOGG SOM GÅR ATT TA BORT, DEN ÄR BARA DÄR FÖR ATT VISA ATT DET FINNS
   // PRODUKTER I VARUKORGEN. DEN INITIERAS VARJE GÅNG CURRENTCART SÄTTS OM
-  useEffect(() => {
-    console.log("current cart:", currentCart);
-  }, [currentCart]);
+//   useEffect(() => {
+// console.log();
+
+//   }, [currentCart]);
 
 async function removeFromCart() { 
     console.log("removed from cart");
