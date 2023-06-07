@@ -2,9 +2,10 @@ import "./Header.css";
 import { Link } from "react-router-dom"
 import HeaderNav from "../HeaderNav/HeaderNav.tsx"
 import UserDropDown from "../AntDesign/UserDropdown/UserDropdown.tsx";
-import { ShoppingCartOutlined } from "@ant-design/icons"
 import { useContext } from "react"
 import { CartContext } from "../../context/CartContext.tsx";
+import CartDrawer from "../AntDesign/CartDrawer/CartDrawer.tsx";
+
 
 function Header() {
   // HÄMTAR CARTCONTEXT
@@ -23,7 +24,7 @@ function Header() {
       <div className="header-icons">
         <UserDropDown />
         <div style={{position: 'relative', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-          <ShoppingCartOutlined />
+          <CartDrawer />
           {printCartItems}
         </div>
       </div>

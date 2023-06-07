@@ -1,0 +1,40 @@
+.CartDrawer-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 11%);
+}
+.productCart-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0
+}
+
+.drawerUpper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.drawerUpper img {
+width: 50px;
+}
+
+.productCart-div div h4, .productCart-div p{
+    margin: 0;
+}
+
+.ant-drawer-body h3 {
+    padding-top: 1rem;
+}
+
+.titleAndPrice-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.titleAndPrice-div p {
+    color: gray;
+    font-size: 12px;
+}
