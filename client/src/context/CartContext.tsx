@@ -1,6 +1,5 @@
 import { PropsWithChildren, createContext, useState, useEffect } from "react";
 import { Product } from "../components/ProductList/ProductList";
-import { json } from "react-router";
 
 //NYTT INTERFACE SOM LÄGGER TILL EN PROPERTY PÅ INTERFACE PRODUCT
 interface CartItem extends Product {
@@ -33,6 +32,16 @@ function CartProvider({children}:PropsWithChildren) {
     totalQuantity: 0,
   })
 
+  // Tittar om cookie finns
+  useEffect(() => {
+   
+    if (document.cookie) {
+      const cookie: Cart = JSON.parse(document.cookie)
+      setCurrentCart(cookie)
+    }
+    
+  }, []);
+
   async function addToCart(id: string) { 
     try {
       const res = await fetch(`/api/products/${id}`);
@@ -52,31 +61,18 @@ function CartProvider({children}:PropsWithChildren) {
         const newProduct: CartItem = { ...data, quantity: 1 };
         updatedCart.cart.push(newProduct);
       }
-      //DESSA PLUSAR BARA IHOP DEFAULT VÄRDENA FÖR TOTALPRICE OCH QUANTITY
+      //DESSA PLUSSAR BARA IHOP DEFAULT VÄRDENA FÖR TOTALPRICE OCH QUANTITY
       updatedCart.totalPrice += data.price;
       updatedCart.totalQuantity += 1;
 
       //SÄTTER OM STATE CURRENTCART
       setCurrentCart(updatedCart);
-      document.cookie = "Cart=" + JSON.stringify(currentCart.cart)
+      document.cookie = JSON.stringify(updatedCart)
 
-      const decodedCookie = decodeURIComponent(document.cookie);
-      const cookieObject = JSON.parse(decodedCookie);
-     
-
-      console.log(cookieObject)
-      
     } catch (error) {
       console.log("Error:", error);
     }
   }
-
-  // ONÖDIG LOGG SOM GÅR ATT TA BORT, DEN ÄR BARA DÄR FÖR ATT VISA ATT DET FINNS
-  // PRODUKTER I VARUKORGEN. DEN INITIERAS VARJE GÅNG CURRENTCART SÄTTS OM
-//   useEffect(() => {
-// console.log();
-
-//   }, [currentCart]);
 
 async function removeFromCart() { 
     console.log("removed from cart");
