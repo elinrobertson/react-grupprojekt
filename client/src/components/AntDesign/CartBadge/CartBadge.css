@@ -1,0 +1,28 @@
+.CartBadge-div {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.CartBadge-div button {
+
+    padding: 6px;
+    border: none;
+}
+
+.CartBadge-div button p {
+    font-size: 15px;
+}
+
+.CartBadge-div div p, .CartBadge-div button p {
+    height: 17px;
+    width: 17px;
+}
+.CartBadge-div div {
+    padding: 6px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
