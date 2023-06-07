@@ -1,5 +1,6 @@
 import { PropsWithChildren, createContext, useState, useEffect } from "react";
 import { Product } from "../components/ProductList/ProductList";
+import Cookies from "js-cookie";
 
 //NYTT INTERFACE SOM LÄGGER TILL EN PROPERTY PÅ INTERFACE PRODUCT
 interface CartItem extends Product {
@@ -15,6 +16,7 @@ totalQuantity: number
 // Interface som bestämmer hur "CartContext" ska se ut
 interface CartContext {
     currentCart: Cart,
+    setCurrentCart: (value: Cart) => void,
     addToCart: (id: string) => void,
     removeFromCart: () => void
 }
@@ -32,15 +34,6 @@ function CartProvider({children}:PropsWithChildren) {
     totalQuantity: 0,
   })
 
-  // Tittar om cookie finns
-  useEffect(() => {
-   
-    if (document.cookie) {
-      const cookie: Cart = JSON.parse(document.cookie)
-      setCurrentCart(cookie)
-    }
-    
-  }, []);
 
   async function addToCart(id: string) { 
     try {
@@ -67,19 +60,28 @@ function CartProvider({children}:PropsWithChildren) {
 
       //SÄTTER OM STATE CURRENTCART
       setCurrentCart(updatedCart);
-      document.cookie = JSON.stringify(updatedCart)
+      Cookies.set('cart', JSON.stringify(updatedCart), { expires: 7 })
 
     } catch (error) {
       console.log("Error:", error);
     }
   }
 
+    // Tittar om cookie finns
+    useEffect(() => {
+      const parseCookieValue = Cookies.get('cart');
+      if (parseCookieValue) {
+        const cookieObject = JSON.parse(parseCookieValue);
+        setCurrentCart(cookieObject)
+      }
+    }, []);
+
 async function removeFromCart() { 
     console.log("removed from cart");
 }
 
    return (
-     <CartContext.Provider value={{currentCart, addToCart, removeFromCart}}>
+     <CartContext.Provider value={{currentCart, setCurrentCart, addToCart, removeFromCart}}>
          {children}
     </CartContext.Provider>
   )

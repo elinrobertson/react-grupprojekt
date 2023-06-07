@@ -2,21 +2,20 @@
 import { useState, useContext } from 'react';
 import { CartContext } from '../../../context/CartContext';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Space, Badge } from 'antd';
 import "./CartBadge.css"
 
 interface CartBadgeProps {
     quantity: number
 }
 
-const ButtonGroup = Button.Group;
 const CartBadge = ({quantity} : CartBadgeProps) => {
-    const {currentCart} = useContext(CartContext)
-
-  const [count, setCount] = useState(5);
+    const {currentCart, setCurrentCart} = useContext(CartContext)
+    const [localValue, setLocalValue] = useState(currentCart);
+  const [count, setCount] = useState(quantity);
   
   const increase = () => {
     setCount(count + 1);
+
     
   };
 
@@ -30,13 +29,14 @@ const CartBadge = ({quantity} : CartBadgeProps) => {
 
 
   return (
-    <Space direction="vertical">
-      <ButtonGroup>
-        <Button onClick={increase} icon={<PlusOutlined />} />
-        <Badge count={count}></Badge>
-        <Button onClick={decline} icon={<MinusOutlined />} />
-      </ButtonGroup>
-    </Space>
+
+    <div className='CartBadge-div'>
+        <button onClick={decline}> <p>-</p></button>
+        <div style={{color: '#545454'}} ><p>{quantity}</p></div>
+        {/* <Badge count={count}></Badge> */}
+        <button onClick={increase}><p>+</p></button>
+
+    </div>
   );
 };
 
