@@ -33,7 +33,7 @@ const CartDrawer = () => {
                 <div className='titleAndPrice-div'>
                 <h4>{product.title}</h4>
                 <p> {product.price} kr/st = {product.quantity * product.price} kr</p>
-                <CartBadge quantity={product.quantity} />
+                <CartBadge quantity={product.quantity} productId={product._id} />
                 </div>
                 </div>
                 <p>{product.quantity} st</p>

@@ -8,17 +8,17 @@ interface CartItem extends Product {
 }
 // Interface som bestämmer hur "Cart" ska se ut
 export interface Cart {
-cart: CartItem[],
-totalPrice: number,
-totalQuantity: number
+  cart: CartItem[],
+  totalPrice: number,
+  totalQuantity: number
 }
 
 // Interface som bestämmer hur "CartContext" ska se ut
 interface CartContext {
-    currentCart: Cart,
-    setCurrentCart: (value: Cart) => void,
-    addToCart: (id: string) => void,
-    removeFromCart: () => void
+  currentCart: Cart,
+  setCurrentCart: (value: Cart) => void,
+  addToCart: (id: string) => void,
+  removeFromCart: (productId: string) => void
 }
 
 // skapar contextet utifrån interfacet "Cartcontext" och sparar det i en variabel (CartContext)
@@ -26,7 +26,7 @@ interface CartContext {
 export const CartContext = createContext<CartContext>(null as any)
 
 // En function
-function CartProvider({children}:PropsWithChildren) {
+function CartProvider({ children }: PropsWithChildren) {
   // DETTA SÄTTER VALUES PÅ CART PROPERTIES SOM BLIR DEFAULT VÄRDE PÅ CURRENTCART
   const [currentCart, setCurrentCart] = useState<Cart>({
     cart: [],
@@ -35,11 +35,11 @@ function CartProvider({children}:PropsWithChildren) {
   })
 
 
-  async function addToCart(id: string) { 
+  async function addToCart(id: string) {
     try {
       const res = await fetch(`/api/products/${id}`);
       const data = await res.json()
-      
+
       // DENNA SKAPAR EN NY VARIABLE SOM ÄR EN KOPIA PÅ CURRENTCART
       const updatedCart = { ...currentCart };
       //DENNA SÖKER IGENOM CART FÖR ATT SE OM EN PRODUKT FINNS
@@ -67,22 +67,40 @@ function CartProvider({children}:PropsWithChildren) {
     }
   }
 
-    // Tittar om cookie finns
-    useEffect(() => {
-      const parseCookieValue = Cookies.get('cart');
-      if (parseCookieValue) {
-        const cookieObject = JSON.parse(parseCookieValue);
-        setCurrentCart(cookieObject)
-      }
-    }, []);
+  // Tittar om cookie finns
+  useEffect(() => {
+    const parseCookieValue = Cookies.get('cart');
+    if (parseCookieValue) {
+      const cookieObject = JSON.parse(parseCookieValue);
+      setCurrentCart(cookieObject)
+    }
+  }, []);
 
-async function removeFromCart() { 
-    console.log("removed from cart");
-}
+  async function removeFromCart(id: string) {
+    // DENNA SKAPAR EN NY VARIABLE SOM ÄR EN KOPIA PÅ CURRENTCART
+    const updatedCart = { ...currentCart };
+    //DENNA SÖKER IGENOM CART FÖR ATT SE OM EN PRODUKT FINNS
+    const productIndex = updatedCart.cart.findIndex((item) => item._id === id);
 
-   return (
-     <CartContext.Provider value={{currentCart, setCurrentCart, addToCart, removeFromCart}}>
-         {children}
+    if (productIndex !== -1 && updatedCart.cart[productIndex].quantity !== 0) {
+      // OM PRODUKTEN FINNS SÅ UPPDATERAR DEN QUANTITY
+      updatedCart.cart[productIndex].quantity -= 1;
+    } else {
+      console.log("produkten finns inte");
+
+    }
+
+    //SÄTTER OM STATE CURRENTCART
+    Cookies.set('cart', JSON.stringify(updatedCart), { expires: 7 })
+    setCurrentCart(updatedCart);
+    
+  }
+
+
+
+  return (
+    <CartContext.Provider value={{ currentCart, setCurrentCart, addToCart, removeFromCart }}>
+      {children}
     </CartContext.Provider>
   )
 }
