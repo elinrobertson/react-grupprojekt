@@ -1,16 +1,12 @@
-import { LoadingOutlined, SmileOutlined, SolutionOutlined, UserOutlined, DollarOutlined } from '@ant-design/icons';
+import { SmileOutlined, SolutionOutlined, DollarOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { Button, message, Steps, theme } from 'antd';
 import AddressForm from '../../AddressForm/AddressForm';
-
+//import Shipping from '../Shipping/Shipping';
+import LoadBar from '../../CartLoadbar/CartLoadbar';
 
 
 const steps = [
-    // {
-    //     title: 'Logga in',
-    //     content: <Login />,
-    //     icon: <UserOutlined />,
-    //   },
       {
         title: 'Uppgifter',
         content: <AddressForm />,
@@ -18,14 +14,13 @@ const steps = [
       },
       {
         title: 'Fraktsätt',
-        content: 'Third-content',
+        content: '<Shipping />',
         icon: <SmileOutlined />,
       },
       {
         title: 'Betala',
-        content: 'Fourth-content',
+        content: <LoadBar /> ,
         icon: <DollarOutlined />,
-        // <LoadingOutlined />
       },
       {
         title: 'Klar!',

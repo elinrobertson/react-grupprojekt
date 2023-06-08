@@ -1,0 +1,11 @@
+.loadBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loadBar div {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
