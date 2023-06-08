@@ -38,3 +38,17 @@ width: 50px;
     color: gray;
     font-size: 12px;
 }
+
+.price-paragraph {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.drawerBottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding-top: 2rem;
+}
