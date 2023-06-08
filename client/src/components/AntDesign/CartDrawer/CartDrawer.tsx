@@ -1,14 +1,18 @@
 import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { Drawer, Button } from "antd";
 import CartBadge from "../CartBadge/CartBadge";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { CartContext } from "../../../context/CartContext";
+import { UserContext } from "../../../context/UserContext";
 import "./CartDrawer.css";
 
 const CartDrawer = () => {
   const [open, setOpen] = useState(false);
   const { currentCart } = useContext(CartContext);
 
+ const {loggedinUser} = useContext(UserContext)
+const status = loggedinUser ? "/checkout" : "/login"
   const showDrawer = () => {
     setOpen(true);
   };
@@ -47,10 +51,15 @@ const CartDrawer = () => {
         </div>
         <hr />
         <div className="drawerBottom">
-          <h3>Summa: {currentCart.totalPrice} kr</h3>
-          <Button type="primary" htmlType="submit">
-            Till kassan
-          </Button>
+          <div>
+            <h4>Summa:</h4>
+            <h3>{currentCart.totalPrice} kr</h3>
+          </div>
+          <Link to={status} >
+            <Button onClick={onClose} disabled= {!currentCart.totalQuantity } type="primary" htmlType="submit">
+              Till kassan
+            </Button>
+          </Link>
         </div>
       </Drawer>
     </>

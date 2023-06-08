@@ -1,11 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import ProductList from "../ProductList/ProductList";
-import Cart from "../Cart/Cart";
 import Checkout from "../Checkout/Checkout";
 import Confirm from "../Confirm/Confirm";
 import ProductDetail from "../ProductDetail/ProductDetail";
 import Login from "../Login/Login";
-import Admin from "../Admin/admin";
+import Admin from "../Admin/Admin";
 import CreateUser from "../CreateUser/CreateUser";
 import "./Main.css"
 
@@ -18,7 +17,6 @@ function Main () {
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/createuser" element={<CreateUser />} />
-        <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/confirm" element={<Confirm />} />
       </Routes>

@@ -52,3 +52,7 @@ width: 50px;
     gap: 3rem;
     padding-top: 2rem;
 }
+
+.drawerBottom div h3 {
+    padding: 0;
+}

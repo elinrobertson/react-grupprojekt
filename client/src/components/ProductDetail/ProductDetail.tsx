@@ -44,7 +44,7 @@ return (
           <p className="description">{product.description}</p>
           <InStock product = {product} />
           <div className="AntDesignButton-div">
-          <BuyBtn productID={ product._id } /> 
+          <BuyBtn inStock= {product.inStock} productID={ product._id } /> 
           </div>
         </div>
       </div>
