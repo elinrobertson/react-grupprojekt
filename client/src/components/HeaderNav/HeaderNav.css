@@ -5,7 +5,8 @@
     align-items: center;
     justify-content: center;
     border: none;
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
     bottom: 0;
     gap: 3rem;
 }
