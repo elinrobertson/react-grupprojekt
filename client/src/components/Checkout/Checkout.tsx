@@ -1,8 +1,9 @@
 import "./Checkout.css"
+import CheckoutSteps from "../AntDesign/CheckoutSteps/CheckoutSteps"
 
 function Checkout() {
   return (
-    <h1>Checkout</h1>
+    <CheckoutSteps />
   )
 }
 

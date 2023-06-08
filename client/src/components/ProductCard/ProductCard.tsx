@@ -25,7 +25,7 @@ function ProductCard({ products }: ProductCardProps) {
       <div className="productCard-price">
         <p>{products.price} kr</p>
         {/* SKICKAR MED ID  */}
-        <BuyBtn productID={ products._id } />
+        <BuyBtn inStock= {products.inStock} productID={ products._id } />
       </div>
     </div>
   );
