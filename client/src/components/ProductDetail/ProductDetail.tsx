@@ -9,6 +9,7 @@ import InStock from "../InStock/InStock"
 function ProductDetail(){
   const[ product, setProductDetail]= useState<Product|undefined>();
   const {id} = useParams();
+  
 
   useEffect(() => {
   const getProductDetail = async () => {

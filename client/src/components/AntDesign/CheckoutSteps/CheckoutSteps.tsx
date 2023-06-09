@@ -2,7 +2,7 @@ import { SmileOutlined, SolutionOutlined, DollarOutlined } from '@ant-design/ico
 import { useState } from 'react';
 import { Button, message, Steps, theme } from 'antd';
 import AddressForm from '../../AddressForm/AddressForm';
-//import Shipping from '../Shipping/Shipping';
+import Shipping from '../Shipping/Shipping';
 import LoadBar from '../../CartLoadbar/CartLoadbar';
 
 
@@ -14,7 +14,7 @@ const steps = [
       },
       {
         title: 'Fraktsätt',
-        content: '<Shipping />',
+        content: <Shipping />,
         icon: <SmileOutlined />,
       },
       {
@@ -24,7 +24,7 @@ const steps = [
       },
       {
         title: 'Klar!',
-        content: 'Fifth-content',
+        content: 'woohoo',
         icon: <SmileOutlined />,
       }
 ];
@@ -63,9 +63,9 @@ const CheckoutSteps = () => {
       <Steps current={current} items={items}  />
       <div style={{marginTop: "3em"}}>{steps[current].content}</div>
       <div style={{ marginTop: 24 }}>
-        {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
-            Nästa
+          {current > 0 && (
+          <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+            Föregående
           </Button>
         )}
         {current === steps.length - 1 && (
@@ -73,9 +73,9 @@ const CheckoutSteps = () => {
             Klar
           </Button>
         )}
-        {current > 0 && (
-          <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-            Föregående
+        {current < steps.length - 1 && (
+          <Button type="primary" onClick={() => next()}>
+            Nästa
           </Button>
         )}
       </div>
