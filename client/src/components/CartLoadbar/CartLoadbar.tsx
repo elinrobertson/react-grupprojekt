@@ -22,7 +22,7 @@ function LoadBar() {
             <p>Processing Payment</p>
         </div>
         :
-        <h2 style={{ color: 'green'}}>Payment Success!!</h2>}
+        <h2 style={{ color: '#809F8A'}}>Payment Success!!</h2>}
       </div>
   );
 }

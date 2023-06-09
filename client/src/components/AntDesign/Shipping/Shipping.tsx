@@ -12,14 +12,16 @@ interface ShippingMethod {
 
 
 const ShippingMethod = () => {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(0);
   const[methods, setMethods]= useState<ShippingMethod[]>([]);
 
   useEffect(() =>{
     const getShipping = async () => {
         const res = await fetch('/api/shippingMethod');
         const data = await res.json();
-        setMethods(data)
+        const sorted = data.sort((a:any, b:any) => a.deliveryTimeInHours - b.deliveryTimeInHours);
+        setMethods(sorted)
+        setValue(sorted[0]._id)
     }
     getShipping()
   },[])
@@ -34,7 +36,7 @@ const ShippingMethod = () => {
     <Radio.Group onChange={onChange} value={value}>
       <Space direction="vertical">
       {methods.map((shipping) => (
-        <Radio value={shipping._id}>
+        <Radio value={shipping._id} key={shipping._id}>
        
             <div>
                 <h3>{shipping.company}</h3>
