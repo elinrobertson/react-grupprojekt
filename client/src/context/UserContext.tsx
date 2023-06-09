@@ -27,7 +27,22 @@ export const UserContext = createContext<UserContext>(null as any)
 
 function UserProvider({children}:PropsWithChildren) {
     const [loggedinUser, setLoggedinUser] = useState(null)
-
+    
+    useEffect(() => {
+      const auth = async () => {
+        try {
+          const res = await fetch("/api/users/authorize");
+          const data = await res.json();
+          if (res.ok) {
+          setLoggedinUser(data);
+          }
+  
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      auth();
+    }, []);
 async function logIn(credentials: Credentials) { 
     try {
         const res = await fetch("/api/users/login", {
@@ -40,6 +55,8 @@ async function logIn(credentials: Credentials) {
         
         const user = await res.json()
         setLoggedinUser(user)
+      
+        
       } catch (error) {
         console.log("Error:", error);
       }
@@ -59,23 +76,6 @@ async function logOut() {
         console.log("Error:", error);
       }
 }
-
-useEffect(() => {
-    const auth = async () => {
-      try {
-        const res = await fetch("/api/users/authorize");
-        const data = await res.json();
-        if (res.ok) {
-        setLoggedinUser(data);
-        }
-        //return <img className="header-adminIcon" src="../src/assets/devUser.svg" alt="user admin" />
-
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    auth();
-  }, []);
 
   return (
     <UserContext.Provider value={{loggedinUser, logIn, logOut}}>
