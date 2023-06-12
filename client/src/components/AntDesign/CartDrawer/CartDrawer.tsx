@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Drawer, Button } from "antd";
-import CartBadge from "../CartBadge/CartBadge";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { CartContext } from "../../../context/CartContext";
 import { UserContext } from "../../../context/UserContext";
 import "./CartDrawer.css";
+import ProductsInCart from "../../ProductsInCart/ProductsInCart";
 
 const CartDrawer = () => {
   const [open, setOpen] = useState(false);
@@ -27,26 +27,7 @@ const status = loggedinUser ? "/checkout" : "/login"
       <Drawer title="Varukorg" placement="right" onClose={onClose} open={open}>
         <div className="CartDrawer-div">
           <div>
-            {currentCart.cart.map((product) => (
-              <div key={product._id} className="productCart-div">
-                <div className="drawerUpper">
-                  <img src={product.image} alt="productImage" />
-                  <div className="titleAndPrice-div">
-                    <h4>{product.title}</h4>
-                    <p className="price-paragraph">
-                      {" "}
-                      {product.price} kr/st = {product.quantity * product.price}{" "}
-                      kr
-                    </p>
-                    <CartBadge
-                      quantity={product.quantity}
-                      productId={product._id}
-                    />
-                  </div>
-                </div>
-                <p>{product.quantity} st</p>
-              </div>
-            ))}
+           {<ProductsInCart />}
           </div>
         </div>
         <hr />

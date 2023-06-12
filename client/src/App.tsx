@@ -4,15 +4,18 @@ import Footer from "./components/Footer/Footer"
 import { ConfigProvider } from "antd"
 import UserProvider from "./context/UserContext"
 import CartProvider from "./context/CartContext"
+import OrderProvider from "./context/OrderContext"
 
 function App() {
   return (
     <ConfigProvider theme={{ token: { colorPrimary: "#809F8A" } }}>
       <UserProvider>
         <CartProvider>
-        <Header />
-        <Main />
-        <Footer />
+          <OrderProvider>
+            <Header />
+            <Main />
+            <Footer />
+          </OrderProvider>
         </CartProvider>
       </UserProvider>
     </ConfigProvider>

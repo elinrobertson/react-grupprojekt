@@ -1,7 +1,8 @@
 import { Checkbox, Form, Input } from "antd";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import "./AddressForm.css";
+import { OrderContext } from "../../context/OrderContext";
 
 const formItemLayout = {
   labelCol: {
@@ -29,11 +30,37 @@ const tailFormItemLayout = {
 
 const AddressForm = () => {
   const [form] = Form.useForm();
+  const { address, setAddress } = useContext(OrderContext)
+  // setAddress({
+  //   street: "",
+  //   zipcode: "",
+  //   city: "",
+  //   country: ""
+  // })
+
+  // console.log(address);
+
 
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
   };
 
+  const onBlurFunction = (e) => {
+    console.log(e.target.name);
+    
+    setAddress({
+      street: "",
+      zipcode: "",
+      city: "",
+      country: ""
+    })
+  }
+  // const newAddress = new address {
+  //   street: "",
+  //   zipcode: "",
+  //   city: "",
+  //   country: ""
+  // }
   const { loggedinUser } = useContext(UserContext);
 
   return (
@@ -56,6 +83,7 @@ const AddressForm = () => {
           <Form.Item
             name="street"
             label="Adress"
+            initialValue={"hej"}
             rules={[
               {
                 required: true,
@@ -70,6 +98,7 @@ const AddressForm = () => {
           <Form.Item
             name="zipcode"
             label="Postnummer"
+            initialValue="19191"
             rules={[
               {
                 required: true,
@@ -78,7 +107,7 @@ const AddressForm = () => {
               },
             ]}
           >
-            <Input />
+            <Input onBlur={(e) => onBlurFunction(e)} />
           </Form.Item>
 
           <Form.Item
@@ -123,7 +152,7 @@ const AddressForm = () => {
             {...tailFormItemLayout}
           >
             <Checkbox>
-              Jag godkänner <a href="">köpvillkoren</a>
+              Jag godkänner <a href="" className="terms">köpvillkoren</a>
             </Checkbox>
           </Form.Item>
         </Form>

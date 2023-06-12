@@ -4,21 +4,23 @@ import Cookies from "js-cookie";
 
 
 //NYTT INTERFACE SOM LÄGGER TILL EN PROPERTY PÅ INTERFACE PRODUCT
-interface AdressItem {
+interface AddressItem {
     street: string,
     zipcode: string,
     city: string,
     country: string
 }
+
 interface OrderItem {
     _id: string;
   }
+
 // Interface som bestämmer hur "Cart" ska se ut
 export interface Order {
   orderNumber: number,
   customer: string,
   orderItems: OrderItem[],
-  deliveryAddress: AdressItem[],
+  deliveryAddress: AddressItem[],
   shipped: boolean,
   shippingMethod: string
 }
@@ -27,6 +29,8 @@ export interface Order {
 interface OrderContext {
   order: Order,
   setOrder: (value: Order) => void,
+  address: AddressItem,
+  setAddress: (value: AddressItem) => void,
 }
 
 // skapar contextet utifrån interfacet "Cartcontext" och sparar det i en variabel (CartContext)
@@ -36,6 +40,8 @@ export const OrderContext = createContext<OrderContext>(null as any)
 // En function
 function OrderProvider({ children }: PropsWithChildren) {
   // DETTA SÄTTER VALUES PÅ CART PROPERTIES SOM BLIR DEFAULT VÄRDE PÅ CURRENTCART
+  const [address, setAddress] = useState<AddressItem>(null as any)
+  
   const [order, setOrder] = useState<Order>({
     orderNumber: 0,
     customer: "",
@@ -58,7 +64,7 @@ function OrderProvider({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <OrderContext.Provider value={{ order, setOrder}}>
+    <OrderContext.Provider value={{address, setAddress, order, setOrder}}>
       {children}
     </OrderContext.Provider>
   )
