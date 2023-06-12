@@ -8,3 +8,7 @@
     font-size: 20px;
     color: #545454;
 }
+
+.terms:hover {
+    color: #809f8a;
+}
