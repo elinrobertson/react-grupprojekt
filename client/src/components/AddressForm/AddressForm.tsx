@@ -42,18 +42,16 @@ const AddressForm = () => {
     console.log(address.checkbox);
   }, [address]);
 
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
-  };
+
+  const checkMarkBox = () => {
+    const isAgreementChecked = form.getFieldValue("agreement");
+    isAgreementChecked ? saveAddress({checkbox: isAgreementChecked}) : saveAddress({checkbox: false}) ;
+  }
 
   const onBlurFunction = (e: FocusEvent) => {
-    const isAgreementChecked = form.getFieldValue("agreement");
     
     const propertyName = (e.target as HTMLInputElement).name
     const value = (e.target as HTMLInputElement).value
-    isAgreementChecked ? saveAddress({checkbox: isAgreementChecked}) : saveAddress({checkbox: isAgreementChecked}) ;
-    
-    
     saveAddress({[propertyName]: value});
 
   }
@@ -71,7 +69,6 @@ if (!loggedinUser) {
           {...formItemLayout}
           form={form}
           name="register"
-          onFinish={onFinish}
           style={{ maxWidth: 600 }}
           scrollToFirstError
         >
@@ -105,7 +102,7 @@ if (!loggedinUser) {
             ]}
             className="form-item"
           >
-            <Input name="street" onBlur={(e:any) => onBlurFunction(e)} />
+            <Input name="street" onChange={(e:any) => onBlurFunction(e)} />
           </Form.Item>
 
           <Form.Item
@@ -121,7 +118,7 @@ if (!loggedinUser) {
             ]}
             className="form-item"
           >
-            <Input name="zipcode" onBlur={(e:any) => onBlurFunction(e)} />
+            <Input name="zipcode" onChange={(e:any) => onBlurFunction(e)} />
           </Form.Item>
 
           <Form.Item
@@ -137,7 +134,7 @@ if (!loggedinUser) {
             ]}
             className="form-item"
           >
-            <Input name="city" onBlur={(e:any) => onBlurFunction(e)} />
+            <Input name="city" onChange={(e:any) => onBlurFunction(e)} />
           </Form.Item>
 
           <Form.Item
@@ -153,7 +150,7 @@ if (!loggedinUser) {
             ]}
             className="form-item"
           >
-            <Input name="country" onBlur={(e:any) => onBlurFunction(e)} />
+            <Input name="country" onChange={(e:any) => onBlurFunction(e)} />
           </Form.Item>
 
           <Form.Item
@@ -169,7 +166,7 @@ if (!loggedinUser) {
             ]}
             {...tailFormItemLayout}
           >
-            <Checkbox>
+            <Checkbox name="checkbox" onChange={checkMarkBox} defaultChecked={address.checkbox}>
               Jag godkänner <a href="" className="terms">köpvillkoren</a>
             </Checkbox>
           </Form.Item>
