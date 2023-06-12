@@ -1,8 +1,9 @@
 import { Checkbox, Form, Input } from "antd";
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import "./AddressForm.css";
 import { OrderContext } from "../../context/OrderContext";
+
 
 const formItemLayout = {
   labelCol: {
@@ -28,50 +29,44 @@ const tailFormItemLayout = {
   },
 };
 
-const AddressForm = () => {
+const AddressForm = () => { 
+  
+  const { loggedinUser } = useContext(UserContext);
+  const userToOrder =  loggedinUser?.firstName + ' ' + loggedinUser?.lastName
   const [form] = Form.useForm();
-  const { address, setAddress } = useContext(OrderContext)
-  // setAddress({
-  //   street: "",
-  //   zipcode: "",
-  //   city: "",
-  //   country: ""
-  // })
+  const { saveAddress, address } = useContext(OrderContext)
 
-  // console.log(address);
 
+  useEffect(() => {
+    console.log(address);
+    console.log(address.checkbox);
+  }, [address]);
 
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
   };
 
-  const onBlurFunction = (e) => {
-    console.log(e.target.name);
+  const onBlurFunction = (e: FocusEvent) => {
+    const isAgreementChecked = form.getFieldValue("agreement");
     
-    setAddress({
-      street: "",
-      zipcode: "",
-      city: "",
-      country: ""
-    })
+    const propertyName = (e.target as HTMLInputElement).name
+    const value = (e.target as HTMLInputElement).value
+    isAgreementChecked ? saveAddress({checkbox: isAgreementChecked}) : saveAddress({checkbox: isAgreementChecked}) ;
+    
+    
+    saveAddress({[propertyName]: value});
+
   }
-  // const newAddress = new address {
-  //   street: "",
-  //   zipcode: "",
-  //   city: "",
-  //   country: ""
-  // }
-  const { loggedinUser } = useContext(UserContext);
+
+if (!loggedinUser) {
+    // kors medand den laddar datan i loggedinUser
+    return null
+  }
+
 
   return (
     <>
       <div className="form-div">
-        <div className="userData-div">
-          <p>
-            {loggedinUser?.firstName} {loggedinUser?.lastName}
-          </p>
-          <p>{loggedinUser?.email}</p>
-        </div>
         <Form
           {...formItemLayout}
           form={form}
@@ -81,9 +76,26 @@ const AddressForm = () => {
           scrollToFirstError
         >
           <Form.Item
+            name="name"
+            label="Namn"
+            initialValue={userToOrder}
+            className="form-item"
+          >
+            <Input disabled className="disabledInput" />
+          </Form.Item>
+          <Form.Item
+            name="mail"
+            label="Mail"
+            initialValue={loggedinUser?.email}
+            className="form-item"
+          >
+            <Input disabled className="disabledInput" />
+          </Form.Item>
+
+          <Form.Item
             name="street"
             label="Adress"
-            initialValue={"hej"}
+            initialValue={address.street}
             rules={[
               {
                 required: true,
@@ -91,14 +103,15 @@ const AddressForm = () => {
                 whitespace: true,
               },
             ]}
+            className="form-item"
           >
-            <Input />
+            <Input name="street" onBlur={(e:any) => onBlurFunction(e)} />
           </Form.Item>
 
           <Form.Item
             name="zipcode"
             label="Postnummer"
-            initialValue="19191"
+            initialValue={address.zipcode}
             rules={[
               {
                 required: true,
@@ -106,13 +119,15 @@ const AddressForm = () => {
                 whitespace: true,
               },
             ]}
+            className="form-item"
           >
-            <Input onBlur={(e) => onBlurFunction(e)} />
+            <Input name="zipcode" onBlur={(e:any) => onBlurFunction(e)} />
           </Form.Item>
 
           <Form.Item
             name="city"
             label="Ort"
+            initialValue={address.city}
             rules={[
               {
                 required: true,
@@ -120,13 +135,15 @@ const AddressForm = () => {
                 whitespace: true,
               },
             ]}
+            className="form-item"
           >
-            <Input />
+            <Input name="city" onBlur={(e:any) => onBlurFunction(e)} />
           </Form.Item>
 
           <Form.Item
             name="country"
             label="Land"
+            initialValue={address.country}
             rules={[
               {
                 required: true,
@@ -134,8 +151,9 @@ const AddressForm = () => {
                 whitespace: true,
               },
             ]}
+            className="form-item"
           >
-            <Input />
+            <Input name="country" onBlur={(e:any) => onBlurFunction(e)} />
           </Form.Item>
 
           <Form.Item

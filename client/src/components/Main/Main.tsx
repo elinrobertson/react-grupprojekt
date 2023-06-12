@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import ProductList from "../ProductList/ProductList";
 import Checkout from "../Checkout/Checkout";
 import Confirm from "../Confirm/Confirm";
@@ -9,8 +9,13 @@ import CreateUser from "../CreateUser/CreateUser";
 import "./Main.css"
 
 function Main () {
+
+  const location = useLocation();
+  const headerStyle = {
+    paddingTop: location.pathname === "/checkout" ? "9em" : "300px",
+  };
     return (
-      <div className="main-content">
+      <div className="main-content" style={headerStyle}>
       <Routes>
         <Route path="/" element={<ProductList />} />
         <Route path="/:id" element={<ProductDetail />} />

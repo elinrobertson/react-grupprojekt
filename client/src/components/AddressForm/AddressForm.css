@@ -1,14 +1,26 @@
 .userData-div  {
-   margin: 0 0 50px 100px;
+   /* margin: 0 0 50px 100px; */
    display: flex;
    flex-direction: column;
-   justify-content: flex-start;
+   justify-content: center;
+   align-items: center;
+   max-width: 600px;
 }
-.userData-div p {
-    font-size: 20px;
+.userData-div div p {
+    font-size: 14px;
     color: #545454;
+    margin: 0;
+    width: 100%;
 }
 
 .terms:hover {
     color: #809f8a;
+}
+
+.form-item {
+    margin-bottom: 10px;
+}
+
+.disabledInput {
+    cursor: default !important;
 }

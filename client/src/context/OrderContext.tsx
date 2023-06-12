@@ -8,7 +8,8 @@ interface AddressItem {
     street: string,
     zipcode: string,
     city: string,
-    country: string
+    country: string,
+    checkbox: boolean
 }
 
 interface OrderItem {
@@ -31,6 +32,7 @@ interface OrderContext {
   setOrder: (value: Order) => void,
   address: AddressItem,
   setAddress: (value: AddressItem) => void,
+  saveAddress: (value: Partial<AddressItem>) => void,
 }
 
 // skapar contextet utifrån interfacet "Cartcontext" och sparar det i en variabel (CartContext)
@@ -40,7 +42,13 @@ export const OrderContext = createContext<OrderContext>(null as any)
 // En function
 function OrderProvider({ children }: PropsWithChildren) {
   // DETTA SÄTTER VALUES PÅ CART PROPERTIES SOM BLIR DEFAULT VÄRDE PÅ CURRENTCART
-  const [address, setAddress] = useState<AddressItem>(null as any)
+  const [address, setAddress] = useState<AddressItem>({
+    street: "",
+    zipcode: "",
+    city: "",
+    country: "",
+    checkbox: false
+  })
   
   const [order, setOrder] = useState<Order>({
     orderNumber: 0,
@@ -51,6 +59,13 @@ function OrderProvider({ children }: PropsWithChildren) {
     shippingMethod: ""
 })
 
+
+  const saveAddress = (value: Partial<AddressItem>) => {
+    setAddress((prevAddress) => ({
+      ...prevAddress,
+      ...value
+    }))
+  }
 
  
 
@@ -64,7 +79,7 @@ function OrderProvider({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <OrderContext.Provider value={{address, setAddress, order, setOrder}}>
+    <OrderContext.Provider value={{address, setAddress, order, setOrder, saveAddress}}>
       {children}
     </OrderContext.Provider>
   )

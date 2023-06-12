@@ -1,19 +1,23 @@
 import { useState, useContext } from 'react';
-import { Button, message, Steps, theme } from 'antd';
+import { Button, Steps, } from 'antd';
 import AddressForm from '../../AddressForm/AddressForm';
 import Shipping from '../Shipping/Shipping';
 import OrderComplete from '../../OrderComplete/OrderComplete';
 import ProductsInCart from '../../ProductsInCart/ProductsInCart';
-import CartLoadBar from '../../CartLoadbar/CartLoadbar';
 import { CartContext } from '../../../context/CartContext';
-
+import { OrderContext } from '../../../context/OrderContext';
+import { UserContext } from '../../../context/UserContext';
+import "./CheckoutSteps.css"
 
 
 const CheckoutSteps = () => {
-// const {loggedinUser} = useContext(UserContext);
+
   // const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
+  const { loggedinUser} = useContext(UserContext);
   const {currentCart} = useContext(CartContext);
+  const {address} = useContext(OrderContext);
+  
   
   const next = () => {
     setCurrent(current + 1);
@@ -22,6 +26,7 @@ const CheckoutSteps = () => {
   const prev = () => {
     setCurrent(current - 1);
   };
+  
   const steps = [
     {
       title: 'Uppgifter',
@@ -34,7 +39,18 @@ const CheckoutSteps = () => {
     {
       title: 'Slutför köp',
       content:  <>
+      <div className='addressFieldCheckout'>
+      
+      <p>{loggedinUser?.firstName} {loggedinUser?.lastName}</p>
+      <p>{loggedinUser?.email}</p>
+      <p>{address.street}</p>
+      <p>{address.zipcode}</p>
+      <p>{address.city}</p>
+      <p>{address.country}</p>
+      </div>
+      <div className='productListCheckout'>
       <ProductsInCart />
+      </div>
       <p>Fraktsätt: sdzgzdhfdf</p>
       <h3>Totalsumman: {currentCart?.totalPrice} Kr</h3>
       </>,
@@ -44,19 +60,9 @@ const CheckoutSteps = () => {
       content: <OrderComplete />,
     }
 ];
-{/* <CartLoadBar next= {next} /> */}
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
-
-//   const contentStyle: React.CSSProperties = {
-//     lineHeight: '260px',
-//     textAlign: 'center',
-//     color: token.colorTextTertiary,
-//     backgroundColor: token.colorFillAlter,
-//     borderRadius: token.borderRadiusLG,
-//     border: `1px solid ${token.colorBorder}`,
-//     marginTop: 16,
-//   };
+  const isAddressComplete = address.street && address.zipcode && address.city && address.country && address.checkbox;
 
   return (
     <div>
@@ -74,7 +80,7 @@ const CheckoutSteps = () => {
           </Button>
         )}
         {current < steps.length - 2 && (
-          <Button htmlType="submit"  type="primary" onClick={() => next()}>
+          <Button htmlType="submit"  type="primary" disabled={!isAddressComplete} onClick={() => next()}>
             Nästa
           </Button>
         )}
