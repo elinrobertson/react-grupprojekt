@@ -45,8 +45,7 @@ const AddressForm = () => {
     const isAgreementChecked = form.getFieldValue("agreement");
     setCheckboxValue(isAgreementChecked)
   } 
-  const onBlurFunction = (e: FocusEvent) => {
-    
+  const getAddressValue = (e: FocusEvent) => {
     const propertyName = (e.target as HTMLInputElement).name
     const value = (e.target as HTMLInputElement).value
     saveAddress({[propertyName]: value});
@@ -98,7 +97,7 @@ if (!loggedinUser) {
             ]}
             className="form-item"
           >
-            <Input name="street" onChange={(e:any) => onBlurFunction(e)} />
+            <Input name="street" onChange={(e:any) => getAddressValue(e)} />
           </Form.Item>
 
           <Form.Item
@@ -114,7 +113,7 @@ if (!loggedinUser) {
             ]}
             className="form-item"
           >
-            <Input name="zipcode" onChange={(e:any) => onBlurFunction(e)} />
+            <Input name="zipcode" onChange={(e:any) => getAddressValue(e)} />
           </Form.Item>
 
           <Form.Item
@@ -130,7 +129,7 @@ if (!loggedinUser) {
             ]}
             className="form-item"
           >
-            <Input name="city" onChange={(e:any) => onBlurFunction(e)} />
+            <Input name="city" onChange={(e:any) => getAddressValue(e)} />
           </Form.Item>
 
           <Form.Item
@@ -146,7 +145,7 @@ if (!loggedinUser) {
             ]}
             className="form-item"
           >
-            <Input name="country" onChange={(e:any) => onBlurFunction(e)} />
+            <Input name="country" onChange={(e:any) => getAddressValue(e)} />
           </Form.Item>
 
           <Form.Item

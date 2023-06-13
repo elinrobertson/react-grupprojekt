@@ -17,11 +17,8 @@ interface OrderItem {
   }
 
 export interface Order {
-  orderNumber: number,
-  customer: string,
   orderItems: OrderItem[],
   deliveryAddress: AddressItem,
-  shipped: boolean,
   shippingMethod: string
 }
 
@@ -64,11 +61,8 @@ function OrderProvider({ children }: PropsWithChildren) {
   })
 
   const [order, setOrder] = useState<Order>({
-    orderNumber: 0,
-    customer: "",
     orderItems: orderItem,
     deliveryAddress: address,
-    shipped: false,
     shippingMethod: ""
 })
 
@@ -76,9 +70,7 @@ function OrderProvider({ children }: PropsWithChildren) {
 const getOrders = async () => {
   const res = await fetch('/api/orders');
   const data = await res.json();
-  //console.log("Get Orders: ", data);
-  const countedOrders =  4 * Math.floor(Math.random() * 1000000)
-  setOrder({...order, orderNumber: countedOrders})
+  console.log("Get Orders: ", data);
 }
 
 const saveAddress = (value: object) => {
@@ -102,6 +94,7 @@ const shippingMethod = (value: string) => {
 
 
 useEffect(() => {
+
   const orders = currentCart.cart.map((product) => ({
     product: product._id,
     quantity: product.quantity,
@@ -118,8 +111,6 @@ useEffect(() => {
 useEffect(() => {
   setOrder((prevOrder) => ({
     ...prevOrder,
-    orderNumber: 5436,
-    customer: loggedinUser ? loggedinUser._id : "",
     orderItems: orderItem,
     deliveryAddress: address
   }));

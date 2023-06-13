@@ -24,6 +24,12 @@ const CheckoutSteps = () => {
     setCurrent(current - 1);
   };
 
+  const clearOrder = () => {
+    //logic here
+  };
+
+
+
   const finishCheckout = () => {
     async function createOrder() {
       try {
@@ -89,7 +95,7 @@ const CheckoutSteps = () => {
       <Steps current={current} items={items} />
       <div style={{ marginTop: "3em" }}>{steps[current].content}</div>
       <div style={{ marginTop: 24 }}>
-        {current > 0 && (
+        {current > 0 && current !== 3 && (
           <Button
             style={{ margin: "0 8px" }}
             onClick={() => prev()}
