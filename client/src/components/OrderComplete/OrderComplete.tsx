@@ -4,6 +4,7 @@ import "./OrderComplete.css"
 import { CartContext } from '../../context/CartContext';
 import { UserContext } from '../../context/UserContext';
 import { OrderContext } from '../../context/OrderContext';
+import { Button } from "antd";
 
 
 function OrderComplete() {
@@ -64,8 +65,10 @@ function OrderComplete() {
               <p><b>Total Summa:</b> {currentCart.totalPrice}kr</p>
             </div>
           </div>
+          <Button type='primary' onClick={() => console.log('wiiie')}>Go Back</Button>
         </div>
-}
+        
+        }
       </div>
   );
 }

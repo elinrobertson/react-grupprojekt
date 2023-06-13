@@ -7,7 +7,13 @@
 .successPayment-div {
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
+}
+
+.successPayment-div button {
+    margin-top: 2em;
+    width: 10em;
 }
 .successPaymentOrder {
     background-color: rgb(241, 241, 241);
