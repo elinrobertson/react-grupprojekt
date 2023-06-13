@@ -1,8 +1,22 @@
+import { ProductContext } from "../../context/ProductContext";
+import { useContext } from "react"; 
+import ProductCard from "../ProductCard/ProductCard";
 
-function admin() {
+
+function Admin() {
+
+  const { products } = useContext(ProductContext)
+
   return (
-    <h1>admin</h1>
-  )
+    <div>
+      <div>
+      {products.map((product) => ( 
+          <ProductCard key={product._id} products={product} />
+      ))}
+      </div>
+    </div>
+  );
+  
 }
 
-export default admin
+export default Admin;

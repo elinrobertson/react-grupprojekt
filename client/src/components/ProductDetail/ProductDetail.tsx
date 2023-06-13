@@ -2,7 +2,7 @@ import "./ProductDetail.css";
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { BuyBtn } from "../AntDesign/BuyBtn/BuyBtn";
-import { Product } from "../ProductList/ProductList";
+import { Product } from "../../context/ProductContext";
 import InStock from "../InStock/InStock"
 
 

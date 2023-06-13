@@ -1,5 +1,5 @@
 import "./ProductCard.css";
-import { Product } from "../ProductList/ProductList";
+import { Product } from "../../context/ProductContext";
 import { BuyBtn } from "../AntDesign/BuyBtn/BuyBtn";
 import { NavLink } from "react-router-dom";
 import ProductDetail  from '../ProductDetail/ProductDetail';
