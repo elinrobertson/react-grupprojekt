@@ -14,7 +14,7 @@ const CheckoutSteps = () => {
   const [current, setCurrent] = useState(0);
   const { loggedinUser } = useContext(UserContext);
   const { currentCart } = useContext(CartContext);
-  const { address, AddressCheckbox, order } = useContext(OrderContext);
+  const { address, AddressCheckbox, order, shippingMethodes } = useContext(OrderContext);
 
   const next = () => {
     setCurrent(current + 1);
@@ -28,7 +28,7 @@ const CheckoutSteps = () => {
     //logic here
   };
 
-
+  const chosenShippingMethod = shippingMethodes.find((shipping) => shipping._id === order.shippingMethod)
 
   const finishCheckout = () => {
     async function createOrder() {
@@ -75,7 +75,7 @@ const CheckoutSteps = () => {
           <div className="productListCheckout">
             <ProductsInCart />
           </div>
-          <p>Fraktsätt: {order.shippingMethod}</p>
+          <p>Fraktsätt: {chosenShippingMethod?.company}</p>
           <h3>Totalsumman: {currentCart?.totalPrice} Kr</h3>
         </>
       ),

@@ -10,9 +10,10 @@ import { Button } from "antd";
 function OrderComplete() {
   const { currentCart } = useContext(CartContext)
   const { loggedinUser } = useContext(UserContext)
-  const { address } = useContext(OrderContext)
+  const { address, order, shippingMethodes } = useContext(OrderContext)
 
   const [showLoading, setShowLoading] = useState(false);
+  const chosenShippingMethod = shippingMethodes.find((shipping) => shipping._id === order.shippingMethod)
 
   useEffect(() => {
     setShowLoading(true);
@@ -58,8 +59,12 @@ function OrderComplete() {
               ))}
             </div>
             <div className="successPaymentShipping">
-              <p></p>
-              <p></p>
+              <p><b>Fraktsätt:</b></p>
+              <p>{chosenShippingMethod?.company} {chosenShippingMethod?.price}kr</p>
+            </div>
+            <div className="successPaymentDeliver">
+              <p><b>Expected Delivery:</b> </p>
+              <p>{chosenShippingMethod?.deliveryTimeInHours}h</p>
             </div>
             <div className="successPaymentTotalPrice">
               <p><b>Total Summa:</b> {currentCart.totalPrice}kr</p>

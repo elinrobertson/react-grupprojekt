@@ -4,32 +4,24 @@ import { Radio, Space } from 'antd';
 import "./Shipping.css";
 import { OrderContext } from '../../../context/OrderContext';
 
-interface ShippingMethod {
-    _id: string,
-    company: string,
-    price: number,
-    deliveryTimeInHours: number
-}
 
 
 const ShippingMethod = () => {
   const [value, setValue] = useState<string>("");
-  const[shippingMethodes, setShippingMethods]= useState<ShippingMethod[]>([]);
-  const { shippingMethod } = useContext(OrderContext)
+  
+  const { shippingMethod, saveShippingMethod, shippingMethodes } = useContext(OrderContext)
 
   useEffect(() =>{
     const getShipping = async () => {
         const res = await fetch('/api/shippingMethod');
         const data = await res.json();
-        const sorted: ShippingMethod[] = data.sort((a: ShippingMethod, b: ShippingMethod) => a.deliveryTimeInHours - b.deliveryTimeInHours);
-        setShippingMethods(sorted)
+        saveShippingMethod(data)
     }
     getShipping()
   },[])
 
 
   const onChange = (e: RadioChangeEvent) => {
-    console.log('radio checked', e.target.value);
     setValue(e.target.value);
     shippingMethod(e.target.value)
   };
