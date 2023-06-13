@@ -3,7 +3,8 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 20em;
+    height: 30vh;
+    /* height: 20em; */
     width: 100%;
     /* position: relative; */
     background-color: #F1E2DE;
@@ -21,11 +22,13 @@ header a {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 3rem;
+    /* padding-bottom: 3rem; */
+    padding-bottom: 7vh;
 }
 
 .logo img {
-    width: 15em;
+    /* width: 15em; */
+    width: 13.5vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,17 +40,24 @@ header a {
     justify-content: flex-end;
     position: absolute;
     color: #545454;
-    right: 3px;
+    right: 0.3vw;
+    top: 5vh;
+    width: 100vw;
+    padding-right: 2.3vw;
+    gap: 0.5vw;
+    font-size: 5vh;
+    /* right: 3px;
     top: 1em;
     width: 100vw;
     padding-right: 1em;
     gap: 5px;
-    font-size: 27px;
+    font-size: 27px; */
 
 }
 
 .header-adminIcon {
-    width: 18px;
+    width: 5vh;
+    /* width: 18px; */
     color: #545454;
 }
 
@@ -57,12 +67,20 @@ header a {
     justify-content: center;
     
     background-color: #809f8a;
-    height: 18px;
+    height: 3vh;
+    width: 3vh;
+    border-radius: 1rem;
+
+    position: absolute;
+    right: -1vh;
+    top: -1vh;
+
+    /* height: 18px;
     width: 18px;
     padding: 2px 5px;
     border-radius: 1rem;
 
     position: absolute;
     right: -7px;
-    top: -2px;
+    top: -2px; */
 }
