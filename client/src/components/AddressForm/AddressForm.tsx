@@ -4,7 +4,6 @@ import { UserContext } from "../../context/UserContext";
 import "./AddressForm.css";
 import { OrderContext } from "../../context/OrderContext";
 
-
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -34,20 +33,18 @@ const AddressForm = () => {
   const { loggedinUser } = useContext(UserContext);
   const userToOrder =  loggedinUser?.firstName + ' ' + loggedinUser?.lastName
   const [form] = Form.useForm();
-  const { saveAddress, address } = useContext(OrderContext)
+  const { saveAddress, address, AddressCheckbox, setCheckboxValue } = useContext(OrderContext)
 
 
   useEffect(() => {
     console.log(address);
-    console.log(address.checkbox);
   }, [address]);
 
 
   const checkMarkBox = () => {
     const isAgreementChecked = form.getFieldValue("agreement");
-    isAgreementChecked ? saveAddress({checkbox: isAgreementChecked}) : saveAddress({checkbox: false}) ;
-  }
-
+    setCheckboxValue(isAgreementChecked)
+  } 
   const onBlurFunction = (e: FocusEvent) => {
     
     const propertyName = (e.target as HTMLInputElement).name
@@ -57,7 +54,6 @@ const AddressForm = () => {
   }
 
 if (!loggedinUser) {
-    // kors medand den laddar datan i loggedinUser
     return null
   }
 
@@ -166,7 +162,7 @@ if (!loggedinUser) {
             ]}
             {...tailFormItemLayout}
           >
-            <Checkbox name="checkbox" onChange={checkMarkBox} defaultChecked={address.checkbox}>
+            <Checkbox name="checkbox" onChange={checkMarkBox} defaultChecked={AddressCheckbox}>
               Jag godkänner <a href="" className="terms">köpvillkoren</a>
             </Checkbox>
           </Form.Item>
