@@ -3,8 +3,7 @@ footer {
     background-color: #F1E2DE;
     padding-top: 1.5rem;
     padding-bottom: 0.7rem;
-    position: fixed;
-    bottom: 0;
+    margin-top: auto;
 }
 
 .footer-container{

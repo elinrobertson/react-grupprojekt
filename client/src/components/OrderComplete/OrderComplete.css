@@ -3,9 +3,49 @@
     align-items: center;
     justify-content: center;
 }
-.loadBar div {
+
+.successPayment-div {
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    text-align: center;
+}
+
+.successPayment-div button {
+    margin-top: 2em;
+    width: 10em;
+}
+.successPaymentOrder {
+    background-color: rgb(241, 241, 241);
+    padding: 2em 4em;
+}
+.successPaymentOrder p {
+    margin: 5px;
+}
+
+.successPayment {
+    
+    text-align: start;
+    font-size: 14px;
+}
+.successPaymentProducts {
+    padding-top: 1em;
+}
+.successPaymentProducts > div, .successPaymentShipping, .successPaymentDeliver {
+    display: flex;
+    gap: 6em;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.successPaymentProducts > div {
+    border-bottom: 1px solid rgb(170, 170, 170);
+}
+
+.successPaymentShipping {
+    padding-top: 1em;
+}
+
+.successPaymentTotalPrice {
+    padding-top: 1em;
 }

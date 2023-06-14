@@ -11,7 +11,6 @@ export interface Product {
   inStock: number,
 }
 
-
 function ProductList() {
   const[products, setProducts]= useState<Product[]>([]);
 

@@ -1,70 +1,139 @@
-import { PropsWithChildren, createContext, useState, useEffect } from "react";
-import Cookies from "js-cookie";
+import { PropsWithChildren, createContext, useState, useEffect, useContext } from "react";
+import { UserContext } from "./UserContext";
+import { CartContext } from "./CartContext";
 
-
-
-//NYTT INTERFACE SOM LÄGGER TILL EN PROPERTY PÅ INTERFACE PRODUCT
+// INTERFACES
 interface AddressItem {
-    street: string,
-    zipcode: string,
-    city: string,
-    country: string
+  street: string,
+  zipcode: string,
+  city: string,
+  country: string,
 }
 
 interface OrderItem {
-    _id: string;
-  }
+  product:string,
+  quantity: number,
+  price: number,
+}
 
-// Interface som bestämmer hur "Cart" ska se ut
+interface ShippingMethod {
+  _id: string,
+  company: string,
+  price: number,
+  deliveryTimeInHours: number
+}
+
 export interface Order {
-  orderNumber: number,
-  customer: string,
   orderItems: OrderItem[],
-  deliveryAddress: AddressItem[],
-  shipped: boolean,
+  deliveryAddress: AddressItem,
   shippingMethod: string
 }
 
-// Interface som bestämmer hur "CartContext" ska se ut
 interface OrderContext {
   order: Order,
   setOrder: (value: Order) => void,
   address: AddressItem,
   setAddress: (value: AddressItem) => void,
+  saveAddress: (value: Partial<AddressItem>) => void,
+  // saveOrder: (value: OrderItem) => void,
+  shippingMethod: (value: string) => void,
+  AddressCheckbox: boolean
+  setCheckboxValue: (value: boolean) => void
+  saveShippingMethod: (methods:ShippingMethod[]) => void
+  shippingMethodes: ShippingMethod[]
 }
-
-// skapar contextet utifrån interfacet "Cartcontext" och sparar det i en variabel (CartContext)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const OrderContext = createContext<OrderContext>(null as any)
 
-// En function
+// ---------------------------------------------------------- ORDER CONTEXT PROVIDER STARTS HERE
+
 function OrderProvider({ children }: PropsWithChildren) {
-  // DETTA SÄTTER VALUES PÅ CART PROPERTIES SOM BLIR DEFAULT VÄRDE PÅ CURRENTCART
-  const [address, setAddress] = useState<AddressItem>(null as any)
+
+  const {loggedinUser} = useContext(UserContext)
+  const {currentCart} = useContext(CartContext)
+
+  // ------------------------------------------------------- STATES STARTS HERE
   
+  // Ett state som berättar att checkbox från Cart är i kryssad.
+  const [AddressCheckbox, setAddressCheckbox] = useState(false)
+
+  const[shippingMethodes, setShippingMethods]= useState<ShippingMethod[]>([]);
+
+  const [orderItem, setOrderItem] = useState<OrderItem[]>([{
+    product: "",
+    quantity: 0,
+    price: 0,
+  }])
+
+  const [address, setAddress] = useState<AddressItem>({
+    street: "",
+    zipcode: "",
+    city: "",
+    country: "",
+  })
+
   const [order, setOrder] = useState<Order>({
-    orderNumber: 0,
-    customer: "",
-    orderItems: [],
-    deliveryAddress: [],
-    shipped: false,
+    orderItems: orderItem,
+    deliveryAddress: address,
     shippingMethod: ""
 })
 
+// ------------------------------------------------------- ALL STATES ENDS HERE
+/* const getOrders = async () => {
+  const res = await fetch('/api/orders');
+  const data = await res.json();
+  console.log("Get Orders: ", data);
+} */
 
- 
+const saveAddress = (value: object) => {
+  setAddress({
+    ...address,
+    ...value
+  })
+}
 
-  // Tittar om cookie finns
-  useEffect(() => {
-    const parseCookieValue = Cookies.get('cart');
-    if (parseCookieValue) {
-      const cookieObject = JSON.parse(parseCookieValue);
-      setOrder(cookieObject)
-    }
-  }, []);
+const setCheckboxValue = (value: boolean) => {
+  setAddressCheckbox(value)
+}
+
+const shippingMethod = (value: string) => {
+  setOrder({
+    ...order,
+    shippingMethod: value
+  })
+}
+
+const saveShippingMethod = (methods:ShippingMethod[]) => {
+  const sorted: ShippingMethod[] = methods.sort((a: ShippingMethod, b: ShippingMethod) => a.deliveryTimeInHours - b.deliveryTimeInHours);
+  setShippingMethods(sorted)
+}
+
+
+
+useEffect(() => {
+
+  const orders = currentCart.cart.map((product) => ({
+    product: product._id,
+    quantity: product.quantity,
+    price: product.price
+  }));
+
+  setOrderItem(orders);
+}, [currentCart]);
+
+useEffect(() => {
+  console.log("Order status: ", order);
+}, [order]);
+
+useEffect(() => {
+  setOrder((prevOrder) => ({
+    ...prevOrder,
+    orderItems: orderItem,
+    deliveryAddress: address
+  }));
+}, [address, orderItem]);
 
   return (
-    <OrderContext.Provider value={{address, setAddress, order, setOrder}}>
+    <OrderContext.Provider value={{address, setAddress, order, setOrder, saveAddress, shippingMethod, AddressCheckbox, setCheckboxValue, saveShippingMethod, shippingMethodes}}>
       {children}
     </OrderContext.Provider>
   )
