@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext, useState, useEffect } from "react";
-import { Product } from "../components/ProductList/ProductList";
 import Cookies from "js-cookie";
+import { Product } from "./ProductContext";
 
 
 
