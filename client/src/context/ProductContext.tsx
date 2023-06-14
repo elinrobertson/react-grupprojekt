@@ -49,9 +49,17 @@ export interface Product {
         console.log("add products");
     }
 
-    function deleteProduct(product: string) {
-      
-      console.log(product);
+    const deleteProduct = async (id: string) => {
+      try {
+          const res = await fetch(`api/products/${id}`, {
+            method: 'DELETE',
+          })
+          if (res.ok) {
+            setProducts(prevProducts => prevProducts.filter(product => product._id !== id));
+          }
+        } catch (error) {
+          console.log('there was an error');
+        }
     }
 
     function editProduct() {

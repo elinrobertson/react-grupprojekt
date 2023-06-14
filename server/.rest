@@ -36,17 +36,23 @@ GET http://localhost:3000/api/users/authorize
 
 
 ###
+GET http://localhost:3000/api/products
+
+###
+DELETE  http://localhost:3000/api/products/6474549865cf346822204e9f
+
+###
 
 //Skapa produkter här
 POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "title": "",
-  "price": 0,
-  "description": "",
-  "image": "",
-  "inStock": 0
+  "title": "A macaron dream bracelet",
+  "price": 2300,
+  "description": "Armband i vintagelook med i rhodierat återvunnet sterlingsilver och fem baguetteslipade stenar i blå topas. Armbandet har justerbar längd: 16, 17.5 eller 19 cm. Dekor: längd 6,5 x bredd 3 mm. Topas: 5 x 0.42 ct. ",
+  "image": "https://cdn.sanity.io/images/iive6pz5/eaproduction/88e646096e749e573ae689ef148eac9ad0865860-1920x1920.jpg",
+  "inStock": 10
 }
 
 ###
