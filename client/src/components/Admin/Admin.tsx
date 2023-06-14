@@ -1,7 +1,7 @@
 import { ProductContext } from "../../context/ProductContext";
 import { useContext } from "react"; 
 import ProductCard from "../ProductCard/ProductCard";
-
+import AdminUI from "../AntDesign/Table/Table";
 
 function Admin() {
 
@@ -10,9 +10,10 @@ function Admin() {
   return (
     <div>
       <div>
-      {products.map((product) => ( 
+{/*       {products.map((product) => ( 
           <ProductCard key={product._id} products={product} />
-      ))}
+      ))} */}
+      < AdminUI />
       </div>
     </div>
   );
