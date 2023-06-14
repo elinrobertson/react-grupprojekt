@@ -1,40 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Form, Input, InputNumber, Popconfirm, Table, Typography } from 'antd';
+import { Product } from '../../../context/ProductContext';
 import { ProductContext } from '../../../context/ProductContext';
+import './Table.css'
 
-// interface Product {
-//   _id: string,
-//   title: string, 
-//   price: number, 
-//   description: string, 
-//   image: string,
-//   inStock: number,
-// }
-
-//ANTDESIGNS INTERFACE
-interface Item {
-  key: string;
-  title: string;
-  price: number;
-  description: string;
+interface ProductWithKey extends Product {
+  key: string
 }
 
-// bör ändras till en funktion med map
-const originData: Item[] = [];
-for (let i = 0; i < 100; i++) {
-  originData.push({
-    key: i.toString(), 
-    title: `Edward ${i}`, //ändrat till title
-    price: 32, //ändrat till price
-    description: `London Park no. ${i}`,//ändrat till description
-  });
-}
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
   dataIndex: string;
   title: any;
   inputType: 'number' | 'text';
-  record: Item;
+  record: ProductWithKey;
   index: number;
   children: React.ReactNode;
 }
@@ -73,25 +52,49 @@ const EditableCell: React.FC<EditableCellProps> = ({
   );
 };
 
-const App: React.FC = () => {
+const AdminUI = () => {
+  
   const [form] = Form.useForm();
-  const [data, setData] = useState(originData);
+  
+
   const [editingKey, setEditingKey] = useState('');
+  const { products, deleteProduct } = useContext(ProductContext)
+  const [data, setData] = useState<ProductWithKey[]>([]);
 
-  const isEditing = (record: Item) => record.key === editingKey;
+  useEffect(() => {
+    const newData = products.map((product: ProductWithKey) => ({
+      ...product,
+      key: product._id, // Assigning unique key based on _id
+    }));
+    setData(newData);
+  }, [products]);
 
-  const edit = (record: Partial<Item> & { key: React.Key }) => {
-    form.setFieldsValue({ name: '', age: '', address: '', ...record });
+ // ------------------------------------------------------------ EDITING FUNCTION
+
+  const isEditing = (record: ProductWithKey) => record.key === editingKey;
+
+  const edit = (record: Partial<ProductWithKey> & { key: React.Key }) => {
+    form.setFieldsValue({ title: '', price: '', description: '',  inStock: '', image: '', ...record });
     setEditingKey(record.key);
   };
+ // ------------------------------------------------------------ Delete FUNCTION
+
+/* 
+  const deleteProduct = (record:ProductWithKey) => {
+    console.log(record);
+    
+  }; */
+
+  // ------------------------------------------------------------ CANCEL BUTTON FUNCTION
 
   const cancel = () => {
     setEditingKey('');
   };
 
+  // ------------------------------------------------------------ SAVE BUTTON FUNCTION
   const save = async (key: React.Key) => {
     try {
-      const row = (await form.validateFields()) as Item;
+      const row = (await form.validateFields()) as ProductWithKey;
 
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.key);
@@ -113,29 +116,44 @@ const App: React.FC = () => {
     }
   };
 
+  // ------------------------------------------------------------ SAVE FUNCTION ENDS HERE
+
+  // ------------------------------------------------------------ SETS COLUMNS AND ITS PROPERTIES
   const columns = [
     {
-      title: 'name',
-      dataIndex: 'name',
-      width: '25%',
+      title: 'titel',
+      dataIndex: 'title',
+      width: '',
       editable: true,
     },
     {
-      title: 'age',
-      dataIndex: 'age',
-      width: '15%',
+      title: 'pris',
+      dataIndex: 'price',
+      width: '',
       editable: true,
     },
     {
-      title: 'address',
-      dataIndex: 'address',
-      width: '40%',
+      title: 'beskrivning',
+      dataIndex: 'description',
+      width: '',
+      editable: true,
+    },
+    {
+      title: 'lagersaldo',
+      dataIndex: 'inStock',
+      width: '',
+      editable: true,
+    },
+    {
+      title: 'image',
+      dataIndex: 'image',
+      width: '',
       editable: true,
     },
     {
       title: 'operation',
       dataIndex: 'operation',
-      render: (_: any, record: Item) => {
+      render: (_: any, record: ProductWithKey) => {
         const editable = isEditing(record);
         return editable ? (
           <span>
@@ -147,9 +165,14 @@ const App: React.FC = () => {
             </Popconfirm>
           </span>
         ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Edit
-          </Typography.Link>
+          <div className='operation-div'>
+            <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)} id='edit-link'>
+              Edit
+            </Typography.Link>
+            <Typography.Link disabled={editingKey !== ''} onClick={() => deleteProduct(record._id)} id='delete-link'>
+              Delete
+            </Typography.Link>
+          </div>
         );
       },
     },
@@ -161,9 +184,9 @@ const App: React.FC = () => {
     }
     return {
       ...col,
-      onCell: (record: Item) => ({
+      onCell: (record: ProductWithKey) => ({
         record,
-        inputType: col.dataIndex === 'age' ? 'number' : 'text',
+        inputType: col.dataIndex === 'inStock' ? 'number' : 'text',
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record),
@@ -191,4 +214,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default AdminUI;
