@@ -2,6 +2,7 @@ import { PropsWithChildren, createContext, useState, useEffect } from "react";
 
 
 export interface Product {
+    key: any;
     _id: string,
     title: string, 
     price: number, 
@@ -13,9 +14,9 @@ export interface Product {
   interface ProductContext {
     getProductList: () => void,
     addProduct:(value: Product) => void,
-    removeProduct: (productId: string) => void,
+    deleteProduct: (productId: string) => void,
     editProduct:(value: Product) => void,
-    products: Product[],  
+    products: Product[]
   }
 
   export const ProductContext = createContext<ProductContext>(null as any)
@@ -48,8 +49,9 @@ export interface Product {
         console.log("add products");
     }
 
-    function removeProduct() {
-      console.log("remove product");
+    function deleteProduct(product: string) {
+      
+      console.log(product);
     }
 
     function editProduct() {
@@ -57,34 +59,11 @@ export interface Product {
     }
 
     return (
-    <ProductContext.Provider value={{ getProductList, addProduct, removeProduct, editProduct, products  }}>
+    <ProductContext.Provider value={{ getProductList, addProduct, deleteProduct, editProduct, products  }}>
     {children}
   </ProductContext.Provider>);
   }
 
-
-
-
-//   function ProductProvider({children}:PropsWithChildren) {
-//     const [loggedinUser, setLoggedinUser] = useState(null)
-    
-//     useEffect(() => {
-//       const auth = async () => {
-//         try {
-//           const res = await fetch("/api/users/authorize");
-//           const data = await res.json();
-//           if (res.ok) {
-//           setLoggedinUser(data);
-//           }
-  
-//         } catch (error) {
-//           console.log(error);
-//         }
-//       };
-//       auth();
-//     }, []);
-
-//   }
 
 //GET PRODUCTS
 

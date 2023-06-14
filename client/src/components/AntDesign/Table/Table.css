@@ -7,3 +7,15 @@
   table {
     font-size: 10px;
   }
+
+  .operation-div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #edit-link {
+    color: #809F8A;
+  }
+  #delete-link {
+    color: rgb(219, 107, 95);
+  }

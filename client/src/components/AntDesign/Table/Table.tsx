@@ -8,23 +8,6 @@ interface ProductWithKey extends Product {
   key: string
 }
 
-
-/* const originData: ProductWithKey[] = []; */
-/* const newData = products.map((product: ProductWithKey) => ({
-  
-})); */
-/* for (let i = 0; i < 100; i++) {
-  originData.push({
-    key: '12345',
-    _id: '1232',
-    title: `Edward ${i}`,
-    price: 32,
-    description: `Produktbeskrivning. ${i}`,
-    image: 'url',
-    inStock: 10
-  });
-} */
-
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
   dataIndex: string;
@@ -75,7 +58,7 @@ const AdminUI = () => {
   
 
   const [editingKey, setEditingKey] = useState('');
-  const { products } = useContext(ProductContext)
+  const { products, deleteProduct } = useContext(ProductContext)
   const [data, setData] = useState<ProductWithKey[]>([]);
 
   useEffect(() => {
@@ -94,6 +77,13 @@ const AdminUI = () => {
     form.setFieldsValue({ title: '', price: '', description: '',  inStock: '', image: '', ...record });
     setEditingKey(record.key);
   };
+ // ------------------------------------------------------------ Delete FUNCTION
+
+/* 
+  const deleteProduct = (record:ProductWithKey) => {
+    console.log(record);
+    
+  }; */
 
   // ------------------------------------------------------------ CANCEL BUTTON FUNCTION
 
@@ -133,31 +123,31 @@ const AdminUI = () => {
     {
       title: 'titel',
       dataIndex: 'title',
-      width: '20%',
+      width: '',
       editable: true,
     },
     {
       title: 'pris',
       dataIndex: 'price',
-      width: '10%',
+      width: '',
       editable: true,
     },
     {
       title: 'beskrivning',
       dataIndex: 'description',
-      width: '30%',
+      width: '',
       editable: true,
     },
     {
       title: 'lagersaldo',
       dataIndex: 'inStock',
-      width: '10%',
+      width: '',
       editable: true,
     },
     {
       title: 'image',
       dataIndex: 'image',
-      width: '10%',
+      width: '',
       editable: true,
     },
     {
@@ -175,9 +165,14 @@ const AdminUI = () => {
             </Popconfirm>
           </span>
         ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Edit
-          </Typography.Link>
+          <div className='operation-div'>
+            <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)} id='edit-link'>
+              Edit
+            </Typography.Link>
+            <Typography.Link disabled={editingKey !== ''} onClick={() => deleteProduct(record._id)} id='delete-link'>
+              Delete
+            </Typography.Link>
+          </div>
         );
       },
     },
