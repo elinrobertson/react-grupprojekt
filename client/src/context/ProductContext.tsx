@@ -13,9 +13,9 @@ export interface Product {
 
   interface ProductContext {
     getProductList: () => void,
-    addProduct:(value: Product) => void,
+    addProduct:(value: Partial<Product>) => void,
     deleteProduct: (productId: string) => void,
-    editProduct:(value: Product) => void,
+    editProduct:(id: string, product: Product) => void,
     products: Product[]
   }
 
@@ -45,25 +45,64 @@ export interface Product {
     },[]);
     
 
-    function addProduct() {
-        console.log("add products");
-    }
+ const addProduct = async (value: Partial<Product>) => {
 
-    const deleteProduct = async (id: string) => {
-      try {
-          const res = await fetch(`api/products/${id}`, {
-            method: 'DELETE',
-          })
+    try {
+      const res = await fetch(`/api/products`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(value),
+      });
+      if (res.ok) { 
+        console.log('product created', value)
+        getProductList();
+      }
+      
+    } catch (error) {
+      console.log('there was an error');
+    }
+  }
+
+  const deleteProduct = async (id: string) => {
+    try {
+      const res = await fetch(`api/products/${id}`, {
+        method: 'DELETE',
+      })
+      if (res.ok) {
+        setProducts(prevProducts => prevProducts.filter(product => product._id !== id));
+      }
+    } catch (error) {
+      console.log('there was an error');
+    }
+  }
+
+    function editProduct(id: string, product: Partial<Product>) {
+
+      const fetchProductData = async () => {
+        try {
+      // Fetch the initial product value
+      const rest = await fetch(`/api/products/${id}`);
+      const current = await rest.json();
+
+      const updatedProduct = { ...current, ...product };
+
+          const res = await fetch(`/api/products/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedProduct),
+          });
           if (res.ok) {
-            setProducts(prevProducts => prevProducts.filter(product => product._id !== id));
+            getProductList();
           }
         } catch (error) {
-          console.log('there was an error');
+          console.log("There was an error:", error);
         }
-    }
-
-    function editProduct() {
-        console.log("edit product");
+      };
+      fetchProductData();
     }
 
     return (
@@ -71,15 +110,3 @@ export interface Product {
     {children}
   </ProductContext.Provider>);
   }
-
-
-//GET PRODUCTS
-
-//CREATE PRODUCT (ADD PRODUCT)
-
-//UPDATE PRODUCT
-
-//DELETE PRODUCT
-
-//GET ORDERS AND MARK ORDER AS SHIPPED (IN ORDERCONTEXT)
-

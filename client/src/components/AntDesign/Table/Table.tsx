@@ -58,7 +58,7 @@ const AdminUI = () => {
   
 
   const [editingKey, setEditingKey] = useState('');
-  const { products, deleteProduct } = useContext(ProductContext)
+  const { products, deleteProduct, editProduct } = useContext(ProductContext)
   const [data, setData] = useState<ProductWithKey[]>([]);
 
   useEffect(() => {
@@ -97,7 +97,10 @@ const AdminUI = () => {
       const row = (await form.validateFields()) as ProductWithKey;
 
       const newData = [...data];
+      
       const index = newData.findIndex((item) => key === item.key);
+      console.log('what is key', key);
+      
       if (index > -1) {
         const item = newData[index];
         newData.splice(index, 1, {
@@ -105,6 +108,8 @@ const AdminUI = () => {
           ...row,
         });
         setData(newData);
+        console.log('what is this', row)
+        editProduct(key.toString(), row)
         setEditingKey('');
       } else {
         newData.push(row);
