@@ -1,13 +1,13 @@
-import AdminUI from "../AntDesign/Table/Table";
-import CreateProduct from "../AntDesign/CreateProduct/CreateProduct";
+import AdminTable from "../AntDesign/AdminTable/AdminTable";
+import CreateProductForm from "../AntDesign/CreateProductForm/CreateProductForm";
 
 
 function Admin() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <CreateProduct />
-      < AdminUI />
+      <CreateProductForm />
+      < AdminTable />
     </div>
   );
   

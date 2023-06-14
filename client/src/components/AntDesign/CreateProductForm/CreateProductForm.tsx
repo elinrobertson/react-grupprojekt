@@ -1,19 +1,18 @@
 import { Form, Input, Button } from 'antd';
 import { useContext } from 'react';
 import { Product, ProductContext } from '../../../context/ProductContext';
-import "./CreateProduct.css"
+import "./CreateProductForm.css"
 
-const CreateProduct = () => {
+const CreateProductForm = () => {
     const { addProduct } = useContext(ProductContext)
 
   const onFinish = (values: Product) => {
     const product = {
         ...values,
-        inStock: Number(values.inStock), // Convert inStock to a number
-        price: Number(values.price) // Convert price to a number
+        inStock: Number(values.inStock), // gor den till nummer
+        price: Number(values.price) // samma har
     };
-    addProduct(product)
-    // Handle form submission here
+    addProduct(product) // skickar product till functionen i context
   };
 
   return (
@@ -35,11 +34,11 @@ const CreateProduct = () => {
         </Form.Item>
         <Form.Item className='form-btn'>
             <Button type="primary" htmlType="submit">
-            L'gg till ny Produkt
+            Lagg till ny Produkt
             </Button>
         </Form.Item>
     </Form>
   );
 };
 
-export default CreateProduct;
+export default CreateProductForm;

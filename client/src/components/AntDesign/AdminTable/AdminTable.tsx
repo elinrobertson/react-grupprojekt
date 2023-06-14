@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Form, Input, InputNumber, Popconfirm, Table, Typography } from 'antd';
 import { Product } from '../../../context/ProductContext';
 import { ProductContext } from '../../../context/ProductContext';
-import './Table.css'
+import './AdminTable.css'
 
 interface ProductWithKey extends Product {
   key: string
@@ -52,7 +52,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   );
 };
 
-const AdminUI = () => {
+const AdminTable = () => {
   
   const [form] = Form.useForm();
   
@@ -77,13 +77,6 @@ const AdminUI = () => {
     form.setFieldsValue({ title: '', price: '', description: '',  inStock: '', image: '', ...record });
     setEditingKey(record.key);
   };
- // ------------------------------------------------------------ Delete FUNCTION
-
-/* 
-  const deleteProduct = (record:ProductWithKey) => {
-    console.log(record);
-    
-  }; */
 
   // ------------------------------------------------------------ CANCEL BUTTON FUNCTION
 
@@ -120,8 +113,6 @@ const AdminUI = () => {
       console.log('Validate Failed:', errInfo);
     }
   };
-
-  // ------------------------------------------------------------ SAVE FUNCTION ENDS HERE
 
   // ------------------------------------------------------------ SETS COLUMNS AND ITS PROPERTIES
   const columns = [
@@ -219,4 +210,4 @@ const AdminUI = () => {
   );
 };
 
-export default AdminUI;
+export default AdminTable;
