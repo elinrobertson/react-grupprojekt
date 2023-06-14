@@ -1,4 +1,4 @@
-import { Product } from "../ProductList/ProductList";
+import { Product } from "../../context/ProductContext";
 
 interface InStockProps {
   product: Product;

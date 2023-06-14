@@ -1,5 +1,4 @@
 import { PropsWithChildren, createContext, useState, useEffect, useContext } from "react";
-import { UserContext } from "./UserContext";
 import { CartContext } from "./CartContext";
 
 // INTERFACES
@@ -11,7 +10,7 @@ interface AddressItem {
 }
 
 interface OrderItem {
-  product:string,
+  product: string,
   quantity: number,
   price: number,
 }
@@ -29,6 +28,10 @@ export interface Order {
   shippingMethod: string
 }
 
+// export interface OrderNumber {
+// orderNumber: number
+// }
+
 interface OrderContext {
   order: Order,
   setOrder: (value: Order) => void,
@@ -39,8 +42,10 @@ interface OrderContext {
   shippingMethod: (value: string) => void,
   AddressCheckbox: boolean
   setCheckboxValue: (value: boolean) => void
-  saveShippingMethod: (methods:ShippingMethod[]) => void
+  saveShippingMethod: (methods: ShippingMethod[]) => void
   shippingMethodes: ShippingMethod[]
+  setOrderNumber: (value: number) => void
+  orderNumber: number
 }
 export const OrderContext = createContext<OrderContext>(null as any)
 
@@ -48,15 +53,14 @@ export const OrderContext = createContext<OrderContext>(null as any)
 
 function OrderProvider({ children }: PropsWithChildren) {
 
-  const {loggedinUser} = useContext(UserContext)
-  const {currentCart} = useContext(CartContext)
+  const { currentCart } = useContext(CartContext)
 
   // ------------------------------------------------------- STATES STARTS HERE
-  
+
   // Ett state som berättar att checkbox från Cart är i kryssad.
   const [AddressCheckbox, setAddressCheckbox] = useState(false)
 
-  const[shippingMethodes, setShippingMethods]= useState<ShippingMethod[]>([]);
+  const [shippingMethodes, setShippingMethods] = useState<ShippingMethod[]>([]);
 
   const [orderItem, setOrderItem] = useState<OrderItem[]>([{
     product: "",
@@ -75,65 +79,67 @@ function OrderProvider({ children }: PropsWithChildren) {
     orderItems: orderItem,
     deliveryAddress: address,
     shippingMethod: ""
-})
-
-// ------------------------------------------------------- ALL STATES ENDS HERE
-/* const getOrders = async () => {
-  const res = await fetch('/api/orders');
-  const data = await res.json();
-  console.log("Get Orders: ", data);
-} */
-
-const saveAddress = (value: object) => {
-  setAddress({
-    ...address,
-    ...value
   })
-}
 
-const setCheckboxValue = (value: boolean) => {
-  setAddressCheckbox(value)
-}
+  const [orderNumber, setOrderNumber] = useState(0);
 
-const shippingMethod = (value: string) => {
-  setOrder({
-    ...order,
-    shippingMethod: value
-  })
-}
+  // ------------------------------------------------------- ALL STATES ENDS HERE
+  /* const getOrders = async () => {
+    const res = await fetch('/api/orders');
+    const data = await res.json();
+    console.log("Get Orders: ", data);
+  } */
 
-const saveShippingMethod = (methods:ShippingMethod[]) => {
-  const sorted: ShippingMethod[] = methods.sort((a: ShippingMethod, b: ShippingMethod) => a.deliveryTimeInHours - b.deliveryTimeInHours);
-  setShippingMethods(sorted)
-}
+  const saveAddress = (value: object) => {
+    setAddress({
+      ...address,
+      ...value
+    })
+  }
+
+  const setCheckboxValue = (value: boolean) => {
+    setAddressCheckbox(value)
+  }
+
+  const shippingMethod = (value: string) => {
+    setOrder({
+      ...order,
+      shippingMethod: value
+    })
+  }
+
+  const saveShippingMethod = (methods: ShippingMethod[]) => {
+    const sorted: ShippingMethod[] = methods.sort((a: ShippingMethod, b: ShippingMethod) => a.deliveryTimeInHours - b.deliveryTimeInHours);
+    setShippingMethods(sorted)
+  }
 
 
 
-useEffect(() => {
+  useEffect(() => {
 
-  const orders = currentCart.cart.map((product) => ({
-    product: product._id,
-    quantity: product.quantity,
-    price: product.price
-  }));
+    const orders = currentCart.cart.map((product) => ({
+      product: product._id,
+      quantity: product.quantity,
+      price: product.price
+    }));
 
-  setOrderItem(orders);
-}, [currentCart]);
+    setOrderItem(orders);
+  }, [currentCart]);
 
-useEffect(() => {
-  console.log("Order status: ", order);
-}, [order]);
+  useEffect(() => {
+    console.log("Order status: ", order);
+  }, [order]);
 
-useEffect(() => {
-  setOrder((prevOrder) => ({
-    ...prevOrder,
-    orderItems: orderItem,
-    deliveryAddress: address
-  }));
-}, [address, orderItem]);
+  useEffect(() => {
+    setOrder((prevOrder) => ({
+      ...prevOrder,
+      orderItems: orderItem,
+      deliveryAddress: address
+    }));
+  }, [address, orderItem]);
 
   return (
-    <OrderContext.Provider value={{address, setAddress, order, setOrder, saveAddress, shippingMethod, AddressCheckbox, setCheckboxValue, saveShippingMethod, shippingMethodes}}>
+    <OrderContext.Provider value={{ address, setAddress, order, setOrder, saveAddress, shippingMethod, AddressCheckbox, setCheckboxValue, saveShippingMethod, shippingMethodes, setOrderNumber, orderNumber }}>
       {children}
     </OrderContext.Provider>
   )

@@ -8,17 +8,16 @@ import { OrderContext } from '../../../context/OrderContext';
 
 const ShippingMethod = () => {
   const [value, setValue] = useState<string>("");
-  
   const { shippingMethod, saveShippingMethod, shippingMethodes } = useContext(OrderContext)
 
-  useEffect(() =>{
+  useEffect(() => {
     const getShipping = async () => {
-        const res = await fetch('/api/shippingMethod');
-        const data = await res.json();
-        saveShippingMethod(data)
+      const res = await fetch('/api/shippingMethod');
+      const data = await res.json();
+      saveShippingMethod(data)
     }
     getShipping()
-  },[])
+  }, [])
 
 
   const onChange = (e: RadioChangeEvent) => {
@@ -26,21 +25,30 @@ const ShippingMethod = () => {
     shippingMethod(e.target.value)
   };
 
+
+
+
   return (
-    <Radio.Group onChange={onChange}  value={value}>
+    <Radio.Group onChange={onChange} value={value}>
       <Space direction="vertical">
-      {shippingMethodes.map((shipping) => (
-        <Radio value={shipping._id} key={shipping._id}>
-       
-            <div>
+        {shippingMethodes.map((shipping) => {
+          const deliveryTimeInHours = shipping.deliveryTimeInHours;
+          const deliveryDate = new Date();
+          deliveryDate.setHours(deliveryDate.getHours() + deliveryTimeInHours);
+          const formattedDate = deliveryDate.toLocaleTimeString() + " " + deliveryDate.toLocaleDateString();
+
+          return (
+            <Radio value={shipping._id} key={shipping._id}>
+              <div>
                 <h3>{shipping.company}</h3>
                 <div className="shipping-info">
-                <p>{shipping.price} kr</p>
-                <h4>{shipping.deliveryTimeInHours}h</h4>
+                  <p>{shipping.price} kr</p>
+                  <h4>Leverans: {formattedDate}</h4>
                 </div>
-            </div>
-        </Radio>
-        ))}
+              </div>
+            </Radio>
+          );
+        })}
       </Space>
     </Radio.Group>
   );

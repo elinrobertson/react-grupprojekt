@@ -2,7 +2,6 @@ import "./ProductCard.css";
 import { Product } from "../../context/ProductContext";
 import { BuyBtn } from "../AntDesign/BuyBtn/BuyBtn";
 import { NavLink } from "react-router-dom";
-import ProductDetail  from '../ProductDetail/ProductDetail';
 
 export interface ProductCardProps {
   products: Product;
@@ -14,7 +13,7 @@ function ProductCard({ products }: ProductCardProps) {
   return (
     <div className="productCard-div">
       <NavLink to={"/" + products._id}> 
-      <div className="productCard-link" onClick ={ () =>  {ProductDetail();}} >
+      <div className="productCard-link" >
         <img src={products.image} alt={products.title} />
         <div className="productCard-info">
           <h3>{products.title}</h3>

@@ -14,8 +14,8 @@ const CheckoutSteps = () => {
   const [current, setCurrent] = useState(0);
   const { loggedinUser } = useContext(UserContext);
   const { currentCart } = useContext(CartContext);
-  const { address, AddressCheckbox, order, shippingMethodes } = useContext(OrderContext);
-
+  const { address, AddressCheckbox, order, shippingMethodes, setOrderNumber } = useContext(OrderContext);
+  
   const next = () => {
     setCurrent(current + 1);
   };
@@ -24,11 +24,14 @@ const CheckoutSteps = () => {
     setCurrent(current - 1);
   };
 
-  const clearOrder = () => {
-    //logic here
-  };
+
 
   const chosenShippingMethod = shippingMethodes.find((shipping) => shipping._id === order.shippingMethod)
+
+  let totalSum = 0
+  chosenShippingMethod?.price ?
+    totalSum = currentCart.totalPrice + chosenShippingMethod?.price :
+    totalSum = currentCart.totalPrice
 
   const finishCheckout = () => {
     async function createOrder() {
@@ -40,14 +43,17 @@ const CheckoutSteps = () => {
           },
           body: JSON.stringify(order),
         });
-        const data = res.json();
-        console.log(data);
+        const data = await res.json();
+        console.log("Ordenwiiii: ", data.orderNumber);
+        const orderNumber = data.orderNumber
+       setOrderNumber(orderNumber)
+
       } catch (error) {
         console.log("Error:", error);
       }
     }
     createOrder();
-    //logic
+    
     next();
   };
 
@@ -75,15 +81,15 @@ const CheckoutSteps = () => {
           <div className="productListCheckout">
             <ProductsInCart />
           </div>
-          <p>Fraktsätt: {chosenShippingMethod?.company}</p>
-          <h3>Totalsumman: {currentCart?.totalPrice} Kr</h3>
+          <p>Fraktsätt: {chosenShippingMethod?.company} {chosenShippingMethod?.price} kr</p>
+          <h3>Totalsumman: {totalSum} kr</h3>
         </>
       ),
-    },
+    }, 
     {
       title: "Orderbekräftelse",
-      content: <OrderComplete />,
-    },
+      content: <OrderComplete />
+    }
   ];
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
@@ -123,7 +129,7 @@ const CheckoutSteps = () => {
         )}
       </div>
     </div>
-  );
-};
+  ); 
+}; 
 
 export default CheckoutSteps;
