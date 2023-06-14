@@ -5,7 +5,10 @@
 }
 .loadBar div {
     display: flex;
-    gap: 2rem;
     align-items: center;
     justify-content: center;
+    gap: 2rem;
+    /* byt till vw istället, t.ex.
+    gap: 1vw; */
+        
 }

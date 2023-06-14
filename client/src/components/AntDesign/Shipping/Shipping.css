@@ -2,4 +2,6 @@
     display: flex;
     justify-content: row;
     gap: 3rem;
+    /* byt till vw istället, t.ex.
+    gap: 1vw; */
 }

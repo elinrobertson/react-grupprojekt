@@ -14,7 +14,7 @@ function HeaderLogin() {
         {loggedinUser ?
         <div className="userDropdown-div">
           <p>{loggedinUser?.firstName}</p>
-          <UserOutlined  style={{fontSize: '24px'}} />
+          <UserOutlined  style={{fontSize: '2.2vw;'}} /> 
         </div> : 
         <Link to={"/login"}>
           <Button type="primary">Logga in</Button>
@@ -24,3 +24,6 @@ function HeaderLogin() {
 }
 
 export default HeaderLogin;
+
+
+//style={{fontSize: '24px;'}} rad 17

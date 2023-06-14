@@ -2,14 +2,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 30px;
+    /* padding-top: 30px;
     padding-bottom: 30px;
     margin-left: 10rem;
-    margin-right: 10rem;
+    margin-right: 10rem; */
+    padding-top: 3vmax;
+    padding-bottom: 3vmax;
+    margin-left: 1vmax;
+    margin-right: 1vmax;
 }
 
 .productList-div img {
-    width: 300px;
+    /* width: 300px; */
+    width: 25vw;
       
 }
 

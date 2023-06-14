@@ -1,3 +1,12 @@
+productDetail-content
+    productDetail-wrapper
+    image-div
+
+productDetail-info
+
+AntDesignButton-div
+
+
 .productDetail-content {
     margin-right: 15%;
 }
@@ -27,7 +36,7 @@
     display: flex;
     flex-direction: column;
     width: 30%;
-    line-height: 22px;
+    line-height: 2vw;
 }
 
 .description {
@@ -44,7 +53,7 @@ color: rgb(219, 107, 95);
 }
 
 .AntDesignButton-div {
-    padding-top: 15px;
+    padding-top: 1.2vmax;
 }
 
 @media screen and (max-width: 1000px) {
@@ -64,7 +73,7 @@ color: rgb(219, 107, 95);
 
     .productDetail-info {
         width: 55%;
-        line-height: 22px;
+        line-height: 2vw;
     }
 }
 

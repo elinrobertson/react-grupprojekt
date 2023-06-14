@@ -7,7 +7,7 @@
     border: none;
     position: absolute;
     bottom: 0;
-    gap: 3rem;
+    gap: 3.5vmax;
 }
 
 
@@ -16,5 +16,5 @@
     border-bottom-color: black;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 14px;
+    font-size: 1.1vw;
 }

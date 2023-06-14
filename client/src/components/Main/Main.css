@@ -1,14 +1,19 @@
+main{
+    height: calc(100% - (30vh - 18vh))
+}
+
 .main-content {
-    margin-top: 353px;
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 33px;
-    /* padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 33px; */
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%; 
+    margin-top: 15vmax;
+    padding-left: 5vmax;
+    padding-right: 5vmax;
+    margin-bottom: 15vmax;
+    /* padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 33px; */
+    
 }
 

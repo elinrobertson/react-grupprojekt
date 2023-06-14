@@ -1,15 +1,15 @@
 header {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    height: 30vh;
-    /* height: 20em; */
+    height: 30vh;   /* fast pixelvärde för höjden är ok */
     width: 100%;
     /* position: relative; */
     background-color: #F1E2DE;
     position: fixed;
     top: 0;
+    /* z-index anledning är anledningen att formuläret lyser igenom i formuläret */
     z-index: 1000;
 }
 
@@ -23,16 +23,16 @@ header a {
     justify-content: center;
     align-items: center;
     /* padding-bottom: 3rem; */
-    padding-bottom: 7vh;
+    padding-bottom: 3vmax;
+    
 }
 
 .logo img {
-    /* width: 15em; */
-    width: 13.5vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+     /* width: 15em; */
+     width: 13.5vw;
 }
 
 .header-icons {
@@ -41,11 +41,11 @@ header a {
     position: absolute;
     color: #545454;
     right: 0.3vw;
-    top: 5vh;
+    top: 2vw;
     width: 100vw;
     padding-right: 2.3vw;
     gap: 0.5vw;
-    font-size: 5vh;
+    font-size: 2.2vw;
     /* right: 3px;
     top: 1em;
     width: 100vw;
@@ -56,7 +56,7 @@ header a {
 }
 
 .header-adminIcon {
-    width: 5vh;
+    width: 2.2vw;
     /* width: 18px; */
     color: #545454;
 }
@@ -70,10 +70,13 @@ header a {
     height: 3vh;
     width: 3vh;
     border-radius: 1rem;
+    height: 1.5vw;
+    width: 1.5vw;
+    border-radius: 25px;
 
     position: absolute;
-    right: -1vh;
-    top: -1vh;
+    right: -0.5vw;
+    top: -0.4vw;
 
     /* height: 18px;
     width: 18px;

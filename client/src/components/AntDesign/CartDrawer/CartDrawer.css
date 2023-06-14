@@ -2,31 +2,39 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* vad gör den här uträkningen för något? */
     height: calc(100% - 11%);
+
+    /* Problem med positioneringen,
+     vilket märks när man testar: */
+    /* overflow: hidden;  */
+   
 }
 .productCart-div {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 0
+    /* padding: 1rem 0; */
+    padding: 0.9vmax 0
 }
 
 .drawerUpper {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.4vw;
 }
 
 .drawerUpper img {
-width: 50px;
+width: 4.3vw;
 }
 
 .productCart-div div h4, .productCart-div p{
     margin: 0;
 }
 
+/* ser inte att den här gör skillnad */
 .ant-drawer-body h3 {
-    padding-top: 1rem;
+    padding-top: 1rem;  
 }
 
 .titleAndPrice-div {
@@ -36,12 +44,12 @@ width: 50px;
 }
 .titleAndPrice-div p {
     color: gray;
-    font-size: 12px;
+    font-size: 1vw;
 }
 
 .price-paragraph {
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding-top: 0.09vmax;
+    padding-bottom:  0.2vmax;
 }
 
 .drawerBottom {
@@ -49,8 +57,8 @@ width: 50px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
-    padding-top: 2rem;
+    gap: 4.1vw;
+    padding-top: 2.5vmax;
 }
 
 .drawerBottom div h3 {

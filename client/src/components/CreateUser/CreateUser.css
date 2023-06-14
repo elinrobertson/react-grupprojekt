@@ -1,7 +1,7 @@
 .registred-div {
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     text-align: center;
 }
 .registred-div h3 {
@@ -13,9 +13,9 @@
 
 #basic {
     display: flex;
+    flex-direction: column;
     align-items: center;
 /*     justify-content: center; */
-    flex-direction: column;
     width: 800px;
 }
 

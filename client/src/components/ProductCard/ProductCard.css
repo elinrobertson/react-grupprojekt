@@ -1,15 +1,17 @@
 .productCard-div {
+    display: flex;
+    flex-direction: column;
     border: 1px rgb(223, 219, 219) solid;
     box-shadow: -1px 1px 10px 1px rgba(197, 197, 197, 0.68);
-    padding-bottom: 1rem;
+    padding-bottom: 1.3vmax;
 }
 
 .productCard-info {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    margin-top: 15px;
+    margin-top: 1vmax;
 }
 
 .productCard-price {
@@ -17,8 +19,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
-    padding-top: 8px;
+    gap: 1.2vmax;
+    padding-top: 0.5vmax;
 }
 
 .productCard-price p {

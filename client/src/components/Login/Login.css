@@ -1,7 +1,7 @@
 .newUser-div {
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     text-align: center;
 }
 .newUser-div h3 {
@@ -13,12 +13,11 @@
 
 #basic {
     display: flex;
-    align-items: center;
-/*     justify-content: center; */
     flex-direction: column;
-    width: 800px;
+    align-items: center;   
+    width: 800px; /* Behövs den här? */
 }
 
 #basic>* {
-    width: 80%;
+    width: 80%; /* Behövs width: 800px; när vi har den här? */
 }

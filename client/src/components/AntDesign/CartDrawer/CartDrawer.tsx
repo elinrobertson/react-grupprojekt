@@ -26,16 +26,12 @@ const status = loggedinUser ? "/checkout" : "/login"
       <ShoppingCartOutlined type="primary" onClick={showDrawer} />
       <Drawer title="Varukorg" placement="right" onClose={onClose} open={open}>
         <div className="CartDrawer-div">
-          <div>
            {<ProductsInCart />}
-          </div>
         </div>
         <hr />
         <div className="drawerBottom">
-          <div>
-            <h4>Summa:</h4>
-            <h3>{currentCart.totalPrice} kr</h3>
-          </div>
+          <h4>Summa:</h4>
+          <h3>{currentCart.totalPrice} kr</h3>
           <Link to={status} >
             <Button onClick={onClose} disabled= {!currentCart.totalQuantity } type="primary" htmlType="submit">
               Till kassan

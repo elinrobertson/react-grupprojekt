@@ -11,3 +11,31 @@
 a {
     color: inherit;
 }
+
+/* Gör canvas till 100% av det som syns i webbläsaren */
+:root{
+    height: 100vh;
+    width: 100vw;
+    /* --line-height är namnet på variabeln för radhöjd, i var är namnet på variabeln för textstorlek */
+    --line-height: calc(1.2* var(--font-size));
+    /* variabel för textstorlek som ser bra ut på alla skärmar och även i liggande läge */
+    /* 20px är max önskade storleken på skärmen, i maxsiffran får vi fram vad den riktiga skärmstorleken är, den minst applicerbara */
+    --font-size: min(20px, max(12px, (16px + (100vw - 1080px) / 100)));
+}
+
+html, body {
+height: 100%;
+width: 100%;
+}
+
+
+
+/* 
+uträkning för höjd fördelat mellan header, main och footer. Inlagt i main.css, kopia här
+main{
+    height: calc(100% - (30vh - 18vh))
+}
+
+header height: 30vh;
+height: 18vh;
+*/

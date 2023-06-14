@@ -8,4 +8,9 @@
 .loggedInUser-div div p {
     margin: 0;
     font-size: 18px;
+    font-size: 1vw;
+}
+
+.userDropdown-div {
+    display: flex;
 }
