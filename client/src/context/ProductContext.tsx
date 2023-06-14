@@ -2,51 +2,48 @@ import { PropsWithChildren, createContext, useState, useEffect } from "react";
 
 
 export interface Product {
-    key: any;
-    _id: string,
-    title: string, 
-    price: number, 
-    description: string, 
-    image: string,
-    inStock: number,
+  key: any;
+  _id: string,
+  title: string, 
+  price: number, 
+  description: string, 
+  image: string,
+  inStock: number,
+}
+
+interface ProductContext {
+  getProductList: () => void,
+  addProduct:(value: Partial<Product>) => void,
+  deleteProduct: (productId: string) => void,
+  editProduct:(id: string, product: Product) => void,
+  products: Product[]
+}
+
+export const ProductContext = createContext<ProductContext>(null as any)
+
+export function ProductProvider({ children }: PropsWithChildren) {
+
+  const[products, setProducts]= useState<Product[]>([]);
+
+  const getProductList = async () => {
+    try {
+      const res = await fetch(
+        "http://localhost:3000/api/products"
+      );
+      const productData = await res.json()
+      setProducts(productData);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  interface ProductContext {
-    getProductList: () => void,
-    addProduct:(value: Partial<Product>) => void,
-    deleteProduct: (productId: string) => void,
-    editProduct:(id: string, product: Product) => void,
-    products: Product[]
-  }
-
-  export const ProductContext = createContext<ProductContext>(null as any)
-
-  export function ProductProvider({ children }: PropsWithChildren) {
-    const[products, setProducts]= useState<Product[]>([]);
-
-    const getProductList = async () => {
-        try {
-          const res = await fetch(
-            "http://localhost:3000/api/products"
-          );
-          const productData = await res.json()
-          // console.log("loggar ut productData", productData);
-          setProducts(productData);
-          //console.log("loggar ut products", products);
-  
-        } catch (error) {
-          console.log(error);
-        }
-      }
-  
-    useEffect(() => {
-
-      getProductList();
-    },[]);
+  useEffect(() => {
+    getProductList();
+  },[]);
     
 
- const addProduct = async (value: Partial<Product>) => {
-
+  const addProduct = async (value: Partial<Product>) => {
     try {
       const res = await fetch(`/api/products`, {
         method: "POST",
@@ -55,6 +52,7 @@ export interface Product {
         },
         body: JSON.stringify(value),
       });
+
       if (res.ok) { 
         console.log('product created', value)
         getProductList();
@@ -78,35 +76,31 @@ export interface Product {
     }
   }
 
-    function editProduct(id: string, product: Partial<Product>) {
-
-      const fetchProductData = async () => {
-        try {
+  const editProduct = async (id: string, product: Partial<Product>) => {
+    try {
       // Fetch the initial product value
       const rest = await fetch(`/api/products/${id}`);
       const current = await rest.json();
-
       const updatedProduct = { ...current, ...product };
 
-          const res = await fetch(`/api/products/${id}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedProduct),
-          });
-          if (res.ok) {
-            getProductList();
-          }
-        } catch (error) {
-          console.log("There was an error:", error);
-        }
-      };
-      fetchProductData();
-    }
+      const res = await fetch(`/api/products/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProduct),
+      });
 
-    return (
-    <ProductContext.Provider value={{ getProductList, addProduct, deleteProduct, editProduct, products  }}>
-    {children}
-  </ProductContext.Provider>);
+      if (res.ok) { getProductList() }
+
+    } catch (error) {
+      console.log("There was an error:", error);
+    }
   }
+
+  return (
+    <ProductContext.Provider value={{ getProductList, addProduct, deleteProduct, editProduct, products  }}>
+      {children}
+    </ProductContext.Provider>
+  );
+}
