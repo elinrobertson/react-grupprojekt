@@ -25,6 +25,7 @@ export function ProductProvider({ children }: PropsWithChildren) {
 
   const[products, setProducts]= useState<Product[]>([]);
 
+  // ----------------------------------------------------- FUNCTION THAT GETS PRODUCTS 
   const getProductList = async () => {
     try {
       const res = await fetch(
@@ -42,7 +43,7 @@ export function ProductProvider({ children }: PropsWithChildren) {
     getProductList();
   },[]);
     
-
+// ----------------------------------------------------- FUNCTION THAT ADDS PRODUCTS 
   const addProduct = async (value: Partial<Product>) => {
     try {
       const res = await fetch(`/api/products`, {
@@ -63,6 +64,8 @@ export function ProductProvider({ children }: PropsWithChildren) {
     }
   }
 
+  // ----------------------------------------------------- FUNCTION THAT DELETES PRODUCTS 
+
   const deleteProduct = async (id: string) => {
     try {
       const res = await fetch(`api/products/${id}`, {
@@ -75,6 +78,8 @@ export function ProductProvider({ children }: PropsWithChildren) {
       console.log('there was an error');
     }
   }
+
+  // ----------------------------------------------------- FUNCTION THAT EDITS PRODUCTS 
 
   const editProduct = async (id: string, product: Partial<Product>) => {
     try {
