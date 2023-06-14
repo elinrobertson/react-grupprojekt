@@ -51,6 +51,11 @@ function CartProvider({ children }: PropsWithChildren) {
       if (productIndex !== -1) {
         // OM PRODUKTEN FINNS SÅ UPPDATERAR DEN QUANTITY
         updatedCart.cart[productIndex].quantity += 1;
+        updatedCart.cart[productIndex].inStock -= 1;
+        // if (!updatedCart.cart[productIndex].inStock > 0) {
+        //   console.log('You cant do that')
+        // }
+        
       } else {
         // OM INTE SÅ LÄGGER DEN TILL PRODUKTEN I EN NY VARIABLE SOM SEN
         // PUSHAS TILL CART-PROPERTYN I UPDATEDCART

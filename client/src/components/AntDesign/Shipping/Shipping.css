@@ -1,5 +1,5 @@
 .shipping-info {
     display: flex;
     justify-content: row;
-    gap: 3rem;
+    gap: 12rem;
 }
