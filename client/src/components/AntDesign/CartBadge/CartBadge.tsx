@@ -23,6 +23,6 @@ const CartBadge = ({ productId, quantity }: CartBadgeProps) => {
     </div>
   );
   
-};
+}; 
 
 export default CartBadge;

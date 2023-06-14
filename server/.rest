@@ -61,4 +61,27 @@ Content-Type: application/json
  "deliveryTimeInHours": 72
 }
 
-##
+###
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+    "orderItems": [
+      {
+      "product": "6474550365cf346822204ea1",
+      "quantity": 2,
+      "price": 100
+      }
+    ],
+    "deliveryAddress": {
+    "street": "123 Main St",
+    "zipcode": "12345",
+    "city": "City Name",
+    "country": "Country Name"
+  },
+    "shippingMethod": "6478678e72908617dcb68951"
+}
+
+###
+
+GET http://localhost:3000/api/orders

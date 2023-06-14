@@ -5,6 +5,8 @@ import { ConfigProvider } from "antd"
 import UserProvider from "./context/UserContext"
 import CartProvider from "./context/CartContext"
 import { ProductProvider } from "./context/ProductContext"
+import OrderProvider from "./context/OrderContext"
+
 
 function App() {
   return (
@@ -12,9 +14,11 @@ function App() {
       <UserProvider>
         <ProductProvider>
         <CartProvider>
-        <Header />
-        <Main />
-        <Footer />
+          <OrderProvider>
+            <Header />
+            <Main />
+            <Footer />
+          </OrderProvider>
         </CartProvider>
         </ProductProvider>
       </UserProvider>

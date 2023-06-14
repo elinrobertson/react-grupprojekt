@@ -21,7 +21,7 @@ function Footer() {
             <h4>Adress</h4>
             <p>Elsas AB <br />
                 Drottninggatan 5 <br />
-                41114 Göteborg 
+                411 14 Göteborg 
             </p>
           </div>
           <div className="footer-col3">

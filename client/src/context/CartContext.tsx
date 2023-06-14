@@ -5,7 +5,7 @@ import { Product } from "./ProductContext";
 
 
 //NYTT INTERFACE SOM LÄGGER TILL EN PROPERTY PÅ INTERFACE PRODUCT
-interface CartItem extends Product {
+export interface CartItem extends Product {
   quantity: number;
 }
 // Interface som bestämmer hur "Cart" ska se ut

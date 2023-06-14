@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import "./ProductList.css";
 
-
 function ProductList() {
 
   const { products } = useContext(ProductContext)

@@ -2,7 +2,11 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import "./CartLoadbar.css"
 
-function LoadBar() {
+interface Next {
+next: () => void
+}
+
+function CartLoadBar({next}:Next) {
   const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
@@ -10,7 +14,10 @@ function LoadBar() {
 
     setTimeout(() => {
       setShowLoading(false);
-    }, 6000);
+      setTimeout(() => {
+       next();
+      },1000);
+    }, 4000);
   }, []);
 
   return (
@@ -27,4 +34,4 @@ function LoadBar() {
   );
 }
 
-export default LoadBar;
+export default CartLoadBar;
