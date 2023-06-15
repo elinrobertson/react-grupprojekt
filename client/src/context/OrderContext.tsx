@@ -32,6 +32,12 @@ export interface OrderWithKey extends Order {
   key: string,
   _id: string,
   orderNumber: number,
+  customer: {
+    firstName: string
+    email: string
+  },
+  firstName: string,
+  email: string,
   shipped: boolean | string
 }
 
