@@ -3,8 +3,8 @@
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    /* height: calc(100% - 11%); */
 }
+
 .productCart-div {
     display: flex;
     align-items: center;

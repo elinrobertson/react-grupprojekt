@@ -2,7 +2,6 @@ import { PropsWithChildren, createContext, useState, useEffect } from "react";
 
 
 export interface Product {
- /*  key: any; */
   _id: string,
   title: string, 
   price: number, 

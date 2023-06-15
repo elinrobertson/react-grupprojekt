@@ -4,7 +4,6 @@ import type { ColumnsType } from 'antd/es/table';
 import { OrderWithKey, OrderContext } from '../../../context/OrderContext';
 //import './AdminOrderTable.css';
 
-
 const columns: ColumnsType<Partial<OrderWithKey>> = [
   {
     title: 'Ordernummer',
@@ -32,7 +31,6 @@ const columns: ColumnsType<Partial<OrderWithKey>> = [
   }
 ];
 
-
 const AdminOrderTable = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [loading, setLoading] = useState(false);
@@ -42,7 +40,6 @@ const AdminOrderTable = () => {
 
   orders.forEach((order) =>  {
     const ship = shippingMethodes.find((item) => item._id === order.shippingMethod);
-    
 
     data.push({
       key: order._id,
@@ -82,7 +79,6 @@ const AdminOrderTable = () => {
         <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
           Uppdatera
         </Button>
-
       </div>
       <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
     </div>

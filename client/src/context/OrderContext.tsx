@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useState, useEffect, useContext } from "react";
+import React, { PropsWithChildren, createContext, useState, useEffect, useContext } from "react";
 import { CartContext } from "./CartContext";
 
 // --------------------------------------------- INTERFACES
@@ -23,9 +23,13 @@ interface ShippingMethod {
 }
 
 export interface Order {
+  key: string,
+  _id: string,
+  orderNumber: number,
   orderItems: OrderItem[],
   deliveryAddress: AddressItem,
-  shippingMethod: string
+  shippingMethod: string,
+  shipped: boolean | string
 }
 
 export interface OrderWithKey extends Order {
@@ -46,7 +50,7 @@ export interface OrderWithKey extends Order {
 interface OrderContext {
   order: Order,
   setOrder: (value: Order) => void, //Sets one order
-  setOrders: (value: OrderWithKey[]) => void, // Sets or Gets multiple orders ----------------------------------- Added here do something about it 
+  setOrders: (value: OrderWithKey[]) => void, // Sets multiple orders
   address: AddressItem,
   setAddress: (value: AddressItem) => void,
   saveAddress: (value: Partial<AddressItem>) => void,
@@ -58,9 +62,10 @@ interface OrderContext {
   shippingMethodes: ShippingMethod[]
   setOrderNumber: (value: number) => void
   orderNumber: number,
-  orders: OrderWithKey[], // ----------------------------------- Added here do something about it 
-  editOrder: (value: React.Key) => void // ----------------------------------- Added here do something about it 
+  orders: OrderWithKey[], 
+  editOrder: (value: React.Key) => void
   getOrderList: () => void
+
 }
 export const OrderContext = createContext<OrderContext>(null as any)
 
@@ -74,7 +79,7 @@ function OrderProvider({ children }: PropsWithChildren) {
 
   // Ett state som berättar att checkbox från Cart är i kryssad.
   const [AddressCheckbox, setAddressCheckbox] = useState(false)
-  const [orders, setOrders] = useState<OrderWithKey[]>([]) // ----------------------------------- Added here do something about it 
+  const [orders, setOrders] = useState<OrderWithKey[]>([])
   const [shippingMethodes, setShippingMethods] = useState<ShippingMethod[]>([]);
 
   const [orderItem, setOrderItem] = useState<OrderItem[]>([{
@@ -91,9 +96,13 @@ function OrderProvider({ children }: PropsWithChildren) {
   })
 
   const [order, setOrder] = useState<Order>({
+    key: "",
+    _id: "",
+    orderNumber: 0,
     orderItems: orderItem,
     deliveryAddress: address,
-    shippingMethod: ""
+    shippingMethod: "",
+    shipped: false
   })
 
   const [orderNumber, setOrderNumber] = useState(0);
@@ -111,7 +120,7 @@ function OrderProvider({ children }: PropsWithChildren) {
       console.log(error);
     }
   }
-
+  
   useEffect(() => {
     getOrderList();
   },[]);
@@ -130,7 +139,6 @@ function OrderProvider({ children }: PropsWithChildren) {
 
 // --------------------------------------------------------------------------- Added here do something about it 
   const editOrder = async (selectedRowKeys: React.Key) => {
-
     try {
       // Fetch the initial product value
       const rest = await fetch(`/api/orders/${selectedRowKeys}`);
@@ -196,13 +204,21 @@ function OrderProvider({ children }: PropsWithChildren) {
 
   return (
     <OrderContext.Provider value={{
-      address, setAddress,
-      order, setOrder,
-      saveAddress, shippingMethod,
-      AddressCheckbox, setCheckboxValue,
-      saveShippingMethod, shippingMethodes,
-      setOrderNumber, orderNumber,
-      orders, setOrders, editOrder,
+      address,
+      setAddress,
+      order,
+      setOrder,
+      saveAddress,
+      shippingMethod,
+      AddressCheckbox,
+      setCheckboxValue,
+      saveShippingMethod,
+      shippingMethodes,
+      setOrderNumber,
+      orderNumber,
+      orders,
+      setOrders,
+      editOrder,
       getOrderList
        }}>
       {children}

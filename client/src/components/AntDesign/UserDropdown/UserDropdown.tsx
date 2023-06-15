@@ -51,8 +51,6 @@ const UserDropdown = () => {
       ),
     }
   ]; 
-
-
   
   return (
     loggedinUser ?
