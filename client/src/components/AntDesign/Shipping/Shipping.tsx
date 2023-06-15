@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import type { RadioChangeEvent } from 'antd';
 import { Radio, Space } from 'antd';
 import "./Shipping.css";
@@ -8,16 +8,7 @@ import { OrderContext } from '../../../context/OrderContext';
 
 const ShippingMethod = () => {
   const [value, setValue] = useState<string>("");
-  const { shippingMethod, saveShippingMethod, shippingMethodes } = useContext(OrderContext)
-
-  useEffect(() => {
-    const getShipping = async () => {
-      const res = await fetch('/api/shippingMethod');
-      const data = await res.json();
-      saveShippingMethod(data)
-    }
-    getShipping()
-  }, [])
+  const { shippingMethod, shippingMethodes } = useContext(OrderContext)
 
 
   const onChange = (e: RadioChangeEvent) => {
