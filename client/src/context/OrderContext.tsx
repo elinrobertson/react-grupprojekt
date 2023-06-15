@@ -84,11 +84,6 @@ function OrderProvider({ children }: PropsWithChildren) {
   const [orderNumber, setOrderNumber] = useState(0);
 
   // ------------------------------------------------------- ALL STATES ENDS HERE
-  /* const getOrders = async () => {
-    const res = await fetch('/api/orders');
-    const data = await res.json();
-    console.log("Get Orders: ", data);
-  } */
 
   const saveAddress = (value: object) => {
     setAddress({
@@ -116,7 +111,6 @@ function OrderProvider({ children }: PropsWithChildren) {
 
 
   useEffect(() => {
-
     const orders = currentCart.cart.map((product) => ({
       product: product._id,
       quantity: product.quantity,
@@ -126,9 +120,9 @@ function OrderProvider({ children }: PropsWithChildren) {
     setOrderItem(orders);
   }, [currentCart]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     console.log("Order status: ", order);
-  }, [order]);
+  }, [order]); */
 
   useEffect(() => {
     setOrder((prevOrder) => ({

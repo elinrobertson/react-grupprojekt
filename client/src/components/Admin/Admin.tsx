@@ -1,20 +1,13 @@
-import { ProductContext } from "../../context/ProductContext";
-import { useContext } from "react"; 
-import ProductCard from "../ProductCard/ProductCard";
-import AdminUI from "../AntDesign/Table/Table";
+import AdminTable from "../AntDesign/AdminTable/AdminTable";
+import CreateProductForm from "../AntDesign/CreateProductForm/CreateProductForm";
+
 
 function Admin() {
 
-  const { products } = useContext(ProductContext)
-
   return (
-    <div>
-      <div>
-{/*       {products.map((product) => ( 
-          <ProductCard key={product._id} products={product} />
-      ))} */}
-      < AdminUI />
-      </div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <CreateProductForm />
+      < AdminTable />
     </div>
   );
   

@@ -54,6 +54,22 @@ Content-Type: application/json
   "image": "https://cdn.sanity.io/images/iive6pz5/eaproduction/88e646096e749e573ae689ef148eac9ad0865860-1920x1920.jpg",
   "inStock": 10
 }
+###
+
+//Skapa produkter här
+PUT http://localhost:3000/api/products/647454dbb5950b3ba448764f
+Content-Type: application/json
+
+{
+  "_id": "647454dbb5950b3ba448764f",
+  "title": "Little devil ring",
+  "price": 1700,
+  "description": "Ring i återvunnet sterlingsilver gjord i form av djävulshorn med en sötvattenpärla. Skena: 1,5x2,3 mm. Dekoration: 9x7 mm, 1 x sötvattenspärla - 7 mm ø.",
+  "image": "https://cdn.sanity.io/images/iive6pz5/eaproduction/3d41a634a6ddc1ef2814bae72d59fe6782ee8dc9-1920x1920.jpg?w=780&h=780&auto=format",
+  "inStock": 10,
+  "deleted": false,
+  "categories": []
+}
 
 ###
 

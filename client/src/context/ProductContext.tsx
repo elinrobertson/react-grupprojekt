@@ -2,84 +2,110 @@ import { PropsWithChildren, createContext, useState, useEffect } from "react";
 
 
 export interface Product {
-    key: any;
-    _id: string,
-    title: string, 
-    price: number, 
-    description: string, 
-    image: string,
-    inStock: number,
+  key: any;
+  _id: string,
+  title: string, 
+  price: number, 
+  description: string, 
+  image: string,
+  inStock: number,
+}
+
+interface ProductContext {
+  getProductList: () => void,
+  addProduct:(value: Partial<Product>) => void,
+  deleteProduct: (productId: string) => void,
+  editProduct:(id: string, product: Product) => void,
+  products: Product[]
+}
+
+export const ProductContext = createContext<ProductContext>(null as any)
+
+export function ProductProvider({ children }: PropsWithChildren) {
+
+  const[products, setProducts]= useState<Product[]>([]);
+
+  // ----------------------------------------------------- FUNCTION THAT GETS PRODUCTS 
+  const getProductList = async () => {
+    try {
+      const res = await fetch(
+        "http://localhost:3000/api/products"
+      );
+      const productData = await res.json()
+      setProducts(productData);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  interface ProductContext {
-    getProductList: () => void,
-    addProduct:(value: Product) => void,
-    deleteProduct: (productId: string) => void,
-    editProduct:(value: Product) => void,
-    products: Product[]
-  }
-
-  export const ProductContext = createContext<ProductContext>(null as any)
-
-  export function ProductProvider({ children }: PropsWithChildren) {
-    const[products, setProducts]= useState<Product[]>([]);
-
-    const getProductList = async () => {
-        try {
-          const res = await fetch(
-            "http://localhost:3000/api/products"
-          );
-          const productData = await res.json()
-          // console.log("loggar ut productData", productData);
-          setProducts(productData);
-          //console.log("loggar ut products", products);
-  
-        } catch (error) {
-          console.log(error);
-        }
-      }
-  
-    useEffect(() => {
-
-      getProductList();
-    },[]);
+  useEffect(() => {
+    getProductList();
+  },[]);
     
+// ----------------------------------------------------- FUNCTION THAT ADDS PRODUCTS 
+  const addProduct = async (value: Partial<Product>) => {
+    try {
+      const res = await fetch(`/api/products`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(value),
+      });
 
-    function addProduct() {
-        console.log("add products");
+      if (res.ok) { 
+        console.log('product created', value)
+        getProductList();
+      }
+      
+    } catch (error) {
+      console.log('there was an error');
     }
-
-    const deleteProduct = async (id: string) => {
-      try {
-          const res = await fetch(`api/products/${id}`, {
-            method: 'DELETE',
-          })
-          if (res.ok) {
-            setProducts(prevProducts => prevProducts.filter(product => product._id !== id));
-          }
-        } catch (error) {
-          console.log('there was an error');
-        }
-    }
-
-    function editProduct() {
-        console.log("edit product");
-    }
-
-    return (
-    <ProductContext.Provider value={{ getProductList, addProduct, deleteProduct, editProduct, products  }}>
-    {children}
-  </ProductContext.Provider>);
   }
 
+  // ----------------------------------------------------- FUNCTION THAT DELETES PRODUCTS 
 
-//GET PRODUCTS
+  const deleteProduct = async (id: string) => {
+    try {
+      const res = await fetch(`api/products/${id}`, {
+        method: 'DELETE',
+      })
+      if (res.ok) {
+        setProducts(prevProducts => prevProducts.filter(product => product._id !== id));
+      }
+    } catch (error) {
+      console.log('there was an error');
+    }
+  }
 
-//CREATE PRODUCT (ADD PRODUCT)
+  // ----------------------------------------------------- FUNCTION THAT EDITS PRODUCTS 
 
-//UPDATE PRODUCT
+  const editProduct = async (id: string, product: Partial<Product>) => {
+    try {
+      // Fetch the initial product value
+      const rest = await fetch(`/api/products/${id}`);
+      const current = await rest.json();
+      const updatedProduct = { ...current, ...product };
 
-//DELETE PRODUCT
+      const res = await fetch(`/api/products/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProduct),
+      });
 
-//GET ORDERS AND MARK ORDER AS SHIPPED (IN ORDERCONTEXT)
+      if (res.ok) { getProductList() }
 
+    } catch (error) {
+      console.log("There was an error:", error);
+    }
+  }
+
+  return (
+    <ProductContext.Provider value={{ getProductList, addProduct, deleteProduct, editProduct, products  }}>
+      {children}
+    </ProductContext.Provider>
+  );
+}

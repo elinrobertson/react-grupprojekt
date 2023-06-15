@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Form, Input, InputNumber, Popconfirm, Table, Typography } from 'antd';
 import { Product } from '../../../context/ProductContext';
 import { ProductContext } from '../../../context/ProductContext';
-import './Table.css'
+import './AdminTable.css'
 
 interface ProductWithKey extends Product {
   key: string
@@ -52,13 +52,13 @@ const EditableCell: React.FC<EditableCellProps> = ({
   );
 };
 
-const AdminUI = () => {
+const AdminTable = () => {
   
   const [form] = Form.useForm();
   
 
   const [editingKey, setEditingKey] = useState('');
-  const { products, deleteProduct } = useContext(ProductContext)
+  const { products, deleteProduct, editProduct } = useContext(ProductContext)
   const [data, setData] = useState<ProductWithKey[]>([]);
 
   useEffect(() => {
@@ -77,13 +77,6 @@ const AdminUI = () => {
     form.setFieldsValue({ title: '', price: '', description: '',  inStock: '', image: '', ...record });
     setEditingKey(record.key);
   };
- // ------------------------------------------------------------ Delete FUNCTION
-
-/* 
-  const deleteProduct = (record:ProductWithKey) => {
-    console.log(record);
-    
-  }; */
 
   // ------------------------------------------------------------ CANCEL BUTTON FUNCTION
 
@@ -97,7 +90,10 @@ const AdminUI = () => {
       const row = (await form.validateFields()) as ProductWithKey;
 
       const newData = [...data];
+      
       const index = newData.findIndex((item) => key === item.key);
+      console.log('what is key', key);
+      
       if (index > -1) {
         const item = newData[index];
         newData.splice(index, 1, {
@@ -105,6 +101,8 @@ const AdminUI = () => {
           ...row,
         });
         setData(newData);
+        console.log('what is this', row)
+        editProduct(key.toString(), row)
         setEditingKey('');
       } else {
         newData.push(row);
@@ -115,8 +113,6 @@ const AdminUI = () => {
       console.log('Validate Failed:', errInfo);
     }
   };
-
-  // ------------------------------------------------------------ SAVE FUNCTION ENDS HERE
 
   // ------------------------------------------------------------ SETS COLUMNS AND ITS PROPERTIES
   const columns = [
@@ -214,4 +210,4 @@ const AdminUI = () => {
   );
 };
 
-export default AdminUI;
+export default AdminTable;
