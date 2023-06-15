@@ -1,4 +1,5 @@
 import { PropsWithChildren, createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 
 
@@ -29,7 +30,7 @@ export const UserContext = createContext<UserContext>(null as any)
 function UserProvider({children}:PropsWithChildren) {
 
     const [loggedinUser, setLoggedinUser] = useState(null)
-    
+    const navigate = useNavigate();
     useEffect(() => {
       const auth = async () => {
         try {
@@ -37,7 +38,6 @@ function UserProvider({children}:PropsWithChildren) {
           const data = await res.json();
           if (res.ok) {
           setLoggedinUser(data);
-          
           }
   
         } catch (error) {
@@ -46,7 +46,9 @@ function UserProvider({children}:PropsWithChildren) {
       };
       auth();
     }, []);
+
 async function logIn(credentials: Credentials) { 
+  
     try {
         const res = await fetch("/api/users/login", {
           method: "POST",
@@ -56,9 +58,11 @@ async function logIn(credentials: Credentials) {
           body: JSON.stringify(credentials)
         });
         
-        const user = await res.json()
-        setLoggedinUser(user)
-        console.log(user);
+        if (res.ok) {
+          const user = await res.json()
+          setLoggedinUser(user)
+          navigate('/');
+          }
 
       } catch (error) {
         console.log("Error:", error);

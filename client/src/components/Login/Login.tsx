@@ -58,10 +58,4 @@ const Login = () => {
   )
 };
 
-{/* <Link to={status} >
-<Button onClick={onClose} disabled= {!currentCart.totalQuantity } type="primary" htmlType="submit">
-  Till kassan
-</Button>
-</Link> */}
-
 export default Login
