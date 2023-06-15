@@ -64,7 +64,7 @@ const AdminTable = () => {
   useEffect(() => {
     const newData = products.map((product: ProductWithKey) => ({
       ...product,
-      key: product._id, // Assigning unique key based on _id
+      key: product._id,
     }));
     setData(newData);
   }, [products]);
