@@ -7,7 +7,6 @@
     border: none;
     position: absolute;
     bottom: 0;
-    gap: 3rem;
 }
 
 
@@ -17,4 +16,11 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 14px;
+}
+
+@media only screen and (min-width: 900px) {
+    .headerNav {
+        gap: 3rem;
+    }
+    
 }

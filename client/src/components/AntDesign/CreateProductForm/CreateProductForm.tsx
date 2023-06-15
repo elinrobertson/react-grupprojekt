@@ -34,7 +34,7 @@ const CreateProductForm = () => {
         </Form.Item>
         <Form.Item className='form-btn'>
             <Button type="primary" htmlType="submit">
-            Lagg till ny Produkt
+            Lägg till ny Produkt
             </Button>
         </Form.Item>
     </Form>
