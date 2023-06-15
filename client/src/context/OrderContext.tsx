@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { PropsWithChildren, createContext, useState, useEffect, useContext } from "react";
 import { CartContext } from "./CartContext";
+import { UserContext } from "./UserContext";
 
 // --------------------------------------------- INTERFACES
 interface AddressItem {
@@ -70,6 +72,7 @@ export const OrderContext = createContext<OrderContext>(null as any)
 function OrderProvider({ children }: PropsWithChildren) {
 
   const { currentCart } = useContext(CartContext)
+  const { loggedinUser } = useContext(UserContext)
 
   // ------------------------------------------------------- STATES STARTS HERE
 
@@ -115,7 +118,7 @@ function OrderProvider({ children }: PropsWithChildren) {
   
   useEffect(() => {
     getOrderList();
-  },[]);
+  },[loggedinUser]);
 // --------------------------------------------------------------------------- Added here do something about it 
 
   const saveAddress = (value: object) => {

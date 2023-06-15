@@ -38,7 +38,11 @@ const AdminOrderTable = () => {
 
   const data: Partial<OrderWithKey>[] = [];
 
-  orders.forEach((order) =>  {
+  if (orders.length === 0) {
+    return <div>Loading...</div>; // Add a loading state if orders are empty
+  }
+  
+  orders.map((order) =>  {
     const ship = shippingMethodes.find((item) => item._id === order.shippingMethod);
 
     data.push({
