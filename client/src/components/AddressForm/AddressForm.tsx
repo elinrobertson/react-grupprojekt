@@ -28,34 +28,28 @@ const tailFormItemLayout = {
   },
 };
 
-const AddressForm = () => { 
-  
-  const { loggedinUser } = useContext(UserContext);
-  const userToOrder =  loggedinUser?.firstName + ' ' + loggedinUser?.lastName
-  const [form] = Form.useForm();
+const AddressForm = () => {
+
   const { saveAddress, address, AddressCheckbox, setCheckboxValue } = useContext(OrderContext)
+  const { loggedinUser } = useContext(UserContext);
+  const [form] = Form.useForm();
 
-
-  useEffect(() => {
-    console.log(address);
-  }, [address]);
-
+  const userToOrder =  loggedinUser?.firstName + ' ' + loggedinUser?.lastName
 
   const checkMarkBox = () => {
     const isAgreementChecked = form.getFieldValue("agreement");
     setCheckboxValue(isAgreementChecked)
   } 
+
   const getAddressValue = (e: FocusEvent) => {
     const propertyName = (e.target as HTMLInputElement).name
     const value = (e.target as HTMLInputElement).value
     saveAddress({[propertyName]: value});
-
   }
 
-if (!loggedinUser) {
+  if (!loggedinUser) {
     return null
   }
-
 
   return (
     <>

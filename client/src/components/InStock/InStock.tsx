@@ -4,7 +4,6 @@ interface InStockProps {
   product: Product;
 }
 
-
 const InStock = ({ product }: InStockProps) => {
   const getStockMessage = () => {
     let stockMessage: string;

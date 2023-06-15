@@ -3,9 +3,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /* height: 20em; */
     width: 100%;
-    /* position: relative; */
     background-color: #F1E2DE;
     position: fixed;
     top: 0;
@@ -25,7 +23,6 @@ header a {
 }
 
 .logo img {
-    /* width: 15em; */
     display: flex;
     align-items: center;
     justify-content: center;

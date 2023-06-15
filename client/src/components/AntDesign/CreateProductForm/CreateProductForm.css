@@ -6,12 +6,15 @@ padding-bottom: 20px;
     display: flex;
     flex-direction: column;
 }
+
 .createProduct-form > div > div .ant-form-item-label {
     text-align: start;
 }
+
 .createProduct-label  *{
     font-size: 10px;
 }
+
 .createProduct-input {
     font-size: 12px;
 }
@@ -21,6 +24,7 @@ padding-bottom: 20px;
     justify-content: center;
     align-items: end;
 }
+
 .form-btn > div > div > div > div > button span {
 font-size: 11px;
 }
@@ -28,9 +32,11 @@ font-size: 11px;
 #price-input {
     width: 50px;
 }
+
 #stock-input {
     width: 100px;
 }
+
 #description-input {
     width: 300px;
 }

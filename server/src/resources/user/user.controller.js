@@ -30,7 +30,6 @@ async function login(req, res) {
     !existingUser ||
     !(await bcrypt.compare(req.body.password, existingUser.password))
   ) {
-    console.log("wiiiii");
     return res.status(401).json("Wrong password or username");
   }
 

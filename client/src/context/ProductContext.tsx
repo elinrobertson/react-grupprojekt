@@ -1,20 +1,19 @@
 import { PropsWithChildren, createContext, useState, useEffect } from "react";
 
-
 export interface Product {
   _id: string,
-  title: string, 
-  price: number, 
-  description: string, 
+  title: string,
+  price: number,
+  description: string,
   image: string,
   inStock: number,
 }
 
 interface ProductContext {
   getProductList: () => void,
-  addProduct:(value: Partial<Product>) => void,
+  addProduct: (value: Partial<Product>) => void,
   deleteProduct: (productId: string) => void,
-  editProduct:(id: string, product: Product) => void,
+  editProduct: (id: string, product: Product) => void,
   products: Product[]
 }
 
@@ -22,7 +21,7 @@ export const ProductContext = createContext<ProductContext>(null as any)
 
 export function ProductProvider({ children }: PropsWithChildren) {
 
-  const[products, setProducts]= useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   // ----------------------------------------------------- FUNCTION THAT GETS PRODUCTS 
   const getProductList = async () => {
@@ -40,9 +39,9 @@ export function ProductProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     getProductList();
-  },[]);
-    
-// ----------------------------------------------------- FUNCTION THAT ADDS PRODUCTS 
+  }, []);
+
+  // ----------------------------------------------------- FUNCTION THAT ADDS PRODUCTS 
   const addProduct = async (value: Partial<Product>) => {
     try {
       const res = await fetch(`/api/products`, {
@@ -53,13 +52,12 @@ export function ProductProvider({ children }: PropsWithChildren) {
         body: JSON.stringify(value),
       });
 
-      if (res.ok) { 
-        console.log('product created', value)
+      if (res.ok) {
         getProductList();
       }
-      
+
     } catch (error) {
-      console.log('there was an error');
+      console.log(error);
     }
   }
 
@@ -74,7 +72,7 @@ export function ProductProvider({ children }: PropsWithChildren) {
         setProducts(prevProducts => prevProducts.filter(product => product._id !== id));
       }
     } catch (error) {
-      console.log('there was an error');
+      console.log(error);
     }
   }
 
@@ -103,7 +101,7 @@ export function ProductProvider({ children }: PropsWithChildren) {
   }
 
   return (
-    <ProductContext.Provider value={{ getProductList, addProduct, deleteProduct, editProduct, products  }}>
+    <ProductContext.Provider value={{ getProductList, addProduct, deleteProduct, editProduct, products }}>
       {children}
     </ProductContext.Provider>
   );

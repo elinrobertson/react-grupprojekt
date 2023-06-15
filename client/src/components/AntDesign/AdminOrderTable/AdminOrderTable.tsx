@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { Button, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { OrderWithKey, OrderContext } from '../../../context/OrderContext';
-//import './AdminOrderTable.css';
 
 const columns: ColumnsType<Partial<OrderWithKey>> = [
   {
@@ -38,10 +37,6 @@ const AdminOrderTable = () => {
 
   const data: Partial<OrderWithKey>[] = [];
 
-  if (orders.length === 0) {
-    return <div>Loading...</div>; // Add a loading state if orders are empty
-  }
-  
   orders.map((order) =>  {
     const ship = shippingMethodes.find((item) => item._id === order.shippingMethod);
 

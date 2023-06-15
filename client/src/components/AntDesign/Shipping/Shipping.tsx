@@ -5,8 +5,9 @@ import "./Shipping.css";
 import { OrderContext } from '../../../context/OrderContext';
 
 const ShippingMethod = () => {
-  const [value, setValue] = useState<string>("");
+
   const { shippingMethod, shippingMethodes } = useContext(OrderContext)
+  const [value, setValue] = useState<string>("");
 
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value);
