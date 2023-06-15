@@ -4,20 +4,14 @@ import { Radio, Space } from 'antd';
 import "./Shipping.css";
 import { OrderContext } from '../../../context/OrderContext';
 
-
-
 const ShippingMethod = () => {
   const [value, setValue] = useState<string>("");
   const { shippingMethod, shippingMethodes } = useContext(OrderContext)
-
 
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value);
     shippingMethod(e.target.value)
   };
-
-
-
 
   return (
     <Radio.Group onChange={onChange} value={value}>
@@ -34,7 +28,7 @@ const ShippingMethod = () => {
                 <h3>{shipping.company}</h3>
                 <div className="shipping-info">
                   <p>{shipping.price} kr</p>
-                  <h4>Leverans: {formattedDate}</h4>
+                  <h4 style={{color:'rgb(128, 159, 138)'}}>~leverans: {formattedDate}</h4>
                 </div>
               </div>
             </Radio>

@@ -50,10 +50,7 @@ const UserDropdown = () => {
         </NavLink>
       ),
     }
-  ];
-  
-
-
+  ]; 
   
   return (
     loggedinUser ?

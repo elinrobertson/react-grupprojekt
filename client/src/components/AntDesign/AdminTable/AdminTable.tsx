@@ -62,7 +62,7 @@ const AdminTable = () => {
   const [data, setData] = useState<ProductWithKey[]>([]);
 
   useEffect(() => {
-    const newData = products.map((product: ProductWithKey) => ({
+    const newData = products.map((product: Product) => ({
       ...product,
       key: product._id,
     }));
@@ -133,6 +133,7 @@ const AdminTable = () => {
       dataIndex: 'description',
       width: '',
       editable: true,
+      className: 'image-cellx350'
     },
     {
       title: 'lagersaldo',
@@ -145,6 +146,7 @@ const AdminTable = () => {
       dataIndex: 'image',
       width: '',
       editable: true,
+      className: 'image-cellx200'
     },
     {
       title: 'operation',
@@ -154,19 +156,19 @@ const AdminTable = () => {
         return editable ? (
           <span>
             <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>
-              Save
+              Spara
             </Typography.Link>
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
+              <a>Avbryt</a>
             </Popconfirm>
           </span>
         ) : (
           <div className='operation-div'>
             <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)} id='edit-link'>
-              Edit
+              Redigera
             </Typography.Link>
             <Typography.Link disabled={editingKey !== ''} onClick={() => deleteProduct(record._id)} id='delete-link'>
-              Delete
+              Ta Bort
             </Typography.Link>
           </div>
         );

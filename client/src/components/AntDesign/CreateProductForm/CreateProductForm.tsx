@@ -4,6 +4,7 @@ import { Product, ProductContext } from '../../../context/ProductContext';
 import "./CreateProductForm.css"
 
 const CreateProductForm = () => {
+    const [form] = Form.useForm<Product>();
     const { addProduct } = useContext(ProductContext)
 
   const onFinish = (values: Product) => {
@@ -13,10 +14,11 @@ const CreateProductForm = () => {
         price: Number(values.price) // samma har
     };
     addProduct(product) // skickar product till functionen i context
+    form.resetFields()
   };
 
   return (
-    <Form onFinish={(onFinish)} layout="inline" size='small' className="createProduct-form">
+    <Form onFinish={(onFinish)} layout="inline" size='small' className="createProduct-form" form={form}>
         <Form.Item label="Titel" name="title">
             <Input className="createProduct-input" placeholder="Titel" />
         </Form.Item>

@@ -1,15 +1,21 @@
 import React, { useContext, useState } from 'react';
 import { Button, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { OrderContext } from '../../../context/OrderContext';
-import { Order } from '../../../context/OrderContext';
-import './AdminOrderTable.css';
+import { OrderWithKey, OrderContext } from '../../../context/OrderContext';
+//import './AdminOrderTable.css';
 
-
-const columns: ColumnsType<Partial<Order>> = [
+const columns: ColumnsType<Partial<OrderWithKey>> = [
   {
     title: 'Ordernummer',
     dataIndex: 'orderNumber',
+  },
+  {
+    title: 'Användare',
+    dataIndex: 'firstName',
+  },
+  {
+    title: 'Mail',
+    dataIndex: 'email',
   },
   {
     title: 'Fraktsätt',
@@ -18,24 +24,28 @@ const columns: ColumnsType<Partial<Order>> = [
   {
     title: 'Status',
     dataIndex: 'shipped',
+    render: (value) => {
+      const color = value === 'Skickad' ? 'rgb(128, 159, 138)' : 'rgb(219, 107, 95)';
+      return <span style={{ color }}>{value}</span>;
+    },
   }
 ];
 
-
-const App: React.FC = () => {
+const AdminOrderTable = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [loading, setLoading] = useState(false);
   const {orders, editOrder, shippingMethodes} = useContext(OrderContext)
 
-  const data: Partial<Order>[] = [];
+  const data: Partial<OrderWithKey>[] = [];
 
   orders.forEach((order) =>  {
     const ship = shippingMethodes.find((item) => item._id === order.shippingMethod);
-    
-    
+
     data.push({
       key: order._id,
       orderNumber: order.orderNumber,
+      firstName: order.customer.firstName,
+      email: order.customer.email,
       shippingMethod: ship?.company,
       shipped: order.shipped == true ? "Skickad" : "Under behandling"
     });
@@ -46,7 +56,7 @@ const App: React.FC = () => {
     selectedRowKeys.forEach(element => {
       editOrder(element)
     });
-    
+
     setTimeout(() => {
       setSelectedRowKeys([]);
       setLoading(false);
@@ -62,20 +72,17 @@ const App: React.FC = () => {
     onChange: onSelectChange,
   };
   const hasSelected = selectedRowKeys.length > 0;
-  
+
   return (
     <div>
       <div style={{ marginBottom: 16 }}>
         <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
           Uppdatera
         </Button>
-      
       </div>
       <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
     </div>
   );
 };
 
-export default App;
-
-
+export default AdminOrderTable;

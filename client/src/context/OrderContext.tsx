@@ -1,8 +1,7 @@
 import React, { PropsWithChildren, createContext, useState, useEffect, useContext } from "react";
 import { CartContext } from "./CartContext";
 
-
-// INTERFACES
+// --------------------------------------------- INTERFACES
 interface AddressItem {
   street: string,
   zipcode: string,
@@ -33,14 +32,25 @@ export interface Order {
   shipped: boolean | string
 }
 
-// export interface OrderNumber {
-// orderNumber: number
-// }
+export interface OrderWithKey extends Order {
+  key: string,
+  _id: string,
+  orderNumber: number,
+  customer: {
+    firstName: string
+    email: string
+  },
+  firstName: string,
+  email: string,
+  shipped: boolean | string
+}
+
+// ---------------------------------------------------------- INTERFACE CONTEXT
 
 interface OrderContext {
   order: Order,
-  setOrder: (value: Order) => void,
-  setOrders: (value: Order[]) => void,
+  setOrder: (value: Order) => void, //Sets one order
+  setOrders: (value: OrderWithKey[]) => void, // Sets multiple orders
   address: AddressItem,
   setAddress: (value: AddressItem) => void,
   saveAddress: (value: Partial<AddressItem>) => void,
@@ -51,9 +61,11 @@ interface OrderContext {
   saveShippingMethod: (methods: ShippingMethod[]) => void
   shippingMethodes: ShippingMethod[]
   setOrderNumber: (value: number) => void
-  orderNumber: number
-  orders: Order[],
+  orderNumber: number,
+  orders: OrderWithKey[], 
   editOrder: (value: React.Key) => void
+  getOrderList: () => void
+
 }
 export const OrderContext = createContext<OrderContext>(null as any)
 
@@ -67,9 +79,8 @@ function OrderProvider({ children }: PropsWithChildren) {
 
   // Ett state som berättar att checkbox från Cart är i kryssad.
   const [AddressCheckbox, setAddressCheckbox] = useState(false)
-  const [orders, setOrders] = useState<Order[]>([])
+  const [orders, setOrders] = useState<OrderWithKey[]>([])
   const [shippingMethodes, setShippingMethods] = useState<ShippingMethod[]>([]);
- 
 
   const [orderItem, setOrderItem] = useState<OrderItem[]>([{
     product: "",
@@ -100,23 +111,20 @@ function OrderProvider({ children }: PropsWithChildren) {
 
   const getOrderList = async () => {
     try {
-      const res = await fetch(
-        "/api/orders"
-      );
+      const res = await fetch("/api/orders");
       const productData = await res.json()
       setOrders(productData);
       console.log(orders);
-   
+
     } catch (error) {
       console.log(error);
     }
- 
   }
- 
+  
   useEffect(() => {
     getOrderList();
   },[]);
-
+// --------------------------------------------------------------------------- Added here do something about it 
 
   const saveAddress = (value: object) => {
     setAddress({
@@ -129,14 +137,8 @@ function OrderProvider({ children }: PropsWithChildren) {
     setAddressCheckbox(value)
   }
 
-  const getShipping = async () => {
-    const res = await fetch('/api/shippingMethod');
-    const data = await res.json();
-    saveShippingMethod(data)
-  }
-
+// --------------------------------------------------------------------------- Added here do something about it 
   const editOrder = async (selectedRowKeys: React.Key) => {
-    
     try {
       // Fetch the initial product value
       const rest = await fetch(`/api/orders/${selectedRowKeys}`);
@@ -159,8 +161,14 @@ function OrderProvider({ children }: PropsWithChildren) {
       console.log("There was an error:", error);
     }
   }
+  // --------------------------------------------------------------------------- Added here do something about it 
 
   useEffect(() => {
+    const getShipping = async () => {
+      const res = await fetch('/api/shippingMethod');
+      const data = await res.json();
+      saveShippingMethod(data)
+    }
     getShipping()
   }, [])
 
@@ -175,8 +183,6 @@ function OrderProvider({ children }: PropsWithChildren) {
     const sorted: ShippingMethod[] = methods.sort((a: ShippingMethod, b: ShippingMethod) => a.deliveryTimeInHours - b.deliveryTimeInHours);
     setShippingMethods(sorted)
   }
-
-
 
   useEffect(() => {
     const orders = currentCart.cart.map((product) => ({
@@ -197,23 +203,24 @@ function OrderProvider({ children }: PropsWithChildren) {
   }, [address, orderItem]);
 
   return (
-    <OrderContext.Provider value={{ 
-      address, 
-      setAddress, 
-      order, 
-      setOrder, 
-      saveAddress, 
-      shippingMethod, 
-      AddressCheckbox, 
-      setCheckboxValue, 
-      saveShippingMethod, 
-      shippingMethodes, 
-      setOrderNumber, 
-      orderNumber, 
-      orders, 
-      setOrders, 
-      editOrder }}>
-        
+    <OrderContext.Provider value={{
+      address,
+      setAddress,
+      order,
+      setOrder,
+      saveAddress,
+      shippingMethod,
+      AddressCheckbox,
+      setCheckboxValue,
+      saveShippingMethod,
+      shippingMethodes,
+      setOrderNumber,
+      orderNumber,
+      orders,
+      setOrders,
+      editOrder,
+      getOrderList
+       }}>
       {children}
     </OrderContext.Provider>
   )
