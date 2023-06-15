@@ -28,7 +28,7 @@ const ShippingMethod = () => {
                 <h3>{shipping.company}</h3>
                 <div className="shipping-info">
                   <p>{shipping.price} kr</p>
-                  <h4>Leverans: {formattedDate}</h4>
+                  <h4 style={{color:'rgb(128, 159, 138)'}}>~leverans: {formattedDate}</h4>
                 </div>
               </div>
             </Radio>

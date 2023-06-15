@@ -12,7 +12,7 @@ import "./OrderComplete.css"
 function OrderComplete() {
   const { currentCart, setCurrentCart } = useContext(CartContext)
   const { loggedinUser } = useContext(UserContext)
-  const { address, order, shippingMethodes, setOrder, orderNumber } = useContext(OrderContext)
+  const { address, order, shippingMethodes, setOrder, orderNumber, getOrderList } = useContext(OrderContext)
 
   const [showLoading, setShowLoading] = useState(false);
   const chosenShippingMethod = shippingMethodes.find((shipping) => shipping._id === order.shippingMethod)
@@ -48,7 +48,7 @@ function OrderComplete() {
       totalPrice: 0,
       totalQuantity: 0,
     })
-
+    getOrderList()
     Cookies.remove('cart');
 
   };

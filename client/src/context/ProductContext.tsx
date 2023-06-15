@@ -2,7 +2,7 @@ import { PropsWithChildren, createContext, useState, useEffect } from "react";
 
 
 export interface Product {
-  key: any;
+ /*  key: any; */
   _id: string,
   title: string, 
   price: number, 
@@ -29,7 +29,7 @@ export function ProductProvider({ children }: PropsWithChildren) {
   const getProductList = async () => {
     try {
       const res = await fetch(
-        "http://localhost:3000/api/products"
+        "/api/products"
       );
       const productData = await res.json()
       setProducts(productData);

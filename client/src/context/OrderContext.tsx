@@ -1,7 +1,7 @@
 import { PropsWithChildren, createContext, useState, useEffect, useContext } from "react";
 import { CartContext } from "./CartContext";
 
-// INTERFACES
+// --------------------------------------------- INTERFACES
 interface AddressItem {
   street: string,
   zipcode: string,
@@ -28,13 +28,19 @@ export interface Order {
   shippingMethod: string
 }
 
-// export interface OrderNumber {
-// orderNumber: number
-// }
+export interface OrderWithKey extends Order {
+  key: string,
+  _id: string,
+  orderNumber: number,
+  shipped: boolean | string
+}
+
+// ---------------------------------------------------------- INTERFACE CONTEXT
 
 interface OrderContext {
   order: Order,
-  setOrder: (value: Order) => void,
+  setOrder: (value: Order) => void, //Sets one order
+  setOrders: (value: OrderWithKey[]) => void, // Sets or Gets multiple orders ----------------------------------- Added here do something about it 
   address: AddressItem,
   setAddress: (value: AddressItem) => void,
   saveAddress: (value: Partial<AddressItem>) => void,
@@ -45,7 +51,10 @@ interface OrderContext {
   saveShippingMethod: (methods: ShippingMethod[]) => void
   shippingMethodes: ShippingMethod[]
   setOrderNumber: (value: number) => void
-  orderNumber: number
+  orderNumber: number,
+  orders: OrderWithKey[], // ----------------------------------- Added here do something about it 
+  editOrder: (value: React.Key) => void // ----------------------------------- Added here do something about it 
+  getOrderList: () => void
 }
 export const OrderContext = createContext<OrderContext>(null as any)
 
@@ -59,7 +68,7 @@ function OrderProvider({ children }: PropsWithChildren) {
 
   // Ett state som berättar att checkbox från Cart är i kryssad.
   const [AddressCheckbox, setAddressCheckbox] = useState(false)
-
+  const [orders, setOrders] = useState<OrderWithKey[]>([]) // ----------------------------------- Added here do something about it 
   const [shippingMethodes, setShippingMethods] = useState<ShippingMethod[]>([]);
 
   const [orderItem, setOrderItem] = useState<OrderItem[]>([{
@@ -85,6 +94,23 @@ function OrderProvider({ children }: PropsWithChildren) {
 
   // ------------------------------------------------------- ALL STATES ENDS HERE
 
+  const getOrderList = async () => {
+    try {
+      const res = await fetch("/api/orders");
+      const productData = await res.json()
+      setOrders(productData);
+      console.log(orders);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getOrderList();
+  },[]);
+// --------------------------------------------------------------------------- Added here do something about it 
+
   const saveAddress = (value: object) => {
     setAddress({
       ...address,
@@ -95,6 +121,33 @@ function OrderProvider({ children }: PropsWithChildren) {
   const setCheckboxValue = (value: boolean) => {
     setAddressCheckbox(value)
   }
+
+// --------------------------------------------------------------------------- Added here do something about it 
+  const editOrder = async (selectedRowKeys: React.Key) => {
+
+    try {
+      // Fetch the initial product value
+      const rest = await fetch(`/api/orders/${selectedRowKeys}`);
+      const current = await rest.json();
+      const updatedOrder = { ...current, shipped: true };
+
+      const res = await fetch(`/api/orders/${selectedRowKeys}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedOrder),
+      });
+
+      if (res.ok) { 
+        getOrderList()
+       }
+
+    } catch (error) {
+      console.log("There was an error:", error);
+    }
+  }
+  // --------------------------------------------------------------------------- Added here do something about it 
 
   useEffect(() => {
     const getShipping = async () => {
@@ -117,8 +170,6 @@ function OrderProvider({ children }: PropsWithChildren) {
     setShippingMethods(sorted)
   }
 
-
-
   useEffect(() => {
     const orders = currentCart.cart.map((product) => ({
       product: product._id,
@@ -129,10 +180,6 @@ function OrderProvider({ children }: PropsWithChildren) {
     setOrderItem(orders);
   }, [currentCart]);
 
-/*   useEffect(() => {
-    console.log("Order status: ", order);
-  }, [order]); */
-
   useEffect(() => {
     setOrder((prevOrder) => ({
       ...prevOrder,
@@ -142,7 +189,16 @@ function OrderProvider({ children }: PropsWithChildren) {
   }, [address, orderItem]);
 
   return (
-    <OrderContext.Provider value={{ address, setAddress, order, setOrder, saveAddress, shippingMethod, AddressCheckbox, setCheckboxValue, saveShippingMethod, shippingMethodes, setOrderNumber, orderNumber }}>
+    <OrderContext.Provider value={{
+      address, setAddress,
+      order, setOrder,
+      saveAddress, shippingMethod,
+      AddressCheckbox, setCheckboxValue,
+      saveShippingMethod, shippingMethodes,
+      setOrderNumber, orderNumber,
+      orders, setOrders, editOrder,
+      getOrderList
+       }}>
       {children}
     </OrderContext.Provider>
   )
