@@ -19,3 +19,16 @@
   #delete-link {
     color: rgb(219, 107, 95);
   }
+
+  .image-cellx350 {
+    max-width: 500px; /* Set the maximum visual width for the cell */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .image-cellx200 {
+    max-width: 200px; /* Set the maximum visual width for the cell */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
