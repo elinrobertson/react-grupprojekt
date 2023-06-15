@@ -16,7 +16,7 @@ export function BuyBtn( {productID, inStock}: BuyBtnProps) {
   const {addToCart} = useContext(CartContext)
   
   return (         
-    <Button style={{cursor: "default"}}  disabled={inStock < 1} onClick={() => addToCart(productID)} icon = {<ShoppingCartOutlined />}>Köp</Button>
+    <Button style={{cursor: "default"}}  disabled={inStock == 0} onClick={() => addToCart(productID)} icon = {<ShoppingCartOutlined />}>Köp</Button>
     )
 }
 

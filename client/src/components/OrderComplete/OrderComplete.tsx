@@ -12,10 +12,10 @@ import "./OrderComplete.css"
 function OrderComplete() {
   const { currentCart, setCurrentCart } = useContext(CartContext)
   const { loggedinUser } = useContext(UserContext)
-  const { address, order, shippingMethodes, setOrder, orderNumber } = useContext(OrderContext)
+  const { address, newOrder, shippingMethodes, setNewOrder, orderNumber } = useContext(OrderContext)
 
   const [showLoading, setShowLoading] = useState(false);
-  const chosenShippingMethod = shippingMethodes.find((shipping) => shipping._id === order.shippingMethod)
+  const chosenShippingMethod = shippingMethodes.find((shipping) => shipping._id === newOrder.shippingMethod)
 
   const deliveryDate = new Date();
   const deliveryTimeInHours = chosenShippingMethod?.deliveryTimeInHours;
@@ -33,7 +33,7 @@ function OrderComplete() {
 
   const handleOk = () => {
     setIsModalOpen(false);
-    setOrder({
+    setNewOrder({
       orderItems: [],
       deliveryAddress: {
         street: "",

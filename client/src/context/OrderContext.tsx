@@ -33,6 +33,14 @@ export interface Order {
   shipped: boolean | string
 }
 
+export interface NewOrder {
+
+  orderItems: OrderItem[],
+  deliveryAddress: AddressItem,
+  shippingMethod: string,
+  
+}
+
 // export interface OrderNumber {
 // orderNumber: number
 // }
@@ -53,7 +61,9 @@ interface OrderContext {
   setOrderNumber: (value: number) => void
   orderNumber: number
   orders: Order[],
-  editOrder: (value: React.Key) => void
+  editOrder: (value: React.Key) => void,
+  newOrder: NewOrder,
+  setNewOrder: (value: NewOrder) => void
 }
 export const OrderContext = createContext<OrderContext>(null as any)
 
@@ -92,6 +102,14 @@ function OrderProvider({ children }: PropsWithChildren) {
     deliveryAddress: address,
     shippingMethod: "",
     shipped: false
+  })
+
+  const [newOrder, setNewOrder] = useState<NewOrder>({
+
+    orderItems: orderItem,
+    deliveryAddress: address,
+    shippingMethod: "",
+  
   })
 
   const [orderNumber, setOrderNumber] = useState(0);
@@ -212,7 +230,9 @@ function OrderProvider({ children }: PropsWithChildren) {
       orderNumber, 
       orders, 
       setOrders, 
-      editOrder }}>
+      editOrder,
+      newOrder,
+      setNewOrder }}>
         
       {children}
     </OrderContext.Provider>

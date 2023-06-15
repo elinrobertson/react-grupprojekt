@@ -43,6 +43,8 @@ const CheckoutSteps = () => {
           },
           body: JSON.stringify(order),
         });
+
+        if (res.ok) { console.log(res)}
         const data = await res.json();
         console.log("Ordenwiiii: ", data.orderNumber);
         const orderNumber = data.orderNumber
