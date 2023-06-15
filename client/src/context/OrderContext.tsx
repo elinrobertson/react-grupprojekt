@@ -96,6 +96,15 @@ function OrderProvider({ children }: PropsWithChildren) {
     setAddressCheckbox(value)
   }
 
+  useEffect(() => {
+    const getShipping = async () => {
+      const res = await fetch('/api/shippingMethod');
+      const data = await res.json();
+      saveShippingMethod(data)
+    }
+    getShipping()
+  }, [])
+
   const shippingMethod = (value: string) => {
     setOrder({
       ...order,
