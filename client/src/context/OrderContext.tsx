@@ -162,7 +162,7 @@ function OrderProvider({ children }: PropsWithChildren) {
     }
   }
   // --------------------------------------------------------------------------- Added here do something about it 
-
+//redo this
   useEffect(() => {
     const getShipping = async () => {
       const res = await fetch('/api/shippingMethod');
