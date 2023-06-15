@@ -23,13 +23,9 @@ interface ShippingMethod {
 }
 
 export interface Order {
-  key: string,
-  _id: string,
-  orderNumber: number,
   orderItems: OrderItem[],
   deliveryAddress: AddressItem,
   shippingMethod: string,
-  shipped: boolean | string
 }
 
 export interface OrderWithKey extends Order {
@@ -96,13 +92,9 @@ function OrderProvider({ children }: PropsWithChildren) {
   })
 
   const [order, setOrder] = useState<Order>({
-    key: "",
-    _id: "",
-    orderNumber: 0,
     orderItems: orderItem,
     deliveryAddress: address,
     shippingMethod: "",
-    shipped: false
   })
 
   const [orderNumber, setOrderNumber] = useState(0);
