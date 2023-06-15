@@ -1,6 +1,7 @@
 import { PropsWithChildren, createContext, useState, useEffect } from "react";
 
 
+
 export interface User {
     _id: string,
     firstName: string,
@@ -26,6 +27,7 @@ export const UserContext = createContext<UserContext>(null as any)
 
 
 function UserProvider({children}:PropsWithChildren) {
+
     const [loggedinUser, setLoggedinUser] = useState(null)
     
     useEffect(() => {
@@ -57,9 +59,7 @@ async function logIn(credentials: Credentials) {
         const user = await res.json()
         setLoggedinUser(user)
         console.log(user);
-        
-      
-        
+
       } catch (error) {
         console.log("Error:", error);
       }
