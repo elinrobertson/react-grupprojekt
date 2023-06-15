@@ -11,6 +11,14 @@ const columns: ColumnsType<Partial<OrderWithKey>> = [
     dataIndex: 'orderNumber',
   },
   {
+    title: 'User',
+    dataIndex: 'firstName',
+  },
+  {
+    title: 'Mail',
+    dataIndex: 'email',
+  },
+  {
     title: 'Fraktsätt',
     dataIndex: 'shippingMethod',
   },
@@ -26,18 +34,17 @@ const AdminOrderTable = () => {
   const [loading, setLoading] = useState(false);
   const {orders, editOrder, shippingMethodes} = useContext(OrderContext)
 
-  const data: Partial<OrderWithKey>[] = [/* {
-    key: "64887707b0884078f6eed762",
-    orderNumber: 591319
-  } */];
+  const data: Partial<OrderWithKey>[] = [];
 
   orders.forEach((order) =>  {
     const ship = shippingMethodes.find((item) => item._id === order.shippingMethod);
-
+    
 
     data.push({
       key: order._id,
       orderNumber: order.orderNumber,
+      firstName: order.customer.firstName,
+      email: order.customer.email,
       shippingMethod: ship?.company,
       shipped: order.shipped == true ? "Skickad" : "Under behandling"
     });
