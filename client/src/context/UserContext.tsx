@@ -35,6 +35,7 @@ function UserProvider({children}:PropsWithChildren) {
           const data = await res.json();
           if (res.ok) {
           setLoggedinUser(data);
+          
           }
   
         } catch (error) {
@@ -55,6 +56,8 @@ async function logIn(credentials: Credentials) {
         
         const user = await res.json()
         setLoggedinUser(user)
+        console.log(user);
+        
       
         
       } catch (error) {

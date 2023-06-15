@@ -12,6 +12,7 @@ const Login = () => {
     console.log('Failed:', errorInfo);
   };
 
+
   return (
     <Form
       name="basic"
@@ -56,5 +57,11 @@ const Login = () => {
     </Form>
   )
 };
+
+{/* <Link to={status} >
+<Button onClick={onClose} disabled= {!currentCart.totalQuantity } type="primary" htmlType="submit">
+  Till kassan
+</Button>
+</Link> */}
 
 export default Login

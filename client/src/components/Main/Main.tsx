@@ -6,7 +6,9 @@ import ProductDetail from "../ProductDetail/ProductDetail";
 import Login from "../Login/Login";
 import Admin from "../Admin/Admin";
 import CreateUser from "../CreateUser/CreateUser";
+import Orders from "../Orders/Orders";
 import "./Main.css"
+
 
 function Main () {
 
@@ -21,6 +23,7 @@ function Main () {
         <Route path="/:id" element={<ProductDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/orders" element={<Orders />} />
         <Route path="/createuser" element={<CreateUser />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/confirm" element={<Confirm />} />

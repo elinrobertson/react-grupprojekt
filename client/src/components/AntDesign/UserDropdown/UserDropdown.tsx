@@ -11,32 +11,47 @@ import "./UserDropdown.css"
 const UserDropdown = () => {
 
   const {logOut, loggedinUser} = useContext(UserContext)
+  const isAdmin = loggedinUser?.isAdmin // Funktion för att kontrollera om användaren är admin
+
   const items: MenuProps['items'] = [
     {
       key: '1',
       label: (
-          <NavLink to={"#"}>
+        <NavLink to="#">
           Min sida
-          </NavLink>
+        </NavLink>
       ),
     },
-    {
+    isAdmin ? (
+      {
         key: '2',
         label: (
-          <NavLink to={"#"}>
-          Ordrar
-          </NavLink>
-        ),
-      },
-      {
-        key: '3',
-        label: (
-          <NavLink to={"/"} onClick={() => logOut()}>
-          Logga ut
+          <NavLink to="/admin">
+            Admin
           </NavLink>
         ),
       }
-    ] 
+    ) : null, 
+    isAdmin ? (
+      {
+        key: '3',
+        label: (
+          <NavLink to="/orders">
+            Ordrar
+          </NavLink>
+        ),
+      }
+    ) : null, 
+    {
+      key: '4',
+      label: (
+        <NavLink to="/" onClick={() => logOut()}>
+          Logga ut
+        </NavLink>
+      ),
+    }
+  ];
+  
 
 
   
