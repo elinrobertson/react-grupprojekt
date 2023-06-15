@@ -11,7 +11,7 @@ const columns: ColumnsType<Partial<OrderWithKey>> = [
     dataIndex: 'orderNumber',
   },
   {
-    title: 'User',
+    title: 'Användare',
     dataIndex: 'firstName',
   },
   {
@@ -25,6 +25,10 @@ const columns: ColumnsType<Partial<OrderWithKey>> = [
   {
     title: 'Status',
     dataIndex: 'shipped',
+    render: (value) => {
+      const color = value === 'Skickad' ? 'rgb(128, 159, 138)' : 'rgb(219, 107, 95)';
+      return <span style={{ color }}>{value}</span>;
+    },
   }
 ];
 
