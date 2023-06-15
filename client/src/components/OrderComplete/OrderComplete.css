@@ -33,7 +33,6 @@
 }
 .successPaymentProducts > div, .successPaymentShipping, .successPaymentDeliver {
     display: flex;
-    gap: 6em;
     justify-content: space-between;
     font-size: 13px;
 }
@@ -55,5 +54,4 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
 }

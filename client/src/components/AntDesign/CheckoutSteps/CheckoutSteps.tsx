@@ -97,10 +97,10 @@ const CheckoutSteps = () => {
     address.country && AddressCheckbox;
 
   return (
-    <div>
+    <div className="checkoutSteps">
       <Steps current={current} items={items} />
       <div style={{ marginTop: "3em" }}>{steps[current].content}</div>
-      <div style={{ marginTop: 24 }}>
+      <div style={{ marginTop: 24 }} className="nav-buttons">
         {current > 0 && current !== 3 && (
           <Button
             style={{ margin: "0 8px" }}

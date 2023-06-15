@@ -1,0 +1,9 @@
+.userDropdown-div span {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 660px) {
+    .userDropdown-div p {
+        display: none;
+    }
+}

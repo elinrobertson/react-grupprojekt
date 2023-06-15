@@ -105,7 +105,7 @@ function OrderComplete() {
                 <p><b>Antal:</b></p>
               </div>
               {currentCart.cart.map((product) => (
-                <div key={product._id}>
+                <div key={product._id} className='purchasedProducts'>
                   <p >{product.title}</p>
                   <p>{product.price} kr</p>
                   <p>{product.quantity} st</p>

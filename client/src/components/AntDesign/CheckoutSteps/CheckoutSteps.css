@@ -10,3 +10,20 @@ margin: 0;
 .productListCheckout {
     padding: 1em 0;
 }
+
+@media only screen and (max-width: 660px) {
+    .ant-steps-vertical {
+        padding-left: 25%;
+    }
+
+    .checkoutSteps {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        padding-right: 1.2em;
+    }
+}
