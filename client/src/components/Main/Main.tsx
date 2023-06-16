@@ -13,11 +13,12 @@ const Main = () => {
 
   const location = useLocation();
   const headerStyle = {
-    paddingTop: location.pathname === "/login" ? "20em" : "250px",
-    paddingBottom: location.pathname === "/login" ? "8em" : "1em",
-    
+    paddingTop: location.pathname === "/checkout" ? "20px" : "255px",
+
+    paddingBottom: location.pathname === "/" ? "1em" : "8em",
+
   };
-  
+
   return (
     <div className="main-content" style={headerStyle}>
       <Routes>
