@@ -64,3 +64,13 @@ header a {
     right: -7px;
     top: -2px;
 }
+
+@media only screen and (max-height: 500px) {
+    header {
+        height:10em;
+    }
+
+    .logo img {
+        width: 8em;
+    }
+}
