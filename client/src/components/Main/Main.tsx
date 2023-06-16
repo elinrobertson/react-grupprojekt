@@ -13,8 +13,9 @@ const Main = () => {
 
   const location = useLocation();
   const headerStyle = {
-    paddingTop: location.pathname === "/checkout" || location.pathname === "/login" ? "9em" : "250px",
-    height: location.pathname === "/login" || location.pathname === "/checkout"? "Calc(100vh - 9em)" : "100%",
+    paddingTop: location.pathname === "/login" ? "20em" : "250px",
+    paddingBottom: location.pathname === "/login" ? "8em" : "1em",
+    
   };
   
   return (

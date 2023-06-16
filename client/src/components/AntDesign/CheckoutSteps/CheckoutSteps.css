@@ -12,6 +12,11 @@ margin: 0;
     padding: 1em 0;
 }
 
+.checkoutSteps {
+padding-top: 3em;
+padding-bottom: 3em;
+}
+
 @media only screen and (max-width: 660px) {
     .ant-steps-vertical {
         padding-left: 25%;
