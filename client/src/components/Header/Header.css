@@ -3,6 +3,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 15em;
     width: 100%;
     background-color: #F1E2DE;
     position: fixed;
@@ -26,7 +27,7 @@ header a {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    width: 15em;
 }
 
 .header-icons {

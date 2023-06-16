@@ -4,8 +4,12 @@ import { NavLink } from "react-router-dom"
 
 
 const Footer = () => {
+  const headerStyle = {
+    display: location.pathname === "/checkout"  ? "none" : "block",
+  };
+
   return (
-    <footer>
+    <footer style={headerStyle}>
 
       <div className="footer-container">
         <div className="footer-col1-col2-wrapper">

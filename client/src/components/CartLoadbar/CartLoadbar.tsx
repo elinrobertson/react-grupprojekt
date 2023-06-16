@@ -24,8 +24,8 @@ function CartLoadBar({next}:Next) {
     <div className='loadBar'>
 
         {showLoading ? 
-        <div >
-            <LoadingOutlined style={{fontSize: '50px'}} />
+        <div>
+            <LoadingOutlined style={{fontSize: '50px', textAlign: "center"}} />
             <p>Processing Payment</p>
         </div>
         :
