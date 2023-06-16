@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { PropsWithChildren, createContext, useState, useEffect, useContext } from "react";
 import { CartContext } from "./CartContext";
 import { UserContext } from "./UserContext";
@@ -52,7 +51,6 @@ interface OrderContext {
   address: AddressItem,
   setAddress: (value: AddressItem) => void,
   saveAddress: (value: Partial<AddressItem>) => void,
-  // saveOrder: (value: OrderItem) => void,
   shippingMethod: (value: string) => void,
   AddressCheckbox: boolean
   setCheckboxValue: (value: boolean) => void
@@ -60,7 +58,7 @@ interface OrderContext {
   shippingMethodes: ShippingMethod[]
   setOrderNumber: (value: number) => void
   orderNumber: number,
-  orders: OrderWithKey[], 
+  orders: OrderWithKey[],
   editOrder: (value: React.Key) => void
   getOrderList: () => void
 
@@ -109,17 +107,16 @@ function OrderProvider({ children }: PropsWithChildren) {
       const res = await fetch("/api/orders");
       const productData = await res.json()
       setOrders(productData);
-      console.log(orders);
 
     } catch (error) {
       console.log(error);
     }
   }
-  
+
   useEffect(() => {
     getOrderList();
-  },[loggedinUser]);
-// --------------------------------------------------------------------------- Added here do something about it 
+  }, [loggedinUser]);
+  // --------------------------------------------------------------------------- Added here do something about it 
 
   const saveAddress = (value: object) => {
     setAddress({
@@ -132,7 +129,7 @@ function OrderProvider({ children }: PropsWithChildren) {
     setAddressCheckbox(value)
   }
 
-// --------------------------------------------------------------------------- Added here do something about it 
+  // --------------------------------------------------------------------------- Added here do something about it 
   const editOrder = async (selectedRowKeys: React.Key) => {
     try {
       // Fetch the initial product value
@@ -148,9 +145,9 @@ function OrderProvider({ children }: PropsWithChildren) {
         body: JSON.stringify(updatedOrder),
       });
 
-      if (res.ok) { 
+      if (res.ok) {
         getOrderList()
-       }
+      }
 
     } catch (error) {
       console.log("There was an error:", error);
@@ -215,12 +212,10 @@ function OrderProvider({ children }: PropsWithChildren) {
       setOrders,
       editOrder,
       getOrderList
-       }}>
+    }}>
       {children}
     </OrderContext.Provider>
   )
 }
 
 export default OrderProvider;
-
-

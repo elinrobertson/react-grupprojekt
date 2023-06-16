@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import "./OrderComplete.css"
 
 
-function OrderComplete() {
+const OrderComplete = () => {
   const { currentCart, setCurrentCart } = useContext(CartContext)
   const { loggedinUser } = useContext(UserContext)
   const { address, order, shippingMethodes, setOrder, orderNumber, getOrderList } = useContext(OrderContext)
@@ -19,9 +19,7 @@ function OrderComplete() {
 
   const deliveryDate = new Date();
   const deliveryTimeInHours = chosenShippingMethod?.deliveryTimeInHours;
-  deliveryTimeInHours ?
-    deliveryDate.setHours(deliveryDate.getHours() + deliveryTimeInHours) :
-    null
+  deliveryTimeInHours ? deliveryDate.setHours(deliveryDate.getHours() + deliveryTimeInHours) : null
   const formattedDate = deliveryDate.toLocaleTimeString() + " " + deliveryDate.toLocaleDateString();
 
   let totalSum = 0
@@ -70,16 +68,15 @@ function OrderComplete() {
           <p>Bearbetar Betalning</p>
         </div>
         :
-        // <div className='successPayment-div'>
         <Modal
           closable={false}
           open={isModalOpen}
           onOk={handleOk}
           footer={[
             <Link to={"/"}>
-            <Button key="ok" type="primary" onClick={handleOk}>
-              Stäng
-            </Button>
+              <Button key="ok" type="primary" onClick={handleOk}>
+                Stäng
+              </Button>
             </Link>
           ]}>
 
@@ -126,8 +123,6 @@ function OrderComplete() {
             </div>
           </div>
         </Modal>
-
-
       }
     </div>
   );

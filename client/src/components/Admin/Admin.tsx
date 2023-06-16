@@ -1,7 +1,6 @@
 import AdminTable from "../AntDesign/AdminTable/AdminTable";
 import CreateProductForm from "../AntDesign/CreateProductForm/CreateProductForm";
 
-
 function Admin() {
 
   return (
@@ -10,7 +9,7 @@ function Admin() {
       < AdminTable />
     </div>
   );
-  
+
 }
 
 export default Admin;

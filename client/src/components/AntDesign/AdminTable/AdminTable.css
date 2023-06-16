@@ -21,13 +21,13 @@
   }
 
   .image-cellx350 {
-    max-width: 500px; /* Set the maximum visual width for the cell */
+    max-width: 500px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
   .image-cellx200 {
-    max-width: 200px; /* Set the maximum visual width for the cell */
+    max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

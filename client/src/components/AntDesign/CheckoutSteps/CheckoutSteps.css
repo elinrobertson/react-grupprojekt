@@ -3,6 +3,7 @@
     font-size: 10pt;
     padding: 1em;
 }
+
 .addressFieldCheckout p {
 margin: 0;
 }
@@ -19,6 +20,8 @@ margin: 0;
     .checkoutSteps {
         padding-left: 1em;
         padding-right: 1em;
+        margin-top: 13em;
+        margin-bottom: 8em;
     }
 
     .nav-buttons {

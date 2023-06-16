@@ -10,11 +10,11 @@ import { UserContext } from "../../../context/UserContext";
 import "./CheckoutSteps.css";
 
 const CheckoutSteps = () => {
-  // const { token } = theme.useToken();
-  const [current, setCurrent] = useState(0);
+
+  const { address, AddressCheckbox, order, shippingMethodes, setOrderNumber } = useContext(OrderContext);
   const { loggedinUser } = useContext(UserContext);
   const { currentCart } = useContext(CartContext);
-  const { address, AddressCheckbox, order, shippingMethodes, setOrderNumber } = useContext(OrderContext);
+  const [current, setCurrent] = useState(0);
   
   const next = () => {
     setCurrent(current + 1);
@@ -24,14 +24,12 @@ const CheckoutSteps = () => {
     setCurrent(current - 1);
   };
 
-
-
   const chosenShippingMethod = shippingMethodes.find((shipping) => shipping._id === order.shippingMethod)
 
   let totalSum = 0
   chosenShippingMethod?.price ?
-    totalSum = currentCart.totalPrice + chosenShippingMethod?.price :
-    totalSum = currentCart.totalPrice
+  totalSum = currentCart.totalPrice + chosenShippingMethod?.price :
+  totalSum = currentCart.totalPrice
 
   const finishCheckout = () => {
     async function createOrder() {
@@ -44,9 +42,8 @@ const CheckoutSteps = () => {
           body: JSON.stringify(order),
         });
         const data = await res.json();
-        console.log("Ordenwiiii: ", data.orderNumber);
         const orderNumber = data.orderNumber
-       setOrderNumber(orderNumber)
+        setOrderNumber(orderNumber)
 
       } catch (error) {
         console.log("Error:", error);
@@ -94,7 +91,7 @@ const CheckoutSteps = () => {
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
   const isAddressComplete = address.street && address.zipcode && address.city &&
-    address.country && AddressCheckbox;
+  address.country && AddressCheckbox;
 
   return (
     <div className="checkoutSteps">

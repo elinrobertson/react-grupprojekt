@@ -9,3 +9,7 @@
     align-items: center;
     justify-content: center;
 }
+
+.loadBar div *{
+text-align: center;
+}

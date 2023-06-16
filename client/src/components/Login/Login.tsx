@@ -4,14 +4,11 @@ import { NavLink } from "react-router-dom";
 import { Credentials, UserContext } from "../../context/UserContext";
 import "./Login.css"
 
-
-
 const Login = () => {
   const { logIn } = useContext(UserContext)
   const onFinishFailed = (errorInfo: object) => {
     console.log('Failed:', errorInfo);
   };
-
 
   return (
     <Form

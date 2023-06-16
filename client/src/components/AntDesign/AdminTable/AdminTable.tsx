@@ -55,10 +55,8 @@ const EditableCell: React.FC<EditableCellProps> = ({
 const AdminTable = () => {
   
   const [form] = Form.useForm();
-  
-
-  const [editingKey, setEditingKey] = useState('');
   const { products, deleteProduct, editProduct } = useContext(ProductContext)
+  const [editingKey, setEditingKey] = useState('');
   const [data, setData] = useState<ProductWithKey[]>([]);
 
   useEffect(() => {
@@ -92,7 +90,6 @@ const AdminTable = () => {
       const newData = [...data];
       
       const index = newData.findIndex((item) => key === item.key);
-      console.log('what is key', key);
       
       if (index > -1) {
         const item = newData[index];
@@ -101,7 +98,6 @@ const AdminTable = () => {
           ...row,
         });
         setData(newData);
-        console.log('what is this', row)
         editProduct(key.toString(), row)
         setEditingKey('');
       } else {
